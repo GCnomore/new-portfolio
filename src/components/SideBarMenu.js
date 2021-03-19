@@ -15,7 +15,7 @@ export default function SideBarMenu({ setPage }) {
   return (
     <SideBarContainer>
       <MenuHeader>
-        <img src={logo} />
+        <img alt="site logo" src={logo} />
       </MenuHeader>
       <SideMenuList>
         <li onClick={() => setPage("")}>
@@ -32,20 +32,25 @@ export default function SideBarMenu({ setPage }) {
         </li>
       </SideMenuList>
       <ContactIcons>
-        <a target="_blank" href="https://github.com/GCnomore">
-          <img src={github} />
+        <a rel="noreferrer" target="_blank" href="https://github.com/GCnomore">
+          <img alt="github icon" src={github} />
         </a>
         <a
+          rel="noreferrer"
           target="_blank"
           href="https://www.linkedin.com/in/isaac-choi-6a68bb1b4/"
         >
-          <img src={linkedin} />
+          <img alt="linkedin icon" src={linkedin} />
         </a>
-        <a target="_blank" href="mailto:isaacgc08@gmail.com">
-          <img src={gmail} />
+        <a rel="noreferrer" target="_blank" href="mailto:isaacgc08@gmail.com">
+          <img alt="gmail icon" src={gmail} />
         </a>
-        <a target="_blank" href="https://twitter.com/IsaacCh99785355">
-          <img src={twitter} />
+        <a
+          rel="noreferrer"
+          target="_blank"
+          href="https://twitter.com/IsaacCh99785355"
+        >
+          <img alt="twitter icon" src={twitter} />
         </a>
       </ContactIcons>
     </SideBarContainer>

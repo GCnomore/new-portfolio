@@ -21,6 +21,14 @@ import nodejs from "../assets/icons/nodejs.png";
 import react from "../assets/icons/React.png";
 import reactnative from "../assets/icons/reactnative.webp";
 import vue from "../assets/icons/Vue.png";
+import typescript from "../assets/icons/typescript.webp";
+import oauth from "../assets/icons/oauth.png";
+import passport from "../assets/icons/passport.png";
+import puppeteer from "../assets/icons/puppeteer.png";
+import cucumber from "../assets/icons/cucumber.png";
+import firebase from "../assets/icons/firebase.webp";
+import heroku from "../assets/icons/heroku.svg";
+import semanticui from "../assets/icons/semanticui.png";
 
 export default function About() {
   const [flipCard, setFlipCard] = useState(false);
@@ -40,7 +48,7 @@ export default function About() {
             <p>LV. 1</p>
             <p>ALL ROUNDER</p>
           </header>
-          <img src={portrait} />
+          <img src={portrait} alt="author" />
           <h1>FRONT END DEVELOPER</h1>
           <p>READY FOR ANYTHING</p>
           <div>
@@ -70,28 +78,146 @@ export default function About() {
           </p>
         </SummaryContainer>
       </ProfileContainer>
+      <Divider />
       <SkillContainer>
         <section>
-          <h2>Confident Skills</h2>
           <div>
-            <img src={angular} />
-            <img src={aws} />
-            <img src={bootstrap} />
-            <img src={cssIcon} />
-            <img src={expo} />
-            <img src={flutter} />
-            <img src={github} />
-            <img src={html} />
-            <img src={javascript} />
-            <img src={jquery} />
-            <img src={materialdesign} />
-            <img src={mongodb} />
-            <img src={mysql} />
-            <img src={nextjs} />
-            <img src={nodejs} />
-            <img src={react} />
-            <img src={reactnative} />
-            <img src={vue} />
+            <h2>Confident Skills</h2>
+            <div>
+              <div>
+                <img alt="html icon" src={html} />
+                <p>HTML</p>
+              </div>
+              <div>
+                <img alt="css icon" src={cssIcon} />
+                <p>CSS</p>
+              </div>
+              <div>
+                <img alt="javascript icon" src={javascript} />
+                <p>Javascript</p>
+              </div>
+              <div>
+                <img alt="react icon" src={react} />
+                <p>React</p>
+              </div>
+              <div>
+                <img alt="nextjs icon" src={nextjs} />
+                <p>Next JS</p>
+              </div>
+              <div>
+                <img alt="reactnative icon" src={reactnative} />
+                <p>React Native</p>
+              </div>
+              <div>
+                <img alt="expo icon" src={expo} />
+                <p>Expo</p>
+              </div>
+              <div>
+                <img alt="nodejs icon" src={nodejs} />
+                <p>Node JS</p>
+              </div>
+              <div>
+                <img alt="bootstrap icon" src={bootstrap} />
+                <p>Bootstrap</p>
+              </div>
+              <div>
+                <img alt="materialdesign icon" src={materialdesign} />
+                <p>Material Design</p>
+              </div>
+              <div>
+                <img alt="github icon" src={github} />
+                <p>Github</p>
+              </div>
+              <div>
+                <img alt="mongodb icon" src={mongodb} />
+                <p>Mongo DB</p>
+              </div>
+              <div>
+                <img alt="firebase icon" src={firebase} />
+                <p>Firebase</p>
+              </div>
+              <div>
+                <img alt="heroku icon" src={heroku} />
+                <p>Heroku</p>
+              </div>
+              <div>
+                <img alt="puppeteer icon" src={puppeteer} />
+                <p>Puppeteer</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div>
+            <h2>Have experienced</h2>
+            <div>
+              <div>
+                <img alt="oauth icon" src={oauth} />
+                <p>Oauth</p>
+              </div>
+              <div>
+                <img alt="cucumber icon" src={cucumber} />
+                <p>Cucumber</p>
+              </div>
+              <div>
+                <img alt="passport icon" src={passport} />
+                <p>Passport</p>
+              </div>
+              <div>
+                <img alt="semanticui icon" src={semanticui} />
+                <p>Semantic UI</p>
+              </div>
+              <div>
+                <img alt="typescript icon" src={typescript} />
+                <p>Typescript</p>
+              </div>
+              <div>
+                <img alt="angular icon" src={angular} />
+                <p>Angular</p>
+              </div>
+              <div>
+                <img alt="aws icon" src={aws} />
+                <p>AWS</p>
+              </div>
+              <div>
+                <img alt="flutter icon" src={flutter} />
+                <p>Flutter</p>
+              </div>
+              <div>
+                <img alt="jquery icon" src={jquery} />
+                <p>Jquery</p>
+              </div>
+              <div>
+                <img alt="mysql icon" src={mysql} />
+                <p>MySQL</p>
+              </div>
+              <div>
+                <p>Vue</p>
+                <img alt="vue icon" src={vue} />
+              </div>
+            </div>
+          </div>
+          <div>
+            <h2>Currently improving</h2>
+            <div>
+              <div>
+                <img alt="flutter icon" src={flutter} />
+                <p>Flutter</p>
+              </div>
+              <div>
+                <img alt="mysql icon" src={mysql} />
+                <p>MySQL</p>
+              </div>
+              <div>
+                <img alt="nodejs icon" src={nodejs} />
+                <p>Node JS</p>
+              </div>
+              <div>
+                <img alt="typescript icon" src={typescript} />
+                <p>Typescript</p>
+              </div>
+            </div>
           </div>
         </section>
       </SkillContainer>
@@ -104,11 +230,13 @@ const AboutContainer = styled.div`
   height: 100%;
   display: flex;
   justify-content: center;
+  > section {
+    width: 100%;
+    padding: 0 5rem;
+  }
 `;
 
 const ProfileContainer = styled.section`
-  width: 100%;
-  padding: 0 15rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -128,11 +256,29 @@ const flipCard = css`
   animation: ${flip} 1s ease-in-out;
 `;
 
+const bounce = keyframes`
+  0%{
+     transform: translateY(0);
+   }
+  50%{
+     transform: translateY(5px);
+   }
+  100%{
+     transform: translateY(0);
+   }
+`;
+
+const bounceCard = css`
+  animation: ${bounce} 1.3s ease-in-out infinite;
+`;
+
 const ProfileCard = styled.div`
+  font-family: "Exo", sans-serif;
   width: 25rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
+  box-shadow: 8px 10px 8px 1px black;
   background: linear-gradient(
     to right,
     #bf953f,
@@ -144,7 +290,7 @@ const ProfileCard = styled.div`
   border: 5px solid rgba(0, 0, 0, 0.4);
   border-radius: 1rem;
   text-align: center;
-  ${(props) => (props.flipCard ? flipCard : null)};
+  ${(props) => (props.flipCard ? flipCard : bounceCard)};
   cursor: pointer;
   user-select: none;
 
@@ -204,13 +350,86 @@ const ProfileCard = styled.div`
 const SummaryContainer = styled.section`
   margin-top: 5rem;
   font-size: 1.2rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
   > h2 {
     margin: 0 0 2rem 0;
     text-decoration: underline;
+    font-family: "Exo", sans-serif;
+    font-family: "Luckiest Guy", cursive;
   }
 `;
 
 const SkillContainer = styled.section`
   display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  > section:nth-child(1) {
+    width: 100%;
+    font-size: 2rem;
+    text-align: center;
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      > div {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        justify-content: center;
+        align-items: center;
+        grid-gap: 1rem 0.25rem;
+        font-size: 1rem;
+        margin-bottom: 3rem;
+
+        > div {
+          > img {
+            width: 5rem;
+            padding: 0.5rem;
+          }
+          > p {
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+
+  > section:nth-child(2) {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.3rem;
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+
+      > div {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-gap: 1rem 2rem;
+        font-size: 1rem;
+
+        > div {
+          > img {
+            width: 3rem;
+          }
+          > p {
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+`;
+
+const Divider = styled.div`
+  width: 5px;
+  height: 85vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  align-self: center;
 `;
