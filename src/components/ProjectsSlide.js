@@ -34,7 +34,11 @@ export default function About() {
   };
 
   const images = importAllImage(
-    require.context("../assets/project_img", false, /\.(png|jpe?g|svg|PNG)$/)
+    require.context(
+      "../assets/project_img",
+      false,
+      /\.(png|jpe?g|svg|PNG|webp)$/
+    )
   );
 
   const gcBoardImg = {

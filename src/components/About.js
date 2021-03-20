@@ -1,34 +1,34 @@
 import { useState } from "react";
 
 import styled, { keyframes, css } from "styled-components/macro";
-import portrait from "../assets/profile_cut.jpg";
+import portrait from "../assets/profile_cut.webp";
 
-import angular from "../assets/icons/Angular.png";
-import aws from "../assets/icons/aws.png";
-import bootstrap from "../assets/icons/Bootstrap.png";
-import cssIcon from "../assets/icons/css.png";
-import expo from "../assets/icons/expo_icon_132404.png";
+import angular from "../assets/icons/Angular.webp";
+import aws from "../assets/icons/aws.webp";
+import bootstrap from "../assets/icons/Bootstrap.webp";
+import cssIcon from "../assets/icons/css.webp";
+import expo from "../assets/icons/expo.webp";
 import flutter from "../assets/icons/flutter.webp";
-import github from "../assets/icons/github1.jpg";
-import html from "../assets/icons/html-5.png";
-import javascript from "../assets/icons/javascript.png";
-import jquery from "../assets/icons/Jquery.png";
-import materialdesign from "../assets/icons/materialdesign.png";
-import mongodb from "../assets/icons/MongoDB.png";
-import mysql from "../assets/icons/mysql.png";
+import github from "../assets/icons/github1.webp";
+import html from "../assets/icons/html.webp";
+import javascript from "../assets/icons/javascript.webp";
+import jquery from "../assets/icons/Jquery.webp";
+import materialdesign from "../assets/icons/materialdesign.webp";
+import mongodb from "../assets/icons/MongoDB.webp";
+import mysql from "../assets/icons/mysql.webp";
 import nextjs from "../assets/icons/nextjs.webp";
-import nodejs from "../assets/icons/nodejs.png";
-import react from "../assets/icons/React.png";
+import nodejs from "../assets/icons/nodejs.webp";
+import react from "../assets/icons/react.webp";
 import reactnative from "../assets/icons/reactnative.webp";
-import vue from "../assets/icons/Vue.png";
+import vue from "../assets/icons/Vue.webp";
 import typescript from "../assets/icons/typescript.webp";
-import oauth from "../assets/icons/oauth.png";
-import passport from "../assets/icons/passport.png";
-import puppeteer from "../assets/icons/puppeteer.png";
-import cucumber from "../assets/icons/cucumber.png";
+import oauth from "../assets/icons/oauth.webp";
+import passport from "../assets/icons/passport.webp";
+import puppeteer from "../assets/icons/puppeteer.webp";
+import cucumber from "../assets/icons/cucumber.webp";
 import firebase from "../assets/icons/firebase.webp";
 import heroku from "../assets/icons/heroku.svg";
-import semanticui from "../assets/icons/semanticui.png";
+import semanticui from "../assets/icons/semanticui.webp";
 
 export default function About() {
   const [flipCard, setFlipCard] = useState(false);

@@ -1,9 +1,9 @@
 import styled from "styled-components/macro";
-import logo from "../assets/logo.png";
-import gmail from "../assets/icons/gmail.png";
+import logo from "../assets/logo.webp";
+import gmail from "../assets/icons/gmail.webp";
 import twitter from "../assets/icons/twitter_icon.svg";
 import linkedin from "../assets/icons/linkedin_icon.svg";
-import github from "../assets/icons/github1.jpg";
+import github from "../assets/icons/github1.webp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBoxOpen,
