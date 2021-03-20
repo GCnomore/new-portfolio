@@ -193,8 +193,8 @@ export default function About() {
                 <p>MySQL</p>
               </div>
               <div>
-                <p>Vue</p>
                 <img alt="vue icon" src={vue} />
+                <p>Vue</p>
               </div>
             </div>
           </div>
