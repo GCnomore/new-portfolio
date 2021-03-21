@@ -31,4 +31,5 @@ export default function grabAndSlide(className, power) {
 
 grabAndSlide.propTypes = {
   className: PropTypes.string.isRequired,
+  power: PropTypes.number.isRequired,
 };

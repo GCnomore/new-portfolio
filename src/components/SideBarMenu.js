@@ -59,7 +59,7 @@ export default function SideBarMenu({ setPage }) {
 
 const SideBarContainer = styled.section`
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: rgb(0, 0, 0, 0.7);
   backdrop-filter: blur(1.5px);
   color: white;

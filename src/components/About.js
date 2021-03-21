@@ -29,6 +29,8 @@ import cucumber from "../assets/icons/cucumber.webp";
 import firebase from "../assets/icons/firebase.webp";
 import heroku from "../assets/icons/heroku.svg";
 import semanticui from "../assets/icons/semanticui.webp";
+import jest from "../assets/icons/jest.webp";
+import express from "../assets/icons/express.webp";
 
 export default function About() {
   const [flipCard, setFlipCard] = useState(false);
@@ -153,16 +155,24 @@ export default function About() {
             <h2>Have experienced</h2>
             <div>
               <div>
+                <img alt="express icon" src={express} />
+                <p>Express</p>
+              </div>
+              <div>
                 <img alt="oauth icon" src={oauth} />
                 <p>Oauth</p>
               </div>
               <div>
-                <img alt="cucumber icon" src={cucumber} />
-                <p>Cucumber</p>
-              </div>
-              <div>
                 <img alt="passport icon" src={passport} />
                 <p>Passport</p>
+              </div>
+              <div>
+                <img alt="jest icon" src={jest} />
+                <p>Jest</p>
+              </div>
+              <div>
+                <img alt="cucumber icon" src={cucumber} />
+                <p>Cucumber</p>
               </div>
               <div>
                 <img alt="semanticui icon" src={semanticui} />
@@ -198,6 +208,7 @@ export default function About() {
               </div>
             </div>
           </div>
+
           <div>
             <h2>Currently improving</h2>
             <div>
@@ -212,6 +223,18 @@ export default function About() {
               <div>
                 <img alt="nodejs icon" src={nodejs} />
                 <p>Node JS</p>
+              </div>
+              <div>
+                <img alt="express icon" src={express} />
+                <p>Express</p>
+              </div>
+              <div>
+                <img alt="oauth icon" src={oauth} />
+                <p>Oauth</p>
+              </div>
+              <div>
+                <img alt="passport icon" src={passport} />
+                <p>Passport</p>
               </div>
               <div>
                 <img alt="typescript icon" src={typescript} />
@@ -368,13 +391,20 @@ const SkillContainer = styled.section`
 
   > section:nth-child(1) {
     width: 100%;
-    font-size: 2rem;
     text-align: center;
 
     > div {
       display: flex;
       flex-direction: column;
       align-items: center;
+
+      > h2 {
+        font-size: 3rem;
+        font-family: "Exo", sans-serif;
+        font-family: "Luckiest Guy", cursive;
+        letter-spacing: 2px;
+        word-spacing: 0.5rem;
+      }
 
       > div {
         display: grid;
@@ -392,6 +422,9 @@ const SkillContainer = styled.section`
           }
           > p {
             margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+              Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+              sans-serif;
           }
         }
       }
@@ -401,12 +434,19 @@ const SkillContainer = styled.section`
   > section:nth-child(2) {
     display: flex;
     justify-content: space-between;
-    font-size: 1.3rem;
 
     > div {
       display: flex;
       flex-direction: column;
       text-align: center;
+
+      > h2 {
+        font-size: 2rem;
+        font-family: "Exo", sans-serif;
+        font-family: "Luckiest Guy", cursive;
+        letter-spacing: 2px;
+        word-spacing: 0.5rem;
+      }
 
       > div {
         display: grid;
@@ -420,6 +460,9 @@ const SkillContainer = styled.section`
           }
           > p {
             margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+              Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+              sans-serif;
           }
         }
       }

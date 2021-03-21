@@ -5,10 +5,11 @@ import ProjectSlide from "./components/ProjectsSlide";
 
 import { useState } from "react";
 
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 function App() {
   const [page, setPage] = useState("");
+
   return (
     <AppContainer>
       <SideBar>
@@ -39,14 +40,16 @@ export default App;
 
 const AppContainer = styled.div`
   display: flex;
-  height: 100vh;
+  height: 10vh;
   width: 100%;
 `;
 
 const SideBar = styled.div`
   width: 3.5vw;
+  height: 10vh;
 `;
 
 const ContentsContainer = styled.div`
   width: 96.5vw;
+  height: 10vh;
 `;
