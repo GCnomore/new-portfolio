@@ -250,7 +250,7 @@ export default function About() {
 
 const AboutContainer = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   justify-content: center;
   > section {
@@ -379,7 +379,6 @@ const SummaryContainer = styled.section`
   > h2 {
     margin: 0 0 2rem 0;
     text-decoration: underline;
-    font-family: "Exo", sans-serif;
     font-family: "Luckiest Guy", cursive;
   }
 `;
@@ -400,7 +399,6 @@ const SkillContainer = styled.section`
 
       > h2 {
         font-size: 3rem;
-        font-family: "Exo", sans-serif;
         font-family: "Luckiest Guy", cursive;
         letter-spacing: 2px;
         word-spacing: 0.5rem;
@@ -442,7 +440,6 @@ const SkillContainer = styled.section`
 
       > h2 {
         font-size: 2rem;
-        font-family: "Exo", sans-serif;
         font-family: "Luckiest Guy", cursive;
         letter-spacing: 2px;
         word-spacing: 0.5rem;
