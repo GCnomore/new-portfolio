@@ -7,6 +7,7 @@ import github from "../assets/icons/github1.webp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBoxOpen,
+  faEgg,
   faHome,
   faIdBadge,
 } from "@fortawesome/free-solid-svg-icons";
@@ -29,6 +30,9 @@ export default function SideBarMenu({ setPage }) {
         <li onClick={() => setPage("Projects")}>
           <FontAwesomeIcon icon={faBoxOpen} />
           <p>Works</p>
+        </li>
+        <li>
+          <FontAwesomeIcon icon={faEgg} />
         </li>
       </SideMenuList>
       <ContactIcons>

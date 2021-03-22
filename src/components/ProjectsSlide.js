@@ -64,31 +64,64 @@ export default function About() {
     name: "gcBoard",
     tag: [TAG.REACT],
     images: [...images.filter((item) => item.default.includes("gcboard"))],
+    description: [
+      "[On-going Project] Project management app inspired by Trello. This app will provide various templates of work flow management.",
+      "It currently stores data into local storage",
+    ],
   };
   const movieHunt = {
     name: "movieHunt",
     tag: [TAG.REACT, TAG.NODE_JS],
     images: [...images.filter((item) => item.default.includes("moviehunt"))],
+    description: [
+      "Users can login using their existing account",
+      "Users can register if they don't have an account",
+      "List of some of my favorite movies",
+      "Click the movie card to see details. Users can add selected movie to their favorite list.",
+      "Click on Genre to see other movies with same genre",
+      "Click on Director to see other movies filmed by the same director",
+      "Showing user account page. Users can update their info and favorite list.",
+    ],
   };
   const pokedex = {
     name: "pokedex",
     tag: [TAG.JQUERY],
     images: [...images.filter((item) => item.default.includes("pokedex"))],
+    description: [
+      "List of Pokemon cards colored by their types",
+      "Click the cards to see their details",
+    ],
   };
   const kokoatalk = {
     name: "kokoatalk",
     tag: [TAG.REACT_NATIVE],
     images: [...images.filter((item) => item.default.includes("kokoa"))],
+    description: [
+      "Users can enter their name and select color of chat screen on main screen",
+      "Three actions are available",
+      "Example view of messages",
+    ],
   };
   const todo = {
     name: "todo",
     tag: [TAG.VUE],
     images: [...images.filter((item) => item.default.includes("todo"))],
+    description: [
+      "Users can add to-dos with title and content",
+      "To do will be added as a card",
+      "User can edit, delete, drage and drop cards",
+    ],
   };
   const watsPoppin = {
     name: "watsPoppin",
     tag: [TAG.REACT],
     images: [...images.filter((item) => item.default.includes("watspoppin"))],
+    description: [
+      "Authenticate user with their Google account",
+      "Main page shows all available events with pie chart and scatter chart",
+      "List of events - details are collapsed by default - can be expanded with show detail button",
+      "Search events by city name",
+    ],
   };
 
   const renderProjectSlide = (project, state) => {
@@ -115,13 +148,32 @@ export default function About() {
           </button>
           {project.images.map((item, index) => {
             return (
-              <ProjectImg
-                src={item.default}
-                key={index}
-                alt={project.name}
-                show={slide[state].index === index ? true : false}
-                width={item.default.includes("kokoa") ? "20rem" : null}
-              />
+              <div key={index}>
+                <ProjectDetails>
+                  <div>
+                    <section>Right side</section>
+                    <Divider
+                      show={project.name === "kokoatalk" ? false : true}
+                    ></Divider>
+                    <section>left side</section>
+                  </div>
+                </ProjectDetails>
+                <ProjectImg
+                  data-name={project.name}
+                  src={item.default}
+                  alt={project.name}
+                  show={slide[state].index === index ? true : false}
+                  width={item.default.includes("kokoa") ? "20rem" : null}
+                  onMouseEnter={(e) => {
+                    console.log(e.target.dataset);
+                  }}
+                />
+                <ProjectSummary
+                  show={slide[state].index === index ? true : false}
+                >
+                  <p>{project.description[index]}</p>
+                </ProjectSummary>
+              </div>
             );
           })}
           <button
@@ -224,6 +276,7 @@ const SortContainer = styled.section`
   align-items: center;
   font-family: "Luckiest Guy", cursive;
   font-size: 1.6rem;
+  margin-left: 3vw;
 
   h2:nth-child(3) {
     cursor: pointer;
@@ -278,7 +331,6 @@ const Project = styled.div`
   > button {
     border: none;
     outline: none;
-    background-color: red;
     height: fit-content;
     align-self: center;
     padding: 2rem 1rem;
@@ -295,5 +347,54 @@ const Project = styled.div`
 const ProjectImg = styled.img`
   width: ${(props) => (props.width ? props.width : "100%")};
   height: 35rem;
+  display: ${(props) => (props.show ? "block" : "none")};
+`;
+
+const ProjectDetails = styled.div`
+  backdrop-filter: blur(1.2px);
+  display: ${(props) => (props.show ? "block" : "none")};
+
+  > div {
+    position: fixed;
+    color: white;
+    width: 100%;
+    height: 35rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: space-between;
+
+    > section {
+      padding: 1rem 3rem;
+      width: 100%;
+      text-align: center;
+    }
+  }
+`;
+
+const ProjectSummary = styled.div`
+  backdrop-filter: blur(1.2px);
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  display: ${(props) => (props.show ? "block" : "none")};
+  > p {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1.2px);
+    color: white;
+    margin: 0;
+    padding: 0.3rem 0;
+    top: -5rem;
+    width: 100%;
+    font-size: 1.2rem;
+  }
+`;
+
+const Divider = styled.div`
+  width: 2px;
+  height: 25rem;
+  background-color: rgba(255, 255, 255, 0.4);
+  align-self: center;
+  margin-bottom: 5rem;
   display: ${(props) => (props.show ? "block" : "none")};
 `;

@@ -253,6 +253,7 @@ const AboutContainer = styled.div`
   height: 100vh;
   display: flex;
   justify-content: center;
+  margin-left: 2vw;
   > section {
     width: 100%;
     padding: 0 5rem;
@@ -268,10 +269,10 @@ const ProfileContainer = styled.section`
 
 const flip = keyframes`
    from {
-      transform: rotateY(0deg);
+      transform: rotateY(360deg);
    }
    to{
-      transform: rotateY(360deg);
+      transform: rotateY(0deg);
    }
 `;
 

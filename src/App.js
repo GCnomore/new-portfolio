@@ -46,10 +46,13 @@ const AppContainer = styled.div`
 
 const SideBar = styled.div`
   width: 3.5vw;
-  height: 10vh;
+  height: 100vh;
+  position: fixed;
+  z-index: 100;
 `;
 
 const ContentsContainer = styled.div`
-  width: 96.5vw;
-  height: 10vh;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 `;
