@@ -35,6 +35,7 @@ export default function About() {
     },
   });
   const [sortBy, setSortBy] = useState("none");
+  const [showDetail, setShowDetail] = useState("");
 
   useEffect(() => {
     grabAndSlide("app", 1.3);
@@ -68,6 +69,24 @@ export default function About() {
       "[On-going Project] Project management app inspired by Trello. This app will provide various templates of work flow management.",
       "It currently stores data into local storage",
     ],
+    info: {
+      summary: (
+        <p>
+          <strong>[On-going Project]</strong>
+          <br />
+          <br /> Project management app inspired by Trello. This app will
+          provide various templates of work flow management.
+        </p>
+      ),
+      tech: [
+        "Javascript",
+        "React",
+        "Styled-Component",
+        "Prop-types",
+        "UUID",
+        "Babel",
+      ],
+    },
   };
   const movieHunt = {
     name: "movieHunt",
@@ -82,6 +101,44 @@ export default function About() {
       "Click on Director to see other movies filmed by the same director",
       "Showing user account page. Users can update their info and favorite list.",
     ],
+    info: {
+      summary: (
+        <p>
+          Full stack project made with <strong>MERN stack</strong> This project
+          uses database I reated with some of my favorite movies. It can
+          register a user and save their account info to the database. Used
+          Heroku to host this app.
+          <br />
+          <br /> <strong>Use a test account to try it out!</strong>
+          <br />
+          <strong>Account: test</strong>
+          <br />
+          <strong>Password: 111111 ---> (Six ones)</strong>
+        </p>
+      ),
+      tech: [
+        "Javascript",
+        "React",
+        "React Router Dom",
+        "SCSS",
+        "Redux",
+        "Babel",
+        "Parcel",
+        "NodeJS",
+        "Express",
+        "Passport",
+        "Heroku",
+        "JWT",
+        "UUID",
+        "MongoDB",
+        "Mongoose",
+        "CORS",
+        "Bcrypt",
+        "Prop-types",
+        "JS Doc",
+        "BootStrap",
+      ],
+    },
   };
   const pokedex = {
     name: "pokedex",
@@ -91,6 +148,24 @@ export default function About() {
       "List of Pokemon cards colored by their types",
       "Click the cards to see their details",
     ],
+    info: {
+      summary: (
+        <p>
+          A simple <strong>Jquery</strong> project to build PokeDex. Displays
+          Pokemons in their number order with detailed information in modal
+          window. Applied infinite scroll function.
+        </p>
+      ),
+      tech: [
+        "HTML",
+        "CSS",
+        "Javascript",
+        "Jqeury",
+        "Bootstrap",
+        "Animate.css",
+        "ES Lint",
+      ],
+    },
   };
   const kokoatalk = {
     name: "kokoatalk",
@@ -101,6 +176,28 @@ export default function About() {
       "Three actions are available",
       "Example view of messages",
     ],
+    info: {
+      summary: (
+        <p>
+          Chat app made with <strong>React Native and GiftedChat</strong> with
+          given design instruction. Users have option to change the color of the
+          chat screen. Photo from library, directly from camera, and current
+          location can be sent as a message. Message data will be stored in{" "}
+          <strong>asyncstorage and Firebase.</strong>
+        </p>
+      ),
+      tech: [
+        "Javascript",
+        "React Native",
+        "Expo",
+        "React Navigation: Stack",
+        "Gifted Chat",
+        "Firebase/Firestore",
+        "Prop-types",
+        "Async-storage",
+        "NetInfo",
+      ],
+    },
   };
   const todo = {
     name: "todo",
@@ -111,6 +208,16 @@ export default function About() {
       "To do will be added as a card",
       "User can edit, delete, drage and drop cards",
     ],
+    info: {
+      summary: (
+        <p>
+          To do list app built with <strong>Vue.</strong> Its data will be
+          stored in local storage. It provides drag and drop feature to sort
+          to-dos in user's priority.
+        </p>
+      ),
+      tech: ["Javascript", "Vue", "Material Deisgn", "Draggable"],
+    },
   };
   const watsPoppin = {
     name: "watsPoppin",
@@ -122,14 +229,42 @@ export default function About() {
       "List of events - details are collapsed by default - can be expanded with show detail button",
       "Search events by city name",
     ],
+    info: {
+      summary: (
+        <p>
+          Event searching application made with Careerfoundry's Google Calander
+          API. Applied OAuth for user authentication. Some commponents were
+          coded as object oriented programming.
+        </p>
+      ),
+      tech: [
+        "Javascript",
+        "React",
+        "Rechart",
+        "AWS",
+        "Atatus",
+        "OAuth",
+        "Material Deisgn",
+        "PWA",
+        "Enzyme",
+        "Cucumber",
+        "Jest",
+        "Puppeteer",
+      ],
+    },
   };
 
   const renderProjectSlide = (project, state) => {
     const length = project.images.length;
     if (project.tag.includes(sortBy) || sortBy === "none") {
       return (
-        <Project width={project.name === "kokoatalk" ? "fit-content" : null}>
+        <Project
+          data-name={project.name}
+          width={project.name === "kokoatalk" ? "fit-content" : null}
+          onMouseEnter={(e) => setShowDetail(e.target.dataset.name)}
+        >
           <button
+            data-name={project.name}
             onClick={() => {
               setSlide((prev) =>
                 prev[state].index === 0
@@ -146,36 +281,62 @@ export default function About() {
           >
             <FontAwesomeIcon icon={faChevronLeft} />
           </button>
+
           {project.images.map((item, index) => {
             return (
-              <div key={index}>
-                <ProjectDetails>
+              <ProjectContent
+                key={index}
+                show={slide[state].index === index ? true : false}
+                data-name={project.name}
+                onMouseLeave={() => setShowDetail()}
+              >
+                <ProjectDetails
+                  show={project.name === showDetail}
+                  kokoatalk={project.name === "kokoatalk"}
+                >
                   <div>
-                    <section>Right side</section>
+                    <section>
+                      <h2>Summary</h2>
+                      <div>{project.info.summary}</div>
+                    </section>
                     <Divider
                       show={project.name === "kokoatalk" ? false : true}
                     ></Divider>
-                    <section>left side</section>
+                    <section>
+                      <h2>Used Techs</h2>
+                      <div>
+                        {project.info.tech &&
+                          project.info.tech.map((item, index) => (
+                            <p key={index}>#{item}</p>
+                          ))}
+                      </div>
+                    </section>
                   </div>
                 </ProjectDetails>
                 <ProjectImg
                   data-name={project.name}
                   src={item.default}
                   alt={project.name}
-                  show={slide[state].index === index ? true : false}
                   width={item.default.includes("kokoa") ? "20rem" : null}
-                  onMouseEnter={(e) => {
-                    console.log(e.target.dataset);
-                  }}
+                  onMouseEnter={(e) => setShowDetail(e.target.dataset.name)}
                 />
-                <ProjectSummary
-                  show={slide[state].index === index ? true : false}
+                <ProjectDescription
+                  show={
+                    showDetail === project.name
+                      ? false
+                      : slide[state].index === index
+                      ? true
+                      : false
+                  }
+                  data-name={project.name}
+                  onMouseEnter={(e) => setShowDetail(e.target.dataset.name)}
                 >
                   <p>{project.description[index]}</p>
-                </ProjectSummary>
-              </div>
+                </ProjectDescription>
+              </ProjectContent>
             );
           })}
+
           <button
             onClick={() => {
               setSlide((prev) =>
@@ -200,10 +361,6 @@ export default function About() {
     }
   };
 
-  const sortProject = (sortBy) => {
-    setSortBy(sortBy);
-  };
-  console.log(sortBy);
   return (
     <ProjectContainer className="app">
       <SortContainer>
@@ -212,35 +369,35 @@ export default function About() {
           <SortIcon
             src={react}
             alt="react icon"
-            onClick={() => sortProject(TAG.REACT)}
+            onClick={() => setSortBy(TAG.REACT)}
             name={"react"}
             selected={sortBy}
           />
           <SortIcon
             src={reactNative}
             alt="reactNative icon"
-            onClick={() => sortProject(TAG.REACT_NATIVE)}
+            onClick={() => setSortBy(TAG.REACT_NATIVE)}
             name={"reactNative"}
             selected={sortBy}
           />
           <SortIcon
             src={nodeJS}
             alt="nodeJS icon"
-            onClick={() => sortProject(TAG.NODE_JS)}
+            onClick={() => setSortBy(TAG.NODE_JS)}
             name={"nodeJS"}
             selected={sortBy}
           />
           <SortIcon
             src={vue}
             alt="vue icon"
-            onClick={() => sortProject(TAG.VUE)}
+            onClick={() => setSortBy(TAG.VUE)}
             name={"vue"}
             selected={sortBy}
           />
           <SortIcon
             src={jquery}
             alt="jquery icon"
-            onClick={() => sortProject(TAG.JQUERY)}
+            onClick={() => setSortBy(TAG.JQUERY)}
             name={"jquery"}
             selected={sortBy}
           />
@@ -315,11 +472,12 @@ const SortIcon = styled.img`
 `;
 
 const ProjectSlider = styled.section`
-  margin-top: 15rem;
+  margin-top: 8rem;
   width: fit-content;
   height: 100vh;
   display: flex;
   padding: 5rem 1rem;
+  align-items: center;
 `;
 
 const Project = styled.div`
@@ -344,34 +502,62 @@ const Project = styled.div`
   }
 `;
 
+const ProjectContent = styled.div`
+  display: ${(props) => (props.show ? "block" : "none")};
+`;
+
 const ProjectImg = styled.img`
   width: ${(props) => (props.width ? props.width : "100%")};
   height: 35rem;
-  display: ${(props) => (props.show ? "block" : "none")};
 `;
 
 const ProjectDetails = styled.div`
   backdrop-filter: blur(1.2px);
-  display: ${(props) => (props.show ? "block" : "none")};
+  width: 100%;
+  position: relative;
+  opacity: ${(props) => (props.show ? 1 : 0)};
+  transition: 0.5s ease-in-out;
 
   > div {
     position: fixed;
+    left: 0;
+    top: 0;
     color: white;
     width: 100%;
     height: 35rem;
     background-color: rgba(0, 0, 0, 0.6);
-    display: flex;
+    display: ${(props) => (props.kokoatalk ? "block" : "flex")};
     justify-content: space-between;
+    font-size: 1.2rem;
+    ${(props) =>
+      props.kokoatalk &&
+      "> section{ font-size: 0.8rem; padding: 0 !important;  >h2 {font-size: 1.3rem;}}"}
 
     > section {
       padding: 1rem 3rem;
       width: 100%;
       text-align: center;
+
+      > h2 {
+        text-decoration: underline;
+        margin-bottom: 2rem;
+      }
+    }
+
+    section:nth-child(3) > div {
+      display: grid;
+      grid-template-columns: ${(props) =>
+        props.kokoatalk ? "1fr 1fr" : "1fr 1fr 1fr"};
+      ${(props) => props.kokoatalk && "grid-gap: 0; padding: 0 1rem;"}
+
+      > p {
+        margin: 0.5rem 0;
+      }
     }
   }
 `;
 
-const ProjectSummary = styled.div`
+const ProjectDescription = styled.div`
   backdrop-filter: blur(1.2px);
   text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
