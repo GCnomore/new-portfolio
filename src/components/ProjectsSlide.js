@@ -15,7 +15,7 @@ import {
   faTicketAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function About({ setPage, broken, darkMode }) {
+export default function About({ setPage, broken, darkMode, setBroken }) {
   const [slide, setSlide] = useState({
     gcBoard: {
       index: 0,
@@ -39,6 +39,8 @@ export default function About({ setPage, broken, darkMode }) {
   const [sortBy, setSortBy] = useState("none");
   const [showDetail, setShowDetail] = useState("");
 
+  // const breakAnimation = ["fly1", "fly2", "fly3", "fly4", "fly5", "fly6"];
+
   useEffect(() => {
     grabAndSlide("app", 1.3);
   }, []);
@@ -51,6 +53,7 @@ export default function About({ setPage, broken, darkMode }) {
           data-name={project.name}
           width={project.name === "kokoatalk" ? "fit-content" : null}
           onMouseEnter={(e) => setShowDetail(e.target.dataset.name)}
+          onMouseLeave={() => setShowDetail()}
         >
           <button
             data-name={project.name}
@@ -77,7 +80,6 @@ export default function About({ setPage, broken, darkMode }) {
                 key={index}
                 show={slide[state].index === index ? true : false}
                 data-name={project.name}
-                onMouseLeave={() => setShowDetail()}
               >
                 <ProjectDetails
                   show={project.name === showDetail}
@@ -89,6 +91,12 @@ export default function About({ setPage, broken, darkMode }) {
                       <section>
                         <h2>Summary</h2>
                         <div>{project.info.summary}</div>
+                        <a target="_blank" href={project.project_src}>
+                          See App
+                        </a>
+                        <a target="_blank" href={project.project_code}>
+                          See Code
+                        </a>
                       </section>
                       <Divider
                         show={project.name === "kokoatalk" ? false : true}
@@ -164,6 +172,7 @@ export default function About({ setPage, broken, darkMode }) {
             onClick={() => setSortBy(TAG.REACT)}
             name={"react"}
             selected={sortBy}
+            className={broken ? "fly1" : ""}
           />
           <SortIcon
             src={reactNative}
@@ -171,6 +180,7 @@ export default function About({ setPage, broken, darkMode }) {
             onClick={() => setSortBy(TAG.REACT_NATIVE)}
             name={"reactNative"}
             selected={sortBy}
+            className={broken ? "fly2" : ""}
           />
           <SortIcon
             src={nodeJS}
@@ -178,6 +188,7 @@ export default function About({ setPage, broken, darkMode }) {
             onClick={() => setSortBy(TAG.NODE_JS)}
             name={"nodeJS"}
             selected={sortBy}
+            className={broken ? "fly3" : ""}
           />
           <SortIcon
             src={vue}
@@ -185,6 +196,7 @@ export default function About({ setPage, broken, darkMode }) {
             onClick={() => setSortBy(TAG.VUE)}
             name={"vue"}
             selected={sortBy}
+            className={broken ? "fly4" : ""}
           />
           <SortIcon
             src={jquery}
@@ -192,9 +204,12 @@ export default function About({ setPage, broken, darkMode }) {
             onClick={() => setSortBy(TAG.JQUERY)}
             name={"jquery"}
             selected={sortBy}
+            className={broken ? "fly5" : ""}
           />
         </div>
-        <h2 onClick={() => setSortBy("none")}>Clear</h2>
+        <h2 onClick={() => setSortBy("none")} className={broken && "fly6"}>
+          Clear
+        </h2>
       </SortContainer>
       <ProjectSlider>
         {renderProjectSlide(projects.gcBoard, "gcBoard")}
@@ -204,10 +219,17 @@ export default function About({ setPage, broken, darkMode }) {
         {renderProjectSlide(projects.watsPoppin, "watsPoppin")}
         {renderProjectSlide(projects.todo, "todo")}
       </ProjectSlider>
-      <ToTheater>
+      <ToTheater broken={broken}>
         <FontAwesomeIcon
           icon={faTicketAlt}
-          onClick={() => setPage("theater")}
+          onClick={() => {
+            if (broken) {
+              setBroken(false);
+              setPage("theater");
+            } else {
+              setPage("theater");
+            }
+          }}
         />
       </ToTheater>
     </ProjectContainer>
@@ -220,6 +242,7 @@ const ProjectContainer = styled.div`
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+  user-select: none;
 `;
 
 const SortContainer = styled.section`
@@ -282,8 +305,8 @@ const Project = styled.div`
   display: flex;
   width: ${(props) => (props.width ? props.width : "50vw")};
   height: fit-content;
-  margin: 0 10rem;
-  padding: 0.1rem;
+  margin: 0 8rem;
+  padding: 1rem 1rem;
 
   > button {
     border: none;
@@ -293,6 +316,7 @@ const Project = styled.div`
     padding: 2rem 1rem;
     font-size: 3rem;
     transition: 0.4s;
+    cursor: pointer;
 
     &:active {
       font-size: 2.2rem;
@@ -325,7 +349,9 @@ const ProjectDetails = styled.div`
     width: 100%;
     height: 35rem;
     background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
     flex-direction: column;
+    justify-content: space-between;
     > h2 {
       text-align: center;
       font-size: ${(props) => (props.kokoatalk ? "2rem" : "3rem")};
@@ -334,6 +360,7 @@ const ProjectDetails = styled.div`
       display: ${(props) => (props.kokoatalk ? "block" : "flex")};
       justify-content: space-between;
       font-size: 1.2rem;
+      height: 37vh;
       ${(props) =>
         props.kokoatalk &&
         "> section{ font-size: 0.8rem; padding: 0 !important;  >h2 {font-size: 1.3rem;}}"}
@@ -342,10 +369,15 @@ const ProjectDetails = styled.div`
         padding: 1rem 3rem;
         width: 100%;
         text-align: center;
+        height: fit-content;
 
         > h2 {
           text-decoration: underline;
           margin-bottom: 2rem;
+        }
+        > a {
+          color: white;
+          margin: 2rem;
         }
       }
 
@@ -394,7 +426,7 @@ const Divider = styled.div`
 const ToTheater = styled.div`
   width: 100vw;
   position: absolute;
-  font-size: 3rem;
+  font-size: ${(props) => (props.broken ? "50rem" : "3rem")};
   bottom: 5vh;
   text-align: center;
   cursor: pointer;

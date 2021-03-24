@@ -24,7 +24,7 @@ function App() {
         easterEggCode.current = [];
         setBroken(false);
       }
-      if (easterEggCode.current.join("") === "break") {
+      if (easterEggCode.current.join("").includes("break")) {
         setBroken(true);
       }
     });
@@ -60,6 +60,7 @@ function App() {
               <ProjectSlide
                 setPage={setPage}
                 broken={broken}
+                setBroken={setBroken}
                 darkMode={darkMode}
               />
             </>

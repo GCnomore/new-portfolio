@@ -110,3 +110,93 @@
 .bounce {
   animation: _bounce 1.3s ease-in-out infinite;
 }
+
+@keyframes _fly1 {
+  0% {
+    transform: perspective(1000px) translateX(0);
+  }
+  25% {
+    transform: perspective(1000px) translateX(-50rem) translateY(60rem);
+  }
+  50% {
+    transform: perspective(1000px) translateX(20rem) translateY(60rem);
+  }
+  100% {
+    transform: perspective(1000px) translateX(0) translateZ(-300rem);
+  }
+}
+
+.fly1 {
+  animation: _fly1 1s infinite;
+}
+
+@keyframes _fly2 {
+  0% {
+    transform: perspective(1000px) translateX(0);
+  }
+  25% {
+    transform: perspective(1000px) translateY(40rem);
+  }
+  50% {
+    transform: perspective(1000px) translateX(20rem) translateY(60rem);
+  }
+  100% {
+    transform: perspective(1000px) translateX(0) translateY(-300rem);
+  }
+}
+
+.fly2 {
+  animation: _fly2 1s infinite;
+}
+
+@keyframes _fly3 {
+  0% {
+    transform: perspective(1000px) translateX(0);
+  }
+  50% {
+    transform: perspective(1000px) translateX(0) translateZ(-300rem);
+  }
+  100% {
+    transform: perspective(1000px) translateX(0) translateZ(0);
+  }
+}
+
+.fly3 {
+  animation: _fly3 1s infinite;
+}
+
+@keyframes _fly4 {
+  0% {
+    transform: perspective(1000px) translateX(0);
+  }
+  25% {
+    transform: perspective(1000px) translateX(30rem);
+  }
+  50% {
+    transform: perspective(1000px) translateX(40rem);
+  }
+  75% {
+    transform: perspective(1000px) translateX(30rem);
+  }
+  100% {
+    transform: perspective(1000px) translateX(0);
+  }
+}
+
+.fly4 {
+  animation: _fly4 1s infinite;
+}
+
+@keyframes _fly5 {
+  0% {
+    transform: perspective(1000px) rotateY(0);
+  }
+
+  100% {
+    transform: perspective(1000px) rotateY(360deg);
+  }
+}
+
+.fly5 {
+  animation: _fly5 1s infinite;
+}
