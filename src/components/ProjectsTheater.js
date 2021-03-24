@@ -139,7 +139,7 @@ const TheaterContainer = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.9);
-  /* animation: ${blackOut} 3s ease-in-out; */
+  animation: ${blackOut} 3s ease-in-out;
 `;
 
 const Screen = styled.iframe`
@@ -149,7 +149,7 @@ const Screen = styled.iframe`
   border: none;
   background-color: ${(props) => (props.screenReady ? "#242424" : "white")};
   transition: 2s;
-  /* animation: ${screenDrop} 6s ease-in-out; */
+  animation: ${screenDrop} 6s ease-in-out;
   transform: perspective(1000px) rotateY(-15deg);
 `;
 

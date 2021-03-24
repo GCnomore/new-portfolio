@@ -84,22 +84,25 @@ export default function About({ setPage }) {
                   kokoatalk={project.name === "kokoatalk"}
                 >
                   <div>
-                    <section>
-                      <h2>Summary</h2>
-                      <div>{project.info.summary}</div>
-                    </section>
-                    <Divider
-                      show={project.name === "kokoatalk" ? false : true}
-                    ></Divider>
-                    <section>
-                      <h2>Used Techs</h2>
-                      <div>
-                        {project.info.tech &&
-                          project.info.tech.map((item, index) => (
-                            <p key={index}>#{item}</p>
-                          ))}
-                      </div>
-                    </section>
+                    <h2>{project.name.toUpperCase()}</h2>
+                    <div>
+                      <section>
+                        <h2>Summary</h2>
+                        <div>{project.info.summary}</div>
+                      </section>
+                      <Divider
+                        show={project.name === "kokoatalk" ? false : true}
+                      ></Divider>
+                      <section>
+                        <h2>Used Techs</h2>
+                        <div>
+                          {project.info.tech &&
+                            project.info.tech.map((item, index) => (
+                              <p key={index}>#{item}</p>
+                            ))}
+                        </div>
+                      </section>
+                    </div>
                   </div>
                 </ProjectDetails>
                 <ProjectImg
@@ -280,6 +283,7 @@ const Project = styled.div`
   width: ${(props) => (props.width ? props.width : "50vw")};
   height: fit-content;
   margin: 0 10rem;
+  padding: 0.1rem;
 
   > button {
     border: none;
@@ -321,32 +325,39 @@ const ProjectDetails = styled.div`
     width: 100%;
     height: 35rem;
     background-color: rgba(0, 0, 0, 0.6);
-    display: ${(props) => (props.kokoatalk ? "block" : "flex")};
-    justify-content: space-between;
-    font-size: 1.2rem;
-    ${(props) =>
-      props.kokoatalk &&
-      "> section{ font-size: 0.8rem; padding: 0 !important;  >h2 {font-size: 1.3rem;}}"}
-
-    > section {
-      padding: 1rem 3rem;
-      width: 100%;
+    flex-direction: column;
+    > h2 {
       text-align: center;
-
-      > h2 {
-        text-decoration: underline;
-        margin-bottom: 2rem;
-      }
+      font-size: ${(props) => (props.kokoatalk ? "2rem" : "3rem")};
     }
+    > div {
+      display: ${(props) => (props.kokoatalk ? "block" : "flex")};
+      justify-content: space-between;
+      font-size: 1.2rem;
+      ${(props) =>
+        props.kokoatalk &&
+        "> section{ font-size: 0.8rem; padding: 0 !important;  >h2 {font-size: 1.3rem;}}"}
 
-    section:nth-child(3) > div {
-      display: grid;
-      grid-template-columns: ${(props) =>
-        props.kokoatalk ? "1fr 1fr" : "1fr 1fr 1fr"};
-      ${(props) => props.kokoatalk && "grid-gap: 0; padding: 0 1rem;"}
+      > section {
+        padding: 1rem 3rem;
+        width: 100%;
+        text-align: center;
 
-      > p {
-        margin: 0.5rem 0;
+        > h2 {
+          text-decoration: underline;
+          margin-bottom: 2rem;
+        }
+      }
+
+      section:nth-child(3) > div {
+        display: grid;
+        grid-template-columns: ${(props) =>
+          props.kokoatalk ? "1fr 1fr" : "1fr 1fr 1fr"};
+        ${(props) => props.kokoatalk && "grid-gap: 0; padding: 0 1rem;"}
+
+        > p {
+          margin: 0.5rem 0;
+        }
       }
     }
   }
