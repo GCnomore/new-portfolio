@@ -1,0 +1,43 @@
+@keyframes _shoot {
+  0% {
+    display: block !important;
+    transform: translateX(0);
+    width: 0.5rem;
+  }
+  15% {
+    display: block !important;
+    transform: translateX(0);
+    width: 3rem;
+  }
+  70% {
+    display: block !important;
+    transform: translateX(30vw);
+    z-index: 100;
+    opacity: 1;
+  }
+
+  85% {
+    display: block !important;
+    opacity: 0.5;
+    z-index: 100;
+    width: 5rem;
+    transform: translateX(30vw);
+  }
+
+  100% {
+    display: none;
+    opacity: 0;
+    transform: translateX(30vw);
+  }
+}
+
+.shoot {
+  animation: _shoot 1.5s linear;
+}
+
+.projectIcons {
+}
+
+.hide {
+  display: none;
+}

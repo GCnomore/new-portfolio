@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import grabAndSlide from "../GrabAndSlide";
 import styled from "styled-components/macro";
+import { projects, TAG } from "../proejcts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import jquery from "../assets/icons/Jquery.webp";
@@ -11,9 +12,10 @@ import nodeJS from "../assets/icons/nodejs.webp";
 import {
   faChevronLeft,
   faChevronRight,
+  faTicketAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function About() {
+export default function About({ setPage }) {
   const [slide, setSlide] = useState({
     gcBoard: {
       index: 0,
@@ -40,219 +42,6 @@ export default function About() {
   useEffect(() => {
     grabAndSlide("app", 1.3);
   }, []);
-
-  const importAllImages = (r) => {
-    return r.keys().map(r);
-  };
-
-  const images = importAllImages(
-    require.context(
-      "../assets/project_img",
-      false,
-      /\.(png|jpe?g|svg|PNG|webp)$/
-    )
-  );
-
-  const TAG = {
-    REACT: "react",
-    REACT_NATIVE: "reactNative",
-    NODE_JS: "nodeJS",
-    VUE: "vue",
-    JQUERY: "jquery",
-  };
-
-  const gcBoard = {
-    name: "gcBoard",
-    tag: [TAG.REACT],
-    images: [...images.filter((item) => item.default.includes("gcboard"))],
-    description: [
-      "[On-going Project] Project management app inspired by Trello. This app will provide various templates of work flow management.",
-      "It currently stores data into local storage",
-    ],
-    info: {
-      summary: (
-        <p>
-          <strong>[On-going Project]</strong>
-          <br />
-          <br /> Project management app inspired by Trello. This app will
-          provide various templates of work flow management.
-        </p>
-      ),
-      tech: [
-        "Javascript",
-        "React",
-        "Styled-Component",
-        "Prop-types",
-        "UUID",
-        "Babel",
-      ],
-    },
-  };
-  const movieHunt = {
-    name: "movieHunt",
-    tag: [TAG.REACT, TAG.NODE_JS],
-    images: [...images.filter((item) => item.default.includes("moviehunt"))],
-    description: [
-      "Users can login using their existing account",
-      "Users can register if they don't have an account",
-      "List of some of my favorite movies",
-      "Click the movie card to see details. Users can add selected movie to their favorite list.",
-      "Click on Genre to see other movies with same genre",
-      "Click on Director to see other movies filmed by the same director",
-      "Showing user account page. Users can update their info and favorite list.",
-    ],
-    info: {
-      summary: (
-        <p>
-          Full stack project made with <strong>MERN stack</strong> This project
-          uses database I reated with some of my favorite movies. It can
-          register a user and save their account info to the database. Used
-          Heroku to host this app.
-          <br />
-          <br /> <strong>Use a test account to try it out!</strong>
-          <br />
-          <strong>Account: test</strong>
-          <br />
-          <strong>Password: 111111 ---> (Six ones)</strong>
-        </p>
-      ),
-      tech: [
-        "Javascript",
-        "React",
-        "React Router Dom",
-        "SCSS",
-        "Redux",
-        "Babel",
-        "Parcel",
-        "NodeJS",
-        "Express",
-        "Passport",
-        "Heroku",
-        "JWT",
-        "UUID",
-        "MongoDB",
-        "Mongoose",
-        "CORS",
-        "Bcrypt",
-        "Prop-types",
-        "JS Doc",
-        "BootStrap",
-      ],
-    },
-  };
-  const pokedex = {
-    name: "pokedex",
-    tag: [TAG.JQUERY],
-    images: [...images.filter((item) => item.default.includes("pokedex"))],
-    description: [
-      "List of Pokemon cards colored by their types",
-      "Click the cards to see their details",
-    ],
-    info: {
-      summary: (
-        <p>
-          A simple <strong>Jquery</strong> project to build PokeDex. Displays
-          Pokemons in their number order with detailed information in modal
-          window. Applied infinite scroll function.
-        </p>
-      ),
-      tech: [
-        "HTML",
-        "CSS",
-        "Javascript",
-        "Jqeury",
-        "Bootstrap",
-        "Animate.css",
-        "ES Lint",
-      ],
-    },
-  };
-  const kokoatalk = {
-    name: "kokoatalk",
-    tag: [TAG.REACT_NATIVE],
-    images: [...images.filter((item) => item.default.includes("kokoa"))],
-    description: [
-      "Users can enter their name and select color of chat screen on main screen",
-      "Three actions are available",
-      "Example view of messages",
-    ],
-    info: {
-      summary: (
-        <p>
-          Chat app made with <strong>React Native and GiftedChat</strong> with
-          given design instruction. Users have option to change the color of the
-          chat screen. Photo from library, directly from camera, and current
-          location can be sent as a message. Message data will be stored in{" "}
-          <strong>asyncstorage and Firebase.</strong>
-        </p>
-      ),
-      tech: [
-        "Javascript",
-        "React Native",
-        "Expo",
-        "React Navigation: Stack",
-        "Gifted Chat",
-        "Firebase/Firestore",
-        "Prop-types",
-        "Async-storage",
-        "NetInfo",
-      ],
-    },
-  };
-  const todo = {
-    name: "todo",
-    tag: [TAG.VUE],
-    images: [...images.filter((item) => item.default.includes("todo"))],
-    description: [
-      "Users can add to-dos with title and content",
-      "To do will be added as a card",
-      "User can edit, delete, drage and drop cards",
-    ],
-    info: {
-      summary: (
-        <p>
-          To do list app built with <strong>Vue.</strong> Its data will be
-          stored in local storage. It provides drag and drop feature to sort
-          to-dos in user's priority.
-        </p>
-      ),
-      tech: ["Javascript", "Vue", "Material Deisgn", "Draggable"],
-    },
-  };
-  const watsPoppin = {
-    name: "watsPoppin",
-    tag: [TAG.REACT],
-    images: [...images.filter((item) => item.default.includes("watspoppin"))],
-    description: [
-      "Authenticate user with their Google account",
-      "Main page shows all available events with pie chart and scatter chart",
-      "List of events - details are collapsed by default - can be expanded with show detail button",
-      "Search events by city name",
-    ],
-    info: {
-      summary: (
-        <p>
-          Event searching application made with Careerfoundry's Google Calander
-          API. Applied OAuth for user authentication. Some commponents were
-          coded as object oriented programming.
-        </p>
-      ),
-      tech: [
-        "Javascript",
-        "React",
-        "Rechart",
-        "AWS",
-        "Atatus",
-        "OAuth",
-        "Material Deisgn",
-        "PWA",
-        "Enzyme",
-        "Cucumber",
-        "Jest",
-        "Puppeteer",
-      ],
-    },
-  };
 
   const renderProjectSlide = (project, state) => {
     const length = project.images.length;
@@ -405,13 +194,19 @@ export default function About() {
         <h2 onClick={() => setSortBy("none")}>Clear</h2>
       </SortContainer>
       <ProjectSlider>
-        {renderProjectSlide(gcBoard, "gcBoard")}
-        {renderProjectSlide(movieHunt, "movieHunt")}
-        {renderProjectSlide(pokedex, "pokedex")}
-        {renderProjectSlide(kokoatalk, "kokoatalk")}
-        {renderProjectSlide(watsPoppin, "watsPoppin")}
-        {renderProjectSlide(todo, "todo")}
+        {renderProjectSlide(projects.gcBoard, "gcBoard")}
+        {renderProjectSlide(projects.movieHunt, "movieHunt")}
+        {renderProjectSlide(projects.pokedex, "pokedex")}
+        {renderProjectSlide(projects.kokoatalk, "kokoatalk")}
+        {renderProjectSlide(projects.watsPoppin, "watsPoppin")}
+        {renderProjectSlide(projects.todo, "todo")}
       </ProjectSlider>
+      <ToTheater>
+        <FontAwesomeIcon
+          icon={faTicketAlt}
+          onClick={() => setPage("theater")}
+        />
+      </ToTheater>
     </ProjectContainer>
   );
 }
@@ -583,4 +378,13 @@ const Divider = styled.div`
   align-self: center;
   margin-bottom: 5rem;
   display: ${(props) => (props.show ? "block" : "none")};
+`;
+
+const ToTheater = styled.div`
+  width: 100vw;
+  position: absolute;
+  font-size: 3rem;
+  bottom: 5vh;
+  text-align: center;
+  cursor: pointer;
 `;

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components/macro";
 import logo from "../assets/logo.webp";
 import gmail from "../assets/icons/gmail.webp";
@@ -13,6 +14,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function SideBarMenu({ setPage }) {
+  const [easter, setEaster] = useState(false);
+
   return (
     <SideBarContainer>
       <MenuHeader>
@@ -31,9 +34,18 @@ export default function SideBarMenu({ setPage }) {
           <FontAwesomeIcon icon={faBoxOpen} />
           <p>Works</p>
         </li>
-        <li>
+        <li onClick={() => setEaster(!easter)}>
           <FontAwesomeIcon icon={faEgg} />
         </li>
+        <EasterEgg show={easter}>
+          <h2>Easter Egg List</h2>
+          <ul>
+            <li>1. Find a movie ticket and click it!</li>
+            <li>2. Try to turn off the lights and see what happens</li>
+            <li>3. Spin my card 3 times!</li>
+            <li>4. Type "break" and see what happens</li>
+          </ul>
+        </EasterEgg>
       </SideMenuList>
       <ContactIcons>
         <a rel="noreferrer" target="_blank" href="https://github.com/GCnomore">
@@ -131,5 +143,30 @@ const ContactIcons = styled.footer`
     width: 2.5rem;
     height: auto;
     margin: 0.5rem 0;
+  }
+`;
+
+const EasterEgg = styled.div`
+  color: white;
+  position: fixed;
+  left: 5vw;
+  top: 40vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 18vw;
+  padding: 1rem;
+  display: ${(props) => (props.show ? "block" : "none")};
+
+  > h2 {
+    margin: 0;
+  }
+
+  > ul {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+
+    > li {
+      margin: 1rem 0;
+    }
   }
 `;

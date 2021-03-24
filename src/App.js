@@ -2,6 +2,7 @@ import SideBarMenu from "./components/SideBarMenu";
 import Home from "./components/Home";
 import About from "./components/About";
 import ProjectSlide from "./components/ProjectsSlide";
+import ProjectTheater from "./components/ProjectsTheater";
 
 import { useState } from "react";
 
@@ -15,23 +16,29 @@ function App() {
       <SideBar>
         <SideBarMenu setPage={setPage} />
       </SideBar>
-      <ContentsContainer>
-        {page === "" && (
-          <>
-            <Home />
-          </>
-        )}
-        {page === "About" && (
-          <>
-            <About />
-          </>
-        )}
-        {page === "Projects" && (
-          <>
-            <ProjectSlide />
-          </>
-        )}
-      </ContentsContainer>
+      {page === "theater" ? (
+        <>
+          <ProjectTheater />
+        </>
+      ) : (
+        <ContentsContainer>
+          {page === "" && (
+            <>
+              <Home />
+            </>
+          )}
+          {page === "About" && (
+            <>
+              <About />
+            </>
+          )}
+          {page === "Projects" && (
+            <>
+              <ProjectSlide setPage={setPage} />
+            </>
+          )}
+        </ContentsContainer>
+      )}
     </AppContainer>
   );
 }
