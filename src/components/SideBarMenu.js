@@ -13,13 +13,44 @@ import {
   faIdBadge,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function SideBarMenu({ setPage }) {
+import logo1 from "../assets/easterEggs/logo1.webp";
+import logo2 from "../assets/easterEggs/logo2.webp";
+import logo3 from "../assets/easterEggs/logo3.webp";
+import logo4 from "../assets/easterEggs/logo4.webp";
+import logo5 from "../assets/easterEggs/logo5.webp";
+import logo6 from "../assets/easterEggs/logo6.webp";
+import logo7 from "../assets/easterEggs/logo7.webp";
+import logo8 from "../assets/easterEggs/logo8.webp";
+import logo9 from "../assets/easterEggs/logo9.webp";
+import logo10 from "../assets/easterEggs/logo10.webp";
+
+export default function SideBarMenu({ setPage, setDarkMode }) {
   const [easter, setEaster] = useState(false);
+  const [light, setLight] = useState(0);
+
+  const logos = [
+    logo1,
+    logo2,
+    logo3,
+    logo4,
+    logo5,
+    logo6,
+    logo7,
+    logo8,
+    logo9,
+    logo10,
+  ];
+
+  light === 9 && setDarkMode(true);
 
   return (
     <SideBarContainer>
-      <MenuHeader>
-        <img alt="site logo" src={logo} />
+      <MenuHeader
+        onClick={() => {
+          light >= 9 ? setLight(0) : setLight(light + 1);
+        }}
+      >
+        <img alt="site logo" src={light === 0 ? logo : logos[light]} />
       </MenuHeader>
       <SideMenuList>
         <li onClick={() => setPage("")}>

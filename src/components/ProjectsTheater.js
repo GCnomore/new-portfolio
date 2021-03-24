@@ -5,7 +5,7 @@ import "../animation.css";
 import styled, { keyframes } from "styled-components/macro";
 import projector from "../assets/projector.webp";
 
-export default function ProjectTheater() {
+export default function ProjectTheater({ broken, darkMode }) {
   const [selected, setSelected] = useState("");
   const [screenReady, setScreenReady] = useState(false);
   const [showing, setShowing] = useState("");
@@ -59,9 +59,12 @@ export default function ProjectTheater() {
         </ProjectTitles>
         <Divider />
         <ProjectDetails projectName={selected.name}>
-          <p>{selected && selected.info.summary}</p>
+          {selected && selected.info.summary}
           <div>
-            {selected && selected.info.tech.map((item) => <p>#{item}</p>)}
+            {selected &&
+              selected.info.tech.map((item, index) => (
+                <p key={index}>#{item}</p>
+              ))}
           </div>
           <div>
             {selected && (
@@ -91,14 +94,14 @@ export default function ProjectTheater() {
       </ProjectList>
       <Projector src={projector} />
       {selected.icons &&
-        selected.icons.map((item) => (
-          <>
+        selected.icons.map((item, index) => (
+          <div key={index}>
             <ProjectIcon
               className="projectIcons hide"
               src={item}
               show={showIcon}
             />
-          </>
+          </div>
         ))}
       <Screen
         screenReady={screenReady}

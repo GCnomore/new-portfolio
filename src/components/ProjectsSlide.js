@@ -15,7 +15,7 @@ import {
   faTicketAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function About({ setPage }) {
+export default function About({ setPage, broken, darkMode }) {
   const [slide, setSlide] = useState({
     gcBoard: {
       index: 0,

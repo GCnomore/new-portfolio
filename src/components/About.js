@@ -1,7 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import styled, { keyframes, css } from "styled-components/macro";
+import "../animation.css";
 import portrait from "../assets/profile_cut.webp";
+import lvl_2_crown from "../assets/easterEggs/lvl2crown.webp";
+import lvl_3_crown from "../assets/easterEggs/lvl3crown.webp";
+import lvl_3_brooch from "../assets/easterEggs/lvl3brooch.webp";
+import goldFrame from "../assets/easterEggs/goldframe.webp";
+import goldBar from "../assets/easterEggs/goldbar.webp";
+import goldRod from "../assets/easterEggs/goldrod.webp";
+import goldCastle from "../assets/easterEggs/goldcastle.webp";
+import goldChest from "../assets/easterEggs/goldchest.webp";
 
 import angular from "../assets/icons/Angular.webp";
 import aws from "../assets/icons/aws.webp";
@@ -32,24 +41,172 @@ import semanticui from "../assets/icons/semanticui.webp";
 import jest from "../assets/icons/jest.webp";
 import express from "../assets/icons/express.webp";
 
-export default function About() {
-  const [flipCard, setFlipCard] = useState(false);
+export default function About({ broken, darkMode }) {
+  const [flipCard, setFlipCard] = useState("");
+  const [levelUp, setLevelUp] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+
+  const renderCrown = () => {
+    if (broken) {
+      console.log(levelUp);
+      if (levelUp === 1)
+        return (
+          <>
+            <Level2Crown src={lvl_2_crown} alt="gold crown" />
+          </>
+        );
+
+      if (levelUp === 2)
+        return (
+          <>
+            <Level3Crown src={lvl_3_crown} alt="gold crown" />
+          </>
+        );
+      if (levelUp === 3)
+        return (
+          <>
+            <Level3Crown src={lvl_3_crown} alt="gold crown" />
+            <GoldBrooch src={lvl_3_brooch} alt="gold brooch" />
+          </>
+        );
+      if (levelUp === 4)
+        return (
+          <>
+            <Level3Crown src={lvl_3_crown} alt="gold crown" />
+            <GoldBrooch src={lvl_3_brooch} alt="gold brooch" />
+            <GoldFrame src={goldFrame} alt="gold frame" />
+          </>
+        );
+      if (levelUp === 5)
+        return (
+          <>
+            <Level3Crown src={lvl_3_crown} alt="gold crown" />
+            <GoldBrooch src={lvl_3_brooch} alt="gold brooch" />
+            <GoldFrame src={goldFrame} alt="gold frame" />
+            <GoldRod src={goldRod} alt="gold rod" />
+          </>
+        );
+      if (levelUp === 6)
+        return (
+          <>
+            <Level3Crown src={lvl_3_crown} alt="gold crown" />
+            <GoldBrooch src={lvl_3_brooch} alt="gold brooch" />
+            <GoldFrame src={goldFrame} alt="gold frame" />
+            <GoldRod src={goldRod} alt="gold rod" />
+            <GoldBar src={goldBar} alt="gold bar" />
+          </>
+        );
+      if (levelUp === 7)
+        return (
+          <>
+            <Level3Crown src={lvl_3_crown} alt="gold crown" />
+            <GoldBrooch src={lvl_3_brooch} alt="gold brooch" />
+            <GoldFrame src={goldFrame} alt="gold frame" />
+            <GoldRod src={goldRod} alt="gold rod" />
+            <GoldBar src={goldBar} alt="gold bar" />
+            <GoldChest src={goldChest} alt="gold chest" />
+          </>
+        );
+      if (levelUp === 8)
+        return (
+          <>
+            <Level3Crown src={lvl_3_crown} alt="gold crown" />
+            <GoldBrooch src={lvl_3_brooch} alt="gold brooch" />
+            <GoldFrame src={goldFrame} alt="gold frame" />
+            <GoldRod src={goldRod} alt="gold rod" />
+            <GoldBar src={goldBar} alt="gold bar" />
+            <GoldChest src={goldChest} alt="gold chest" />
+            <GoldCastle src={goldCastle} alt="gold castle" />
+          </>
+        );
+    }
+
+    if (!broken) {
+      if (levelUp >= 6) {
+        return (
+          <>
+            <Level3Crown src={lvl_3_crown} alt="gold crown" />
+            <GoldBrooch src={lvl_3_brooch} alt="gold brooch" />
+          </>
+        );
+      } else if (levelUp >= 3) {
+        return (
+          <>
+            <Level2Crown src={lvl_2_crown} alt="gold crown" />
+          </>
+        );
+      }
+    }
+  };
+
+  const renderLevel = () => {
+    if (levelUp >= 6) {
+      return 3;
+    } else if (levelUp >= 3) {
+      return 2;
+    } else {
+      return 1;
+    }
+  };
+
+  const renderModal = () => {
+    return (
+      <ModalBackDrop
+        onClick={(e) => {
+          const condition = Array.from(e.target.classList);
+          if (condition.length !== 0) {
+            if (condition[0].includes("BackDrop")) {
+              setShowModal(false);
+            }
+          }
+        }}
+      >
+        <Modal>
+          {broken ? (
+            <p>I still can't go more than this...</p>
+          ) : (
+            <p>
+              Sorry, my conscience is telling me that I shouldn't be more than
+              level 3 for now!
+            </p>
+          )}
+        </Modal>
+      </ModalBackDrop>
+    );
+  };
+
+  if (!broken && levelUp >= 9) {
+    setLevelUp(6);
+    setShowModal(true);
+  }
+  if (broken && levelUp >= 9) {
+    setLevelUp(8);
+    setShowModal(true);
+  }
+
+  useEffect(() => {
+    broken && setLevelUp(0);
+  }, [broken]);
+
   return (
     <AboutContainer>
+      {showModal && renderModal()}
       <ProfileContainer>
         <ProfileCard
           onClick={() => {
-            setFlipCard(true);
+            broken ? setFlipCard("lvlUp") : setFlipCard("flip");
+            setLevelUp(levelUp + 1);
             setTimeout(() => {
-              setFlipCard(false);
+              setFlipCard("");
             }, 1000);
           }}
-          flipCard={flipCard}
+          className={flipCard === "" ? "bounce" : flipCard}
         >
           <header>
-            <p>LV. 1</p>
+            <p>LV. {broken ? levelUp : renderLevel()}</p>
             <p>ALL ROUNDER</p>
           </header>
+          <Crown lvl={broken ? null : levelUp}>{renderCrown()}</Crown>
           <img src={portrait} alt="author" />
           <h1>FRONT END DEVELOPER</h1>
           <p>READY FOR ANYTHING</p>
@@ -66,7 +223,7 @@ export default function About() {
             </div>
           </div>
         </ProfileCard>
-        <SummaryContainer>
+        <SummaryContainer broken={broken}>
           <h2>A BIT ABOUT ME</h2>
           <p>
             I’ve always admired programmers since I noticed that almost
@@ -80,8 +237,8 @@ export default function About() {
           </p>
         </SummaryContainer>
       </ProfileContainer>
-      <Divider />
-      <SkillContainer>
+      <Divider broken={broken} className={broken && "rotate"} />
+      <SkillContainer className={broken && "pop"}>
         <section>
           <div>
             <h2>Confident Skills</h2>
@@ -267,35 +424,6 @@ const ProfileContainer = styled.section`
   align-items: center;
 `;
 
-const flip = keyframes`
-   from {
-      transform: rotateY(360deg);
-   }
-   to{
-      transform: rotateY(0deg);
-   }
-`;
-
-const flipCard = css`
-  animation: ${flip} 1s ease-in-out;
-`;
-
-const bounce = keyframes`
-  0%{
-     transform: translateY(0);
-   }
-  50%{
-     transform: translateY(5px);
-   }
-  100%{
-     transform: translateY(0);
-   }
-`;
-
-const bounceCard = css`
-  animation: ${bounce} 1.3s ease-in-out infinite;
-`;
-
 const ProfileCard = styled.div`
   font-family: "Exo", sans-serif;
   width: 25rem;
@@ -314,15 +442,16 @@ const ProfileCard = styled.div`
   border: 5px solid rgba(0, 0, 0, 0.4);
   border-radius: 1rem;
   text-align: center;
-  ${(props) => (props.flipCard ? flipCard : bounceCard)};
   cursor: pointer;
   user-select: none;
+  z-index: 200;
 
   > header {
     display: flex;
     justify-content: space-between;
     padding: 1rem 0.5rem;
     align-items: center;
+    z-index: 400;
 
     > p:nth-child(1) {
       margin: 0;
@@ -339,6 +468,7 @@ const ProfileCard = styled.div`
   > h1 {
     font-size: 2rem;
     margin: 0;
+    z-index: 200;
   }
 
   > img {
@@ -346,26 +476,32 @@ const ProfileCard = styled.div`
     border-radius: 50%;
     align-self: center;
     opacity: 0.9;
+    z-index: 200;
   }
 
   > p {
     font-size: 1.6rem;
     margin: 0;
+    z-index: 200;
   }
 
   > div {
+    z-index: 400;
     > h2 {
       font-size: 1.2rem;
       margin-top: 2rem;
+      z-index: 200;
     }
     > div {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       grid-gap: 0.5rem;
       margin-bottom: 1rem;
+      z-index: 200;
 
       > p {
         margin: 0;
+        z-index: 400;
       }
     }
   }
@@ -373,7 +509,8 @@ const ProfileCard = styled.div`
 
 const SummaryContainer = styled.section`
   margin-top: 5rem;
-  font-size: 1.2rem;
+  font-size: ${(props) => (props.broken ? "1px;" : "1.2rem")};
+  color: ${(props) => (props.broken ? "green" : "black")};
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
@@ -381,6 +518,11 @@ const SummaryContainer = styled.section`
     margin: 0 0 2rem 0;
     text-decoration: underline;
     font-family: "Luckiest Guy", cursive;
+    color: ${(props) => (props.broken ? "purple" : "black")};
+    font-size: ${(props) => (props.broken ? "10rem" : "1.2rem")};
+    position: ${(props) => (props.broken ? "fixed" : "relative")};
+    transform: perspective(1000px)
+      ${(props) => (props.broken ? "rotateX(-60deg)" : "")};
   }
 `;
 
@@ -469,8 +611,94 @@ const SkillContainer = styled.section`
 `;
 
 const Divider = styled.div`
-  width: 5px;
-  height: 85vh;
+  width: ${(props) => (props.broken ? "30px" : "5px")};
+  height: ${(props) => (props.broken ? "50vh" : "85vh")};
   background-color: rgba(0, 0, 0, 0.2);
   align-self: center;
+  position: ${(props) => (props.broken ? "fixed" : "relative")};
+`;
+
+const Crown = styled.div`
+  position: absolute;
+  z-index: 300;
+`;
+
+const Level2Crown = styled.img`
+  position: absolute;
+  z-index: 100;
+  top: -30vh;
+  left: 3.5vw;
+  width: 15rem;
+`;
+const Level3Crown = styled.img`
+  position: absolute;
+  width: 14rem;
+  top: -23vh;
+  left: 4vw;
+`;
+
+const GoldBrooch = styled.img`
+  position: absolute;
+  left: 0;
+  top: -20vh;
+  width: 25rem;
+`;
+
+const GoldFrame = styled.img`
+  position: absolute;
+  z-index: 100;
+  top: -38vh;
+  left: -6vw;
+  width: 43rem;
+`;
+const GoldBar = styled.img`
+  position: absolute;
+  z-index: 101;
+  top: 0;
+  left: -10vw;
+  width: 20rem;
+`;
+const GoldRod = styled.img`
+  position: absolute;
+  z-index: 101;
+  top: -40vh;
+  left: 10vw;
+  width: 20rem;
+`;
+const GoldChest = styled.img`
+  position: absolute;
+  z-index: 101;
+  top: 5vh;
+  left: 10vw;
+  width: 30rem;
+`;
+const GoldCastle = styled.img`
+  position: absolute;
+  z-index: 1;
+  top: -50vh;
+  left: 0vw;
+  width: 100rem;
+`;
+
+const ModalBackDrop = styled.div`
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Modal = styled.div`
+  z-index: 2000;
+  color: white;
+  width: 45rem;
+  height: 25rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-size: 3rem;
+  padding: 2rem;
 `;

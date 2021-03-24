@@ -4,37 +4,64 @@ import About from "./components/About";
 import ProjectSlide from "./components/ProjectsSlide";
 import ProjectTheater from "./components/ProjectsTheater";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import styled from "styled-components/macro";
 
 function App() {
   const [page, setPage] = useState("");
+  const [darkMode, setDarkMode] = useState(false);
+  const [broken, setBroken] = useState(false);
+  const easterEggCode = useRef([]);
+
+  console.log("darkmode", darkMode);
+  console.log("broken", broken);
+
+  useEffect(() => {
+    window.addEventListener("keydown", (e) => {
+      easterEggCode.current.push(e.key);
+      if (e.key === "Escape") {
+        easterEggCode.current = [];
+        setBroken(false);
+      }
+      if (easterEggCode.current.join("") === "break") {
+        setBroken(true);
+      }
+    });
+  }, []);
 
   return (
     <AppContainer>
-      <SideBar>
-        <SideBarMenu setPage={setPage} />
+      <SideBar broken={broken}>
+        <SideBarMenu
+          setPage={setPage}
+          setDarkMode={setDarkMode}
+          broken={broken}
+        />
       </SideBar>
       {page === "theater" ? (
         <>
-          <ProjectTheater />
+          <ProjectTheater broken={broken} darkMode={darkMode} />
         </>
       ) : (
         <ContentsContainer>
           {page === "" && (
             <>
-              <Home />
+              <Home broken={broken} darkMode={darkMode} />
             </>
           )}
           {page === "About" && (
             <>
-              <About />
+              <About broken={broken} darkMode={darkMode} />
             </>
           )}
           {page === "Projects" && (
             <>
-              <ProjectSlide setPage={setPage} />
+              <ProjectSlide
+                setPage={setPage}
+                broken={broken}
+                darkMode={darkMode}
+              />
             </>
           )}
         </ContentsContainer>
@@ -52,10 +79,13 @@ const AppContainer = styled.div`
 `;
 
 const SideBar = styled.div`
-  width: 3.5vw;
+  width: ${(props) => (props.broken ? "10vw;" : "3.5vw")};
   height: 100vh;
   position: fixed;
-  z-index: 100;
+  z-index: 1005;
+  left: ${(props) => (props.broken ? "10vw;" : "0")};
+  transform: perspective(1000)
+    ${(props) => (props.broken ? "rotateX(20deg) rotateZ(10deg)" : "")};
 `;
 
 const ContentsContainer = styled.div`
