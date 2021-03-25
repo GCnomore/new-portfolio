@@ -91,10 +91,18 @@ export default function About({ setPage, broken, darkMode, setBroken }) {
                       <section>
                         <h2>Summary</h2>
                         <div>{project.info.summary}</div>
-                        <a target="_blank" href={project.project_src}>
+                        <a
+                          target="_blank"
+                          href={project.project_src}
+                          rel="noreferrer"
+                        >
                           See App
                         </a>
-                        <a target="_blank" href={project.project_code}>
+                        <a
+                          target="_blank"
+                          href={project.project_code}
+                          rel="noreferrer"
+                        >
                           See Code
                         </a>
                       </section>
@@ -207,7 +215,7 @@ export default function About({ setPage, broken, darkMode, setBroken }) {
             className={broken ? "fly5" : ""}
           />
         </div>
-        <h2 onClick={() => setSortBy("none")} className={broken && "fly6"}>
+        <h2 onClick={() => setSortBy("none")} className={broken ? "fly6" : ""}>
           Clear
         </h2>
       </SortContainer>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import styled, { keyframes, css } from "styled-components/macro";
+import styled from "styled-components/macro";
 import "../animation.css";
 import portrait from "../assets/profile_cut.webp";
 import lvl_2_crown from "../assets/easterEggs/lvl2crown.webp";

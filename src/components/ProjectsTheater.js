@@ -81,10 +81,14 @@ export default function ProjectTheater({ broken, darkMode }) {
                 >
                   See Project
                 </a>
-                <a target="_blank" href={selected.project_code}>
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  href={selected.project_code}
+                >
                   See Code
                 </a>
-                <a target="_blank" href={selected.project_src}>
+                <a target="_blank" rel="noreferrer" href={selected.project_src}>
                   Open Project
                 </a>
               </>
