@@ -1,58 +1,66 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import styled from "styled-components/macro";
 import javascript from "../assets/icons/javascript.webp";
 
 export default function Home() {
-  let deleteWord = false;
-  let wordIndex = 0;
-  const words = [
-    "const sayHello = () => {</br> &nbsp&nbsp console.log('Hello world!);</br>}</br></br>sayHello();",
-    "import axios from 'axios';</br>import { useState, useEffect } from 'react';</br></br>const [portfolio, setPortfolio] = useState();</br></br>async function getCoolWebiste() {</br>&nbsp const result = await axios.get('www.api.superawesomewebsite.com/data?id=isaac');</br>&nbsp setPortfolio(result.data);</br>}</br></br>useEffect(()=>{</br>&nbsp getCoolWebsite();</br>}, [])",
-  ];
-  let wait = 4000;
-
-  let txt = "";
+  const typing = useRef(false);
+  const txt = useRef("");
+  const deleteWord = useRef(false);
+  const wordIndex = useRef(0);
 
   const typeWords = () => {
-    const currentIndex = wordIndex % words.length;
+    const words = [
+      "const sayHello = () => {</br> &nbsp&nbsp console.log('Hello world!);</br>}</br></br>sayHello();",
+      "import axios from 'axios';</br>import { useState, useEffect } from 'react';</br></br>const [portfolio, setPortfolio] = useState();</br></br>async function getCoolWebiste() {</br>&nbsp const result = await axios.get('www.api.superawesomewebsite.com/data?id=isaac');</br>&nbsp setPortfolio(result.data);</br>}</br></br>useEffect(()=>{</br>&nbsp getCoolWebsite();</br>}, [])",
+    ];
+    let wait = 4000;
+
+    const currentIndex = wordIndex.current % words.length;
     const fullText = words[currentIndex];
     const txtElement = document.querySelector(".txtElement");
 
-    if (deleteWord) {
-      txt = fullText.substring(0, txt.length - 1);
+    if (deleteWord.current) {
+      txt.current = fullText.substring(0, txt.current.length - 1);
     } else {
-      txt = fullText.substring(0, txt.length + 1);
+      txt.current = fullText.substring(0, txt.current.length + 1);
     }
 
-    txtElement && (txtElement.innerHTML = txt);
+    txtElement && (txtElement.innerHTML = txt.current);
 
     let speed = 50;
 
-    if (deleteWord) {
+    if (deleteWord.current) {
       speed /= 5;
     }
 
-    if (!deleteWord && txt === fullText) {
+    if (!deleteWord.current && txt.current === fullText) {
       speed = wait;
-      deleteWord = true;
-    } else if (deleteWord && txt === "") {
-      deleteWord = false;
-      wordIndex++;
+      deleteWord.current = true;
+    } else if (deleteWord.current && txt.current === "") {
+      deleteWord.current = false;
+      wordIndex.current++;
       speed = 500;
     }
 
     setTimeout(() => {
-      typeWords();
+      typing.current && typeWords();
     }, speed);
   };
 
   useEffect(() => {
-    typeWords();
+    typing.current = true;
+    txt.current = "";
+    deleteWord.current = false;
+    wordIndex.current = 0;
+    typing.current && typeWords();
+
+    return () => {
+      typing.current = false;
+    };
   }, []);
 
   return (
     <HomeContainer>
-      {console.log("render")}
       <div>This is home</div>
       <TypingContainer>
         <header>
@@ -85,7 +93,7 @@ export default function Home() {
               <li>12</li>
             </ol>
           </LineNumber>
-          <section className="txtElement">{txt}</section>
+          <section className="txtElement">{txt.current}</section>
         </TextContent>
       </TypingContainer>
     </HomeContainer>

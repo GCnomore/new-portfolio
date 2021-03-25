@@ -14,9 +14,6 @@ function App() {
   const [broken, setBroken] = useState(false);
   const easterEggCode = useRef([]);
 
-  console.log("darkmode", darkMode);
-  console.log("broken", broken);
-
   useEffect(() => {
     window.addEventListener("keydown", (e) => {
       easterEggCode.current.push(e.key);
