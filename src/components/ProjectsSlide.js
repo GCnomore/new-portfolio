@@ -37,7 +37,7 @@ export default function About({ setPage, broken, darkMode, setBroken }) {
     },
   });
   const [sortBy, setSortBy] = useState("none");
-  const [showDetail, setShowDetail] = useState("");
+  const [showDetail, setShowDetail] = useState("gcBoard");
 
   // const breakAnimation = ["fly1", "fly2", "fly3", "fly4", "fly5", "fly6"];
 
@@ -79,54 +79,11 @@ export default function About({ setPage, broken, darkMode, setBroken }) {
               <ProjectContent
                 key={index}
                 show={slide[state].index === index ? true : false}
-                data-name={project.name}
               >
-                <ProjectDetails
-                  show={project.name === showDetail}
-                  kokoatalk={project.name === "kokoatalk"}
-                >
-                  <div>
-                    <h2>{project.name.toUpperCase()}</h2>
-                    <div>
-                      <section>
-                        <h2>Summary</h2>
-                        <div>{project.info.summary}</div>
-                        <a
-                          target="_blank"
-                          href={project.project_src}
-                          rel="noreferrer"
-                        >
-                          See App
-                        </a>
-                        <a
-                          target="_blank"
-                          href={project.project_code}
-                          rel="noreferrer"
-                        >
-                          See Code
-                        </a>
-                      </section>
-                      <Divider
-                        show={project.name === "kokoatalk" ? false : true}
-                      ></Divider>
-                      <section>
-                        <h2>Used Techs</h2>
-                        <div>
-                          {project.info.tech &&
-                            project.info.tech.map((item, index) => (
-                              <p key={index}>#{item}</p>
-                            ))}
-                        </div>
-                      </section>
-                    </div>
-                  </div>
-                </ProjectDetails>
                 <ProjectImg
-                  data-name={project.name}
                   src={item.default}
                   alt={project.name}
                   width={item.default.includes("kokoa") ? "20rem" : null}
-                  onMouseEnter={(e) => setShowDetail(e.target.dataset.name)}
                 />
                 <ProjectDescription
                   show={
@@ -136,11 +93,49 @@ export default function About({ setPage, broken, darkMode, setBroken }) {
                       ? true
                       : false
                   }
-                  data-name={project.name}
-                  onMouseEnter={(e) => setShowDetail(e.target.dataset.name)}
                 >
                   <p>{project.description[index]}</p>
                 </ProjectDescription>
+                <ProjectDetails
+                  show={project.name === showDetail}
+                  kokoatalk={project.name === "kokoatalk"}
+                >
+                  <div>
+                    <h2>{project.name.toUpperCase()}</h2>
+                  </div>
+                  <div>
+                    <section>
+                      <h2>Summary</h2>
+                      <div>{project.info.summary}</div>
+                      <a
+                        target="_blank"
+                        href={project.project_src}
+                        rel="noreferrer"
+                      >
+                        See App
+                      </a>
+                      <a
+                        target="_blank"
+                        href={project.project_code}
+                        rel="noreferrer"
+                      >
+                        See Code
+                      </a>
+                    </section>
+                    <Divider
+                      show={project.name === "kokoatalk" ? false : true}
+                    ></Divider>
+                    <section>
+                      <h2>Used Techs</h2>
+                      <div>
+                        {project.info.tech &&
+                          project.info.tech.map((item, index) => (
+                            <p key={index}>#{item}</p>
+                          ))}
+                      </div>
+                    </section>
+                  </div>
+                </ProjectDetails>
               </ProjectContent>
             );
           })}
@@ -335,69 +330,72 @@ const Project = styled.div`
 
 const ProjectContent = styled.div`
   display: ${(props) => (props.show ? "block" : "none")};
+  position: relative;
 `;
 
 const ProjectImg = styled.img`
   width: ${(props) => (props.width ? props.width : "100%")};
-  height: 35rem;
+  height: 100%;
 `;
 
 const ProjectDetails = styled.div`
   backdrop-filter: blur(1.2px);
   width: 100%;
-  position: relative;
+  height: 100%;
   opacity: ${(props) => (props.show ? 1 : 0)};
+  position: absolute;
+  left: 0;
+  top: 0;
   transition: 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
 
-  > div {
-    position: fixed;
-    left: 0;
-    top: 0;
-    color: white;
+  > div:nth-child(1) {
     width: 100%;
-    height: 35rem;
-    background-color: rgba(0, 0, 0, 0.6);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     > h2 {
       text-align: center;
       font-size: ${(props) => (props.kokoatalk ? "2rem" : "3rem")};
+      margin: 1rem 0 0 0;
+      text-decoration: underline;
     }
-    > div {
-      display: ${(props) => (props.kokoatalk ? "block" : "flex")};
-      justify-content: space-between;
-      font-size: 1.2rem;
-      height: 37vh;
-      ${(props) =>
-        props.kokoatalk &&
-        "> section{ font-size: 0.8rem; padding: 0 !important;  >h2 {font-size: 1.3rem;}}"}
+  }
+  > div:nth-child(2) {
+    overflow: hidden;
+    display: ${(props) => (props.kokoatalk ? "block" : "flex")};
+    justify-content: space-between;
+    font-size: 1.2rem;
+    ${(props) =>
+      props.kokoatalk &&
+      "> section{ font-size: 0.8rem; padding: 0 !important;  >h2 {font-size: 1.3rem;}}"}
 
-      > section {
-        padding: 1rem 3rem;
-        width: 100%;
-        text-align: center;
-        height: fit-content;
+    > section {
+      padding: 0 3rem;
+      width: 100%;
+      text-align: center;
+      height: fit-content;
 
-        > h2 {
-          text-decoration: underline;
-          margin-bottom: 2rem;
-        }
-        > a {
-          color: white;
-          margin: 2rem;
-        }
+      > h2 {
+        text-decoration: underline;
+        margin-bottom: 2rem;
       }
+      > a {
+        color: white;
+        margin: 2rem;
+      }
+    }
 
-      section:nth-child(3) > div {
-        display: grid;
-        grid-template-columns: ${(props) =>
-          props.kokoatalk ? "1fr 1fr" : "1fr 1fr 1fr"};
-        ${(props) => props.kokoatalk && "grid-gap: 0; padding: 0 1rem;"}
+    section:nth-child(3) > div {
+      display: grid;
+      grid-template-columns: ${(props) =>
+        props.kokoatalk ? "1fr 1fr" : "1fr 1fr 1fr"};
+      ${(props) => props.kokoatalk && "grid-gap: 0; padding: 0 1rem;"}
 
-        > p {
-          margin: 0.5rem 0;
-        }
+      > p {
+        margin: 0.5rem 0;
       }
     }
   }
@@ -408,7 +406,8 @@ const ProjectDescription = styled.div`
   text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  display: ${(props) => (props.show ? "block" : "none")};
+  opacity: ${(props) => (props.show ? 1 : 0)};
+  transition: 0.5s;
   > p {
     position: fixed;
     background-color: rgba(0, 0, 0, 0.5);

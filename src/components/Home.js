@@ -61,7 +61,6 @@ export default function Home() {
 
   return (
     <HomeContainer>
-      <div>This is home</div>
       <TypingContainer>
         <header>
           <WindowMenu>
