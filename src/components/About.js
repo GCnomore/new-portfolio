@@ -41,7 +41,7 @@ import semanticui from "../assets/icons/semanticui.webp";
 import jest from "../assets/icons/jest.webp";
 import express from "../assets/icons/express.webp";
 
-export default function About({ broken, darkMode }) {
+export default function About({ broken, theme }) {
   const [flipCard, setFlipCard] = useState("");
   const [levelUp, setLevelUp] = useState(0);
   const [showModal, setShowModal] = useState(false);
@@ -189,10 +189,11 @@ export default function About({ broken, darkMode }) {
   }, [broken]);
 
   return (
-    <AboutContainer>
+    <AboutContainer theme={theme}>
       {showModal && renderModal()}
-      <ProfileContainer>
+      <ProfileContainer theme={theme}>
         <ProfileCard
+          theme={theme}
           onClick={() => {
             broken ? setFlipCard("lvlUp") : setFlipCard("flip");
             setLevelUp(levelUp + 1);
@@ -223,7 +224,7 @@ export default function About({ broken, darkMode }) {
             </div>
           </div>
         </ProfileCard>
-        <SummaryContainer broken={broken}>
+        <SummaryContainer broken={broken} theme={theme}>
           <h2>A BIT ABOUT ME</h2>
           <p>
             I’ve always admired programmers since I noticed that almost
@@ -237,8 +238,8 @@ export default function About({ broken, darkMode }) {
           </p>
         </SummaryContainer>
       </ProfileContainer>
-      <Divider broken={broken} className={broken && "rotate"} />
-      <SkillContainer className={broken && "pop"}>
+      <Divider broken={broken} className={broken && "rotate"} theme={theme} />
+      <SkillContainer className={broken && "pop"} theme={theme}>
         <section>
           <div>
             <h2>Confident Skills</h2>
@@ -284,7 +285,7 @@ export default function About({ broken, darkMode }) {
                 <p>Material Design</p>
               </div>
               <div>
-                <img alt="github icon" src={github} />
+                <GithubIcon alt="github icon" src={github} name="github" />
                 <p>Github</p>
               </div>
               <div>
@@ -411,6 +412,7 @@ const AboutContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-left: 2vw;
+  background-color: ${(props) => props.theme.backgroundColor};
   > section {
     width: 100%;
     padding: 0 5rem;
@@ -445,6 +447,7 @@ const ProfileCard = styled.div`
   cursor: pointer;
   user-select: none;
   z-index: 200;
+  filter: ${(props) => `drop-shadow(${props.theme.abouCardShadow})`};
 
   > header {
     display: flex;
@@ -510,7 +513,15 @@ const ProfileCard = styled.div`
 const SummaryContainer = styled.section`
   margin-top: 5rem;
   font-size: ${(props) => (props.broken ? "1px;" : "1.2rem")};
-  color: ${(props) => (props.broken ? "green" : "black")};
+  color: ${(props) => {
+    if (props.broken) {
+      return "green";
+    } else if (props.theme) {
+      return props.theme.normalFontColor;
+    } else {
+      return "black";
+    }
+  }};
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
@@ -518,7 +529,15 @@ const SummaryContainer = styled.section`
     margin: 0 0 2rem 0;
     text-decoration: underline;
     font-family: "Luckiest Guy", cursive;
-    color: ${(props) => (props.broken ? "purple" : "black")};
+    color: ${(props) => {
+      if (props.broken) {
+        return "purple";
+      } else if (props.theme) {
+        return props.theme.normalFontColor;
+      } else {
+        return "black";
+      }
+    }};
     font-size: ${(props) => (props.broken ? "10rem" : "1.2rem")};
     position: ${(props) => (props.broken ? "fixed" : "relative")};
     transform: perspective(1000px)
@@ -530,6 +549,7 @@ const SkillContainer = styled.section`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  color: ${(props) => props.theme.normalFontColor};
 
   > section:nth-child(1) {
     width: 100%;
@@ -560,6 +580,7 @@ const SkillContainer = styled.section`
           > img {
             width: 5rem;
             padding: 0.5rem;
+            filter: ${(props) => `drop-shadow(${props.theme.dropShadow})`};
           }
           > p {
             margin: 0;
@@ -597,6 +618,7 @@ const SkillContainer = styled.section`
         > div {
           > img {
             width: 3rem;
+            filter: ${(props) => `drop-shadow(${props.theme.dropShadow})`};
           }
           > p {
             margin: 0;
@@ -701,4 +723,8 @@ const Modal = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   font-size: 3rem;
   padding: 2rem;
+`;
+
+const GithubIcon = styled.img`
+  border-radius: ${(props) => props.name === "github" && "5rem"};
 `;

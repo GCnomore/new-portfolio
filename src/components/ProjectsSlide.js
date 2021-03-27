@@ -3,6 +3,7 @@ import grabAndSlide from "../GrabAndSlide";
 import styled from "styled-components/macro";
 import { projects, TAG } from "../proejcts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "../animation.css";
 
 import jquery from "../assets/icons/Jquery.webp";
 import react from "../assets/icons/react.webp";
@@ -15,7 +16,7 @@ import {
   faTicketAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function About({ setPage, broken, darkMode, setBroken }) {
+export default function About({ setPage, broken, theme, setBroken }) {
   const [slide, setSlide] = useState({
     gcBoard: {
       index: 0,
@@ -37,26 +38,18 @@ export default function About({ setPage, broken, darkMode, setBroken }) {
     },
   });
   const [sortBy, setSortBy] = useState("none");
-  const [showDetail, setShowDetail] = useState("gcBoard");
-
-  // const breakAnimation = ["fly1", "fly2", "fly3", "fly4", "fly5", "fly6"];
+  const [showDetail, setShowDetail] = useState("");
 
   useEffect(() => {
-    grabAndSlide("app", 1.3);
+    grabAndSlide("app", 1.2);
   }, []);
 
   const renderProjectSlide = (project, state) => {
     const length = project.images.length;
     if (project.tag.includes(sortBy) || sortBy === "none") {
       return (
-        <Project
-          data-name={project.name}
-          width={project.name === "kokoatalk" ? "fit-content" : null}
-          onMouseEnter={(e) => setShowDetail(e.target.dataset.name)}
-          onMouseLeave={() => setShowDetail()}
-        >
+        <Project width={project.name === "kokoatalk" ? "fit-content" : null}>
           <button
-            data-name={project.name}
             onClick={() => {
               setSlide((prev) =>
                 prev[state].index === 0
@@ -84,6 +77,9 @@ export default function About({ setPage, broken, darkMode, setBroken }) {
                   src={item.default}
                   alt={project.name}
                   width={item.default.includes("kokoa") ? "20rem" : null}
+                  data-name={project.name}
+                  onMouseEnter={(e) => setShowDetail(e.target.dataset.name)}
+                  show={project.name === showDetail}
                 />
                 <ProjectDescription
                   show={
@@ -99,6 +95,7 @@ export default function About({ setPage, broken, darkMode, setBroken }) {
                 <ProjectDetails
                   show={project.name === showDetail}
                   kokoatalk={project.name === "kokoatalk"}
+                  onMouseLeave={() => setShowDetail("")}
                 >
                   <div>
                     <h2>{project.name.toUpperCase()}</h2>
@@ -336,6 +333,7 @@ const ProjectContent = styled.div`
 const ProjectImg = styled.img`
   width: ${(props) => (props.width ? props.width : "100%")};
   height: 100%;
+  z-index: ${(props) => (props.show ? -1000 : 1)};
 `;
 
 const ProjectDetails = styled.div`
@@ -346,20 +344,20 @@ const ProjectDetails = styled.div`
   position: absolute;
   left: 0;
   top: 0;
-  transition: 0.5s ease-in-out;
-  display: flex;
   flex-direction: column;
   background-color: rgba(0, 0, 0, 0.6);
   color: white;
+  z-index: ${(props) => (props.show ? 100 : -100)};
 
   > div:nth-child(1) {
     width: 100%;
     display: flex;
     flex-direction: column;
+
     > h2 {
       text-align: center;
       font-size: ${(props) => (props.kokoatalk ? "2rem" : "3rem")};
-      margin: 1rem 0 0 0;
+      margin: 1rem 0 1rem 0;
       text-decoration: underline;
     }
   }
@@ -380,7 +378,7 @@ const ProjectDetails = styled.div`
 
       > h2 {
         text-decoration: underline;
-        margin-bottom: 2rem;
+        margin: ${(props) => (props.kokoatalk ? "3rem 0 1rem 0" : "2rem 0")};
       }
       > a {
         color: white;
@@ -423,10 +421,10 @@ const ProjectDescription = styled.div`
 
 const Divider = styled.div`
   width: 2px;
-  height: 25rem;
+  height: 20rem;
   background-color: rgba(255, 255, 255, 0.4);
   align-self: center;
-  margin-bottom: 5rem;
+  /* margin-bottom: -10rem; */
   display: ${(props) => (props.show ? "block" : "none")};
 `;
 
@@ -436,5 +434,7 @@ const ToTheater = styled.div`
   font-size: ${(props) => (props.broken ? "50rem" : "3rem")};
   bottom: 5vh;
   text-align: center;
-  cursor: pointer;
+  > svg {
+    cursor: pointer;
+  }
 `;

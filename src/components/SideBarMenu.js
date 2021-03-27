@@ -41,7 +41,7 @@ export default function SideBarMenu({ setPage, setDarkMode }) {
     logo10,
   ];
 
-  light === 9 && setDarkMode(true);
+  // light === 9 ? setDarkMode(true) : setDarkMode(false);
 
   return (
     <SideBarContainer>

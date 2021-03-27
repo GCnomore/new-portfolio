@@ -3,6 +3,7 @@ import Home from "./components/Home";
 import About from "./components/About";
 import ProjectSlide from "./components/ProjectsSlide";
 import ProjectTheater from "./components/ProjectsTheater";
+import theme from "./theme";
 
 import { useEffect, useRef, useState } from "react";
 
@@ -10,7 +11,7 @@ import styled from "styled-components/macro";
 
 function App() {
   const [page, setPage] = useState("");
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
   const [broken, setBroken] = useState(false);
   const easterEggCode = useRef([]);
 
@@ -38,18 +39,27 @@ function App() {
       </SideBar>
       {page === "theater" ? (
         <>
-          <ProjectTheater broken={broken} darkMode={darkMode} />
+          <ProjectTheater
+            broken={broken}
+            theme={darkMode ? theme.dark : theme.normal}
+          />
         </>
       ) : (
-        <ContentsContainer>
+        <ContentsContainer theme={darkMode ? theme.dark : theme.normal}>
           {page === "" && (
             <>
-              <Home broken={broken} darkMode={darkMode} />
+              <Home
+                broken={broken}
+                theme={darkMode ? theme.dark : theme.normal}
+              />
             </>
           )}
           {page === "About" && (
             <>
-              <About broken={broken} darkMode={darkMode} />
+              <About
+                broken={broken}
+                theme={darkMode ? theme.dark : theme.normal}
+              />
             </>
           )}
           {page === "Projects" && (
@@ -58,7 +68,7 @@ function App() {
                 setPage={setPage}
                 broken={broken}
                 setBroken={setBroken}
-                darkMode={darkMode}
+                theme={darkMode ? theme.dark : theme.normal}
               />
             </>
           )}
@@ -90,4 +100,5 @@ const ContentsContainer = styled.div`
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  background-color: ${(props) => props.theme.backgroundColor};
 `;

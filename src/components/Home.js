@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import styled from "styled-components/macro";
 import javascript from "../assets/icons/javascript.webp";
 
-export default function Home() {
+export default function Home({ theme }) {
   const typing = useRef(false);
   const txt = useRef("");
   const deleteWord = useRef(false);
@@ -11,7 +11,7 @@ export default function Home() {
   const typeWords = () => {
     const words = [
       "const sayHello = () => {</br> &nbsp&nbsp console.log('Hello world!);</br>}</br></br>sayHello();",
-      "import axios from 'axios';</br>import { useState, useEffect } from 'react';</br></br>const [portfolio, setPortfolio] = useState();</br></br>async function getCoolWebiste() {</br>&nbsp const result = await axios.get('www.api.superawesomewebsite.com/data?id=isaac');</br>&nbsp setPortfolio(result.data);</br>}</br></br>useEffect(()=>{</br>&nbsp getCoolWebsite();</br>}, [])",
+      "import axios from 'axios';</br>import { useState, useEffect } from 'react';</br></br>const [portfolio, setPortfolio] = useState();</br></br>async function getCoolWebsite() {</br>&nbsp const result = await axios.get('www.api.superawesomewebsite.com/data?id=isaac');</br>&nbsp setPortfolio(result.data);</br>}</br></br>useEffect(()=>{</br>&nbsp getCoolWebsite();</br>}, [])",
     ];
     let wait = 4000;
 
