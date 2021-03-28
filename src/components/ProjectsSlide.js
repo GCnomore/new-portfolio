@@ -48,7 +48,10 @@ export default function About({ setPage, broken, theme, setBroken }) {
     const length = project.images.length;
     if (project.tag.includes(sortBy) || sortBy === "none") {
       return (
-        <Project width={project.name === "kokoatalk" ? "fit-content" : null}>
+        <Project
+          width={project.name === "kokoatalk" ? "fit-content" : null}
+          theme={theme}
+        >
           <button
             onClick={() => {
               setSlide((prev) =>
@@ -163,7 +166,7 @@ export default function About({ setPage, broken, theme, setBroken }) {
 
   return (
     <ProjectContainer className="app">
-      <SortContainer>
+      <SortContainer theme={theme}>
         <h2>Sort by</h2>
         <div>
           <SortIcon
@@ -173,6 +176,7 @@ export default function About({ setPage, broken, theme, setBroken }) {
             name={"react"}
             selected={sortBy}
             className={broken ? "fly1" : ""}
+            theme={theme}
           />
           <SortIcon
             src={reactNative}
@@ -181,6 +185,7 @@ export default function About({ setPage, broken, theme, setBroken }) {
             name={"reactNative"}
             selected={sortBy}
             className={broken ? "fly2" : ""}
+            theme={theme}
           />
           <SortIcon
             src={nodeJS}
@@ -189,6 +194,7 @@ export default function About({ setPage, broken, theme, setBroken }) {
             name={"nodeJS"}
             selected={sortBy}
             className={broken ? "fly3" : ""}
+            theme={theme}
           />
           <SortIcon
             src={vue}
@@ -197,6 +203,7 @@ export default function About({ setPage, broken, theme, setBroken }) {
             name={"vue"}
             selected={sortBy}
             className={broken ? "fly4" : ""}
+            theme={theme}
           />
           <SortIcon
             src={jquery}
@@ -205,9 +212,14 @@ export default function About({ setPage, broken, theme, setBroken }) {
             name={"jquery"}
             selected={sortBy}
             className={broken ? "fly5" : ""}
+            theme={theme}
           />
         </div>
-        <h2 onClick={() => setSortBy("none")} className={broken ? "fly6" : ""}>
+        <h2
+          onClick={() => setSortBy("none")}
+          className={broken ? "fly6" : ""}
+          theme={theme}
+        >
           Clear
         </h2>
       </SortContainer>
@@ -219,7 +231,7 @@ export default function About({ setPage, broken, theme, setBroken }) {
         {renderProjectSlide(projects.watsPoppin, "watsPoppin")}
         {renderProjectSlide(projects.todo, "todo")}
       </ProjectSlider>
-      <ToTheater broken={broken}>
+      <ToTheater broken={broken} theme={theme}>
         <FontAwesomeIcon
           icon={faTicketAlt}
           onClick={() => {
@@ -255,13 +267,18 @@ const SortContainer = styled.section`
   font-family: "Luckiest Guy", cursive;
   font-size: 1.6rem;
   margin-left: 3vw;
+  color: ${(props) => (props.theme ? props.theme.normalFontColor : "black")};
 
   h2:nth-child(3) {
     cursor: pointer;
     border-radius: 0.3rem;
     padding: 0.25rem 1rem;
-    border: 3px solid rgba(0, 0, 0, 0.6);
-    box-shadow: 10px 8px 5px rgba(0, 0, 0, 0.8);
+    border: ${(props) =>
+      props.theme ? "3px solid white" : "3px solid rgba(0, 0, 0, 0.6)"};
+    box-shadow: ${(props) =>
+      props.theme
+        ? "5px 6px 5px rgba(255, 255, 255, 0.3)"
+        : "5px 6px 5px rgba(0, 0, 0, 0.8)"};
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     font-size: 1.2rem;
@@ -269,7 +286,10 @@ const SortContainer = styled.section`
 
     &:active {
       transform: scale(0.95);
-      box-shadow: 6px 4px 1px rgba(0, 0, 0, 1);
+      box-shadow: ${(props) =>
+        props.theme
+          ? "3px 4px 1px rgba(255, 255, 255, 0.3)"
+          : "3px 4px 1px rgba(0, 0, 0, 1)"};
       transition: 0.2s ease-in-out;
     }
   }
@@ -279,7 +299,10 @@ const SortIcon = styled.img`
   width: 5rem;
   height: 5rem;
   margin: 0 1rem;
-  filter: drop-shadow(10px 8px 3px rgba(0, 0, 0, 0.8));
+  filter: ${(props) =>
+    props.theme
+      ? `drop-shadow(${props.theme.dropShadow})`
+      : "drop-shadow(10px 8px 3px rgba(0, 0, 0, 0.8))"};
   cursor: pointer;
   transition: 0.5s ease-in-out;
   opacity: ${(props) =>
@@ -287,7 +310,10 @@ const SortIcon = styled.img`
 
   &:active {
     transform: scale(0.85);
-    filter: drop-shadow(6px 4px 1px rgba(0, 0, 0, 1));
+    filter: ${(props) =>
+      props.theme
+        ? `drop-shadow(${props.theme.dropShadow})`
+        : "drop-shadow(6px 4px 1px rgba(0, 0, 0, 1));"};
     transition: 0.2s ease-in-out;
   }
 `;
@@ -317,6 +343,8 @@ const Project = styled.div`
     font-size: 3rem;
     transition: 0.4s;
     cursor: pointer;
+    background-color: transparent;
+    color: ${(props) => (props.theme ? props.theme.normalFontColor : "black")};
 
     &:active {
       font-size: 2.2rem;
@@ -334,6 +362,8 @@ const ProjectImg = styled.img`
   width: ${(props) => (props.width ? props.width : "100%")};
   height: 100%;
   z-index: ${(props) => (props.show ? -1000 : 1)};
+  box-shadow: ${(props) =>
+    props.theme ? "0px 0px 50px rgba(255, 255, 255, 0.6)" : ""};
 `;
 
 const ProjectDetails = styled.div`
@@ -434,6 +464,7 @@ const ToTheater = styled.div`
   font-size: ${(props) => (props.broken ? "50rem" : "3rem")};
   bottom: 5vh;
   text-align: center;
+  color: ${(props) => (props.theme ? props.theme.normalFontColor : "black")};
   > svg {
     cursor: pointer;
   }
