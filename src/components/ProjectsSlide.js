@@ -4,6 +4,7 @@ import styled from "styled-components/macro";
 import { projects, TAG } from "../proejcts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../animation.css";
+import { useSpring, animated } from "react-spring";
 
 import jquery from "../assets/icons/Jquery.webp";
 import react from "../assets/icons/react.webp";
@@ -39,6 +40,27 @@ export default function About({ setPage, broken, theme, setBroken }) {
   });
   const [sortBy, setSortBy] = useState("none");
   const [showDetail, setShowDetail] = useState("");
+  const [brokenTicket, setBrokenTicket] = useState(800);
+
+  const fadeIn_sortContainer = useSpring({
+    config: { duration: 2000 },
+    opacity: 1,
+    from: { opacity: 0 },
+  });
+
+  const fadeIn_projectContainer = useSpring({
+    config: { duration: 2000 },
+    delay: 1000,
+    opacity: 1,
+    from: { opacity: 0 },
+  });
+
+  const fadeIn_ticket = useSpring({
+    config: { duration: 2000 },
+    delay: 2500,
+    opacity: 1,
+    from: { opacity: 0 },
+  });
 
   useEffect(() => {
     grabAndSlide("app", 1.2);
@@ -51,6 +73,7 @@ export default function About({ setPage, broken, theme, setBroken }) {
         <Project
           width={project.name === "kokoatalk" ? "fit-content" : null}
           theme={theme}
+          style={fadeIn_projectContainer}
         >
           <button
             onClick={() => {
@@ -166,7 +189,7 @@ export default function About({ setPage, broken, theme, setBroken }) {
 
   return (
     <ProjectContainer className="app">
-      <SortContainer theme={theme}>
+      <SortContainer theme={theme} style={fadeIn_sortContainer}>
         <h2>Sort by</h2>
         <div>
           <SortIcon
@@ -231,13 +254,24 @@ export default function About({ setPage, broken, theme, setBroken }) {
         {renderProjectSlide(projects.watsPoppin, "watsPoppin")}
         {renderProjectSlide(projects.todo, "todo")}
       </ProjectSlider>
-      <ToTheater broken={broken} theme={theme}>
+      <ToTheater
+        broken={broken}
+        theme={theme}
+        style={fadeIn_ticket}
+        brokenTicket={brokenTicket}
+      >
         <FontAwesomeIcon
           icon={faTicketAlt}
           onClick={() => {
             if (broken) {
-              setBroken(false);
-              setPage("theater");
+              setBrokenTicket(brokenTicket - 15);
+              if (brokenTicket <= 25) {
+                setBrokenTicket(brokenTicket - 1);
+                if (brokenTicket <= 3.5) {
+                  setBroken(false);
+                  setPage("theater");
+                }
+              }
             } else {
               setPage("theater");
             }
@@ -257,7 +291,7 @@ const ProjectContainer = styled.div`
   user-select: none;
 `;
 
-const SortContainer = styled.section`
+const SortContainer = styled(animated.section)`
   position: fixed;
   display: flex;
   width: 100%;
@@ -299,10 +333,7 @@ const SortIcon = styled.img`
   width: 5rem;
   height: 5rem;
   margin: 0 1rem;
-  filter: ${(props) =>
-    props.theme
-      ? `drop-shadow(${props.theme.dropShadow})`
-      : "drop-shadow(10px 8px 3px rgba(0, 0, 0, 0.8))"};
+  filter: ${(props) => props.theme && `drop-shadow(${props.theme.dropShadow})`};
   cursor: pointer;
   transition: 0.5s ease-in-out;
   opacity: ${(props) =>
@@ -311,9 +342,7 @@ const SortIcon = styled.img`
   &:active {
     transform: scale(0.85);
     filter: ${(props) =>
-      props.theme
-        ? `drop-shadow(${props.theme.dropShadow})`
-        : "drop-shadow(6px 4px 1px rgba(0, 0, 0, 1));"};
+      props.theme && `drop-shadow(${props.theme.dropShadowActive})`};
     transition: 0.2s ease-in-out;
   }
 `;
@@ -327,7 +356,7 @@ const ProjectSlider = styled.section`
   align-items: center;
 `;
 
-const Project = styled.div`
+const Project = styled(animated.div)`
   display: flex;
   width: ${(props) => (props.width ? props.width : "50vw")};
   height: fit-content;
@@ -356,6 +385,7 @@ const Project = styled.div`
 const ProjectContent = styled.div`
   display: ${(props) => (props.show ? "block" : "none")};
   position: relative;
+  height: 100%;
 `;
 
 const ProjectImg = styled.img`
@@ -458,10 +488,10 @@ const Divider = styled.div`
   display: ${(props) => (props.show ? "block" : "none")};
 `;
 
-const ToTheater = styled.div`
+const ToTheater = styled(animated.div)`
   width: 100vw;
   position: absolute;
-  font-size: ${(props) => (props.broken ? "50rem" : "3rem")};
+  font-size: ${(props) => (props.broken ? `${props.brokenTicket}px` : "3rem")};
   bottom: 5vh;
   text-align: center;
   color: ${(props) => (props.theme ? props.theme.normalFontColor : "black")};

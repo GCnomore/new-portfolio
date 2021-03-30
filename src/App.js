@@ -4,10 +4,11 @@ import About from "./components/About";
 import ProjectSlide from "./components/ProjectsSlide";
 import ProjectTheater from "./components/ProjectsTheater";
 import theme from "./theme";
-
 import { useEffect, useRef, useState } from "react";
 
 import styled from "styled-components/macro";
+import { useSpring, animated } from "react-spring";
+import "./animation.css";
 
 function App() {
   const [page, setPage] = useState("");
@@ -29,7 +30,7 @@ function App() {
   }, []);
 
   return (
-    <AppContainer>
+    <AppContainer className={darkMode ? "lightsOnOff" : ""}>
       <SideBar broken={broken}>
         <SideBarMenu
           setPage={setPage}

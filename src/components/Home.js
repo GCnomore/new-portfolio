@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
+import { useSpring, animated, interpolate } from "react-spring";
 import styled from "styled-components/macro";
 import javascript from "../assets/icons/javascript.webp";
+import theme from "../theme";
 
 export default function Home({ theme }) {
   const typing = useRef(false);
@@ -59,9 +61,19 @@ export default function Home({ theme }) {
     };
   }, []);
 
+  const fadeIn = useSpring({
+    config: { duration: 1000 },
+    opacity: 0.7,
+    from: { opacity: 0 },
+  });
+
   return (
     <HomeContainer>
-      <TypingContainer>
+      <NameContainer theme={theme}>
+        <FirstName>Isaac</FirstName>
+        <LastName>Choi</LastName>
+      </NameContainer>
+      <TypingContainer style={fadeIn}>
         <header>
           <WindowMenu>
             <div></div>
@@ -105,7 +117,7 @@ const HomeContainer = styled.div`
   padding: 0 0 0 10rem;
 `;
 
-const TypingContainer = styled.div`
+const TypingContainer = styled(animated.div)`
   position: fixed;
   opacity: 0.7;
   left: 55vw;
@@ -183,10 +195,19 @@ const TextContent = styled.div`
   display: flex;
   height: 100%;
   background-color: #2d2d2d;
+
   color: rgba(255, 255, 255, 0.8);
   > section:nth-child(2) {
     padding-top: 1rem;
     word-spacing: 4px;
     letter-spacing: 2px;
+    background-color: #2d2d2d;
   }
 `;
+
+const NameContainer = styled.div`
+  color: ${(props) =>
+    props.theme.name === "dark" ? props.theme.normalFontColor : "black"};
+`;
+const FirstName = styled(animated.h1)``;
+const LastName = styled(animated.h2)``;

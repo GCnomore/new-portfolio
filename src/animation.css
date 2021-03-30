@@ -200,3 +200,16 @@
 .fly5 {
   animation: _fly5 1s infinite;
 }
+
+@keyframes _lightsOnOff {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.lightsOnOff {
+  animation: _lightsOnOff 3s ease-in;
+}

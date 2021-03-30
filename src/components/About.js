@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import { useSpring, animated } from "react-spring";
 import styled from "styled-components/macro";
 import "../animation.css";
 import portrait from "../assets/profile_cut.webp";
@@ -45,6 +46,19 @@ export default function About({ broken, theme }) {
   const [flipCard, setFlipCard] = useState("");
   const [levelUp, setLevelUp] = useState(0);
   const [showModal, setShowModal] = useState(false);
+
+  const fadeIn = useSpring({
+    config: { duration: 1000 },
+    opacity: 1,
+    from: { opacity: 0 },
+  });
+
+  const fadeIn_card = useSpring({
+    config: { duration: 90 },
+    opacity: 1,
+    from: { opacity: 0 },
+    delay: 1800,
+  });
 
   const renderCrown = () => {
     if (broken) {
@@ -189,7 +203,7 @@ export default function About({ broken, theme }) {
   }, [broken]);
 
   return (
-    <AboutContainer theme={theme}>
+    <AboutContainer theme={theme} style={fadeIn}>
       {showModal && renderModal()}
       <ProfileContainer theme={theme}>
         <ProfileCard
@@ -202,6 +216,7 @@ export default function About({ broken, theme }) {
             }, 1000);
           }}
           className={flipCard === "" ? "bounce" : flipCard}
+          style={fadeIn_card}
         >
           <header>
             <p>LV. {broken ? levelUp : renderLevel()}</p>
@@ -406,7 +421,7 @@ export default function About({ broken, theme }) {
   );
 }
 
-const AboutContainer = styled.div`
+const AboutContainer = styled(animated.div)`
   width: 100%;
   height: 100vh;
   display: flex;
@@ -426,7 +441,7 @@ const ProfileContainer = styled.section`
   align-items: center;
 `;
 
-const ProfileCard = styled.div`
+const ProfileCard = styled(animated.div)`
   font-family: "Exo", sans-serif;
   width: 25rem;
   display: flex;
@@ -447,7 +462,8 @@ const ProfileCard = styled.div`
   cursor: pointer;
   user-select: none;
   z-index: 200;
-  filter: ${(props) => `drop-shadow(${props.theme.abouCardShadow})`};
+  filter: ${(props) =>
+    props.theme && `drop-shadow(${props.theme.abouCardShadow})`};
 
   > header {
     display: flex;
@@ -543,6 +559,11 @@ const SummaryContainer = styled.section`
     transform: perspective(1000px)
       ${(props) => (props.broken ? "rotateX(-60deg)" : "")};
   }
+
+  > p {
+    text-shadow: ${(props) =>
+      props.theme.name === "dark" && `${props.theme.textShadow}`};
+  }
 `;
 
 const SkillContainer = styled.section`
@@ -587,6 +608,8 @@ const SkillContainer = styled.section`
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
               Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
               sans-serif;
+            text-shadow: ${(props) =>
+              props.theme.name === "dark" && `${props.theme.textShadow}`};
           }
         }
       }
@@ -625,6 +648,8 @@ const SkillContainer = styled.section`
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
               Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
               sans-serif;
+            text-shadow: ${(props) =>
+              props.theme.name === "dark" && `${props.theme.textShadow}`};
           }
         }
       }
