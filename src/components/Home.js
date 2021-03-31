@@ -1,8 +1,16 @@
 import { useEffect, useRef } from "react";
-import { useSpring, animated, interpolate } from "react-spring";
+import { useSpring, animated } from "react-spring";
+import GetTime from "./GetTime";
+import Typography from "./Typography";
 import styled from "styled-components/macro";
 import javascript from "../assets/icons/javascript.webp";
-import theme from "../theme";
+import phoneImg from "../assets/undraw_my_app_re_gxtj.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBatteryFull,
+  faSignal,
+  faWifi,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function Home({ theme }) {
   const typing = useRef(false);
@@ -50,30 +58,79 @@ export default function Home({ theme }) {
   };
 
   useEffect(() => {
-    typing.current = true;
-    txt.current = "";
-    deleteWord.current = false;
-    wordIndex.current = 0;
-    typing.current && typeWords();
+    setTimeout(() => {
+      typing.current = true;
+      txt.current = "";
+      deleteWord.current = false;
+      wordIndex.current = 0;
+      typing.current && typeWords();
+    }, 5000);
 
     return () => {
       typing.current = false;
     };
   }, []);
 
-  const fadeIn = useSpring({
-    config: { duration: 1000 },
-    opacity: 0.7,
+  const fadeIn_rest = useSpring({
+    config: { duration: 2000 },
+    opacity: 1,
+    delay: 4500,
+    from: { opacity: 0 },
+  });
+
+  const fadeIn_firstName = useSpring({
+    config: { duration: 1500 },
+    opacity: 1,
+    delay: 500,
+    from: { opacity: 0 },
+  });
+
+  const fadeIn_lastName = useSpring({
+    config: { duration: 1500 },
+    opacity: 1,
+    delay: 1500,
+    from: { opacity: 0 },
+  });
+
+  const fadeIn_title = useSpring({
+    config: { duration: 1500 },
+    opacity: 1,
+    delay: 2500,
     from: { opacity: 0 },
   });
 
   return (
     <HomeContainer>
+      <TypographyContainer style={fadeIn_rest}>
+        <Typography theme={theme} />
+      </TypographyContainer>
       <NameContainer theme={theme}>
-        <FirstName>Isaac</FirstName>
-        <LastName>Choi</LastName>
+        <div>
+          <FirstName style={fadeIn_firstName}>Isaac</FirstName>
+          <LastName style={fadeIn_lastName}>Choi</LastName>
+        </div>
+        <Phone src={phoneImg} alt="phone illustration" style={fadeIn_rest} />
+        <PhoneScreen style={fadeIn_rest}>
+          <AppBar>
+            <section>{<GetTime />}</section>
+            <section>
+              <FontAwesomeIcon icon={faSignal} />
+              <FontAwesomeIcon icon={faWifi} />
+              <FontAwesomeIcon icon={faBatteryFull} />
+            </section>
+          </AppBar>
+          <PhoneContent>
+            <h1>Isaac Choi Portfolio</h1>
+            <span>Welcome to my website!</span>
+            <span>I am a front end developer based in LA</span>
+            <span>I hope my webiste provides great user experience!</span>
+          </PhoneContent>
+        </PhoneScreen>
+        <MyTitle theme={theme} style={fadeIn_title}>
+          <h1>Front End Developer</h1>
+        </MyTitle>
       </NameContainer>
-      <TypingContainer style={fadeIn}>
+      <TypingContainer style={fadeIn_rest}>
         <header>
           <WindowMenu>
             <div></div>
@@ -115,12 +172,15 @@ const HomeContainer = styled.div`
   width: 100%;
   height: 100%;
   padding: 0 0 0 10rem;
+  display: flex;
+  user-select: none;
 `;
 
 const TypingContainer = styled(animated.div)`
   position: fixed;
   opacity: 0.7;
   left: 55vw;
+  top: 5vh;
   width: 40vw;
   height: 35vh;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -206,8 +266,83 @@ const TextContent = styled.div`
 `;
 
 const NameContainer = styled.div`
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
   color: ${(props) =>
     props.theme.name === "dark" ? props.theme.normalFontColor : "black"};
+  font-family: "Chango", cursive;
+  > div {
+    display: flex;
+    margin-bottom: 5rem;
+  }
+
+  > img {
+    position: fixed;
+    top: 35vh;
+    left: 0;
+    width: 40vw;
+  }
 `;
-const FirstName = styled(animated.h1)``;
-const LastName = styled(animated.h2)``;
+const FirstName = styled(animated.h1)`
+  font-size: 6vw;
+  margin-right: 5rem;
+`;
+const LastName = styled(animated.h1)`
+  font-size: 6vw;
+`;
+const MyTitle = styled(animated.div)`
+  color: ${(props) =>
+    props.theme.name === "dark" ? props.theme.normalFontColor : "black"};
+  > h1 {
+    text-align: right;
+    font-size: 7.5vw;
+    margin: 20vh 14vw 0 0;
+  }
+`;
+
+const PhoneScreen = styled(animated.div)`
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 29.8vh;
+  left: 23.2vw;
+  transform: perspective(1000px) rotateX(28deg) rotateY(-6deg) rotateZ(6.5deg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  /* background-color: green; */
+  width: 14.5vw;
+  height: 61vh;
+`;
+const AppBar = styled(animated.header)`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 5.5vh;
+  color: black;
+  font-size: 0.8vw;
+  }
+  > section:nth-child(2) {
+    margin-right: -0.2vw;
+    >* {
+      margin-right: 0.2vw;
+    }
+  }
+`;
+const PhoneContent = styled(animated.div)`
+  transform: perspective(1000px) rotateX(-5deg) rotateY(0deg) rotateZ(0deg);
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  color: black;
+  > h1 {
+    font-size: 2vw;
+  }
+  > span {
+    font-size: 1.1vw;
+    margin-bottom: 1vh;
+  }
+`;
+
+const Phone = styled(animated.img)``;
+const TypographyContainer = styled(animated.div)``;

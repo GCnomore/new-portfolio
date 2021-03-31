@@ -54,10 +54,10 @@ export default function About({ broken, theme }) {
   });
 
   const fadeIn_card = useSpring({
-    config: { duration: 90 },
+    config: { duration: 800 },
     opacity: 1,
     from: { opacity: 0 },
-    delay: 1800,
+    delay: 1400,
   });
 
   const renderCrown = () => {

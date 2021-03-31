@@ -7,12 +7,15 @@ import theme from "./theme";
 import { useEffect, useRef, useState } from "react";
 
 import styled from "styled-components/macro";
-import { useSpring, animated } from "react-spring";
 import "./animation.css";
+
+window.addEventListener("resize", () => {
+  console.log(window.innerWidth);
+});
 
 function App() {
   const [page, setPage] = useState("");
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
   const [broken, setBroken] = useState(false);
   const easterEggCode = useRef([]);
 
@@ -88,7 +91,7 @@ const AppContainer = styled.div`
 `;
 
 const SideBar = styled.div`
-  width: ${(props) => (props.broken ? "10vw;" : "3.5vw")};
+  width: ${(props) => (props.broken ? "14rem;" : "4.8rem")};
   height: 100vh;
   position: fixed;
   z-index: 1005;
