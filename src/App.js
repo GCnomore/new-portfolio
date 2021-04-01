@@ -9,16 +9,19 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components/macro";
 import "./animation.css";
 
-window.addEventListener("resize", () => {
-  console.log(window.innerWidth);
-});
-
 function App() {
   const [page, setPage] = useState("");
   const [darkMode, setDarkMode] = useState(false);
   const [broken, setBroken] = useState(false);
   const easterEggCode = useRef([]);
   const [light, setLight] = useState(0);
+  const [screenWidth, setScreenWidth] = useState(
+    window.innerWidth <= 1118 ? "true" : "false"
+  );
+
+  window.addEventListener("resize", () => {
+    setScreenWidth(window.innerWidth <= 1118 ? "true" : "false");
+  });
 
   if (light === 9) {
     setLight(10);
@@ -43,7 +46,7 @@ function App() {
 
   return (
     <AppContainer className={darkMode ? "lightsOnOff" : ""}>
-      <SideBar broken={broken}>
+      <SideBar broken={broken} screenWidth={screenWidth}>
         <SideBarMenu
           setPage={setPage}
           setDarkMode={setDarkMode}
@@ -57,15 +60,20 @@ function App() {
           <ProjectTheater
             broken={broken}
             theme={darkMode ? theme.dark : theme.normal}
+            screenWidth={screenWidth}
           />
         </>
       ) : (
-        <ContentsContainer theme={darkMode ? theme.dark : theme.normal}>
+        <ContentsContainer
+          theme={darkMode ? theme.dark : theme.normal}
+          screenWidth={screenWidth}
+        >
           {page === "" && (
             <>
               <Home
                 broken={broken}
                 theme={darkMode ? theme.dark : theme.normal}
+                screenWidth={screenWidth}
               />
             </>
           )}
@@ -74,6 +82,7 @@ function App() {
               <About
                 broken={broken}
                 theme={darkMode ? theme.dark : theme.normal}
+                screenWidth={screenWidth}
               />
             </>
           )}
@@ -84,6 +93,7 @@ function App() {
                 broken={broken}
                 setBroken={setBroken}
                 theme={darkMode ? theme.dark : theme.normal}
+                screenWidth={screenWidth}
               />
             </>
           )}
@@ -97,7 +107,7 @@ export default App;
 
 const AppContainer = styled.div`
   display: flex;
-  height: 10vh;
+  height: 100vh;
   width: 100%;
 `;
 

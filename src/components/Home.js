@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSpring, animated } from "react-spring";
 import GetTime from "./GetTime";
 import Typography from "./Typography";
@@ -13,7 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "../animation.css";
 
-export default function Home({ theme, broken }) {
+export default function Home({ theme, broken, screenWidth }) {
   const typing = useRef(false);
   const txt = useRef("");
   const deleteWord = useRef(false);
@@ -73,6 +73,7 @@ export default function Home({ theme, broken }) {
 
     return () => {
       typing.current = false;
+      clearTimeout(typeWords());
     };
   }, []);
 
@@ -105,45 +106,51 @@ export default function Home({ theme, broken }) {
   });
 
   return (
-    <HomeContainer>
-      <TypographyContainer style={fadeIn_rest}>
+    <HomeContainer small={screenWidth}>
+      <TypographyContainer style={fadeIn_rest} small={screenWidth}>
         <Typography theme={theme} broken={broken} />
       </TypographyContainer>
-      <NameContainer theme={theme}>
+      <NameContainer theme={theme} small={screenWidth}>
         <div>
           <FirstName style={fadeIn_firstName}>Isaac</FirstName>
           <LastName style={fadeIn_lastName}>Choi</LastName>
         </div>
-        <Phone
-          src={phoneImg}
-          alt="phone illustration"
-          style={fadeIn_rest}
-          className={broken ? "shake" : ""}
-        />
-        <PhoneScreen
-          style={fadeIn_rest}
-          className={broken ? "shakeScreen" : ""}
-        >
-          <AppBar>
-            <section>{<GetTime />}</section>
-            <section>
-              <FontAwesomeIcon icon={faSignal} />
-              <FontAwesomeIcon icon={faWifi} />
-              <FontAwesomeIcon icon={faBatteryFull} />
-            </section>
-          </AppBar>
-          <PhoneContent>
-            <h1>Isaac Choi Portfolio</h1>
-            <span>Welcome to my website!</span>
-            <span>I am a front end developer based in LA</span>
-            <span>I hope my webiste provides great user experience!</span>
-          </PhoneContent>
-        </PhoneScreen>
-        <MyTitle theme={theme} style={fadeIn_title}>
+        <MyTitle theme={theme} style={fadeIn_title} small={screenWidth}>
           <h1>Front End Developer</h1>
         </MyTitle>
       </NameContainer>
-      <TypingContainer style={fadeIn_rest} theme={theme}>
+      <PhoneContainer small={screenWidth}>
+        <div>
+          <Phone
+            src={phoneImg}
+            alt="phone illustration"
+            style={fadeIn_rest}
+            className={broken ? "shake" : ""}
+            small={screenWidth}
+          />
+          <PhoneScreen
+            style={fadeIn_rest}
+            className={broken ? "shakeScreen" : ""}
+            small={screenWidth}
+          >
+            <AppBar small={screenWidth}>
+              <section>{<GetTime />}</section>
+              <section>
+                <FontAwesomeIcon icon={faSignal} />
+                <FontAwesomeIcon icon={faWifi} />
+                <FontAwesomeIcon icon={faBatteryFull} />
+              </section>
+            </AppBar>
+            <PhoneContent small={screenWidth}>
+              <h1>Isaac Choi Portfolio</h1>
+              <span>Welcome to my website!</span>
+              <span>I am a front end developer based in LA</span>
+              <span>I hope my webiste provides great user experience!</span>
+            </PhoneContent>
+          </PhoneScreen>
+        </div>
+      </PhoneContainer>
+      <TypingContainer style={fadeIn_rest} theme={theme} small={screenWidth}>
         <header>
           <WindowMenu>
             <div></div>
@@ -187,8 +194,9 @@ export default function Home({ theme, broken }) {
 const HomeContainer = styled.div`
   width: 100%;
   height: 100%;
-  padding: 0 0 0 10rem;
+  padding: ${(props) => (props.small === "true" ? "0" : "0 0 0 10rem")};
   display: flex;
+  flex-direction: ${(props) => (props.small === "true" ? "column" : "row")};
   user-select: none;
 `;
 
@@ -199,7 +207,7 @@ const TypingContainer = styled(animated.div)`
   top: 5vh;
   width: 40vw;
   height: fit-content;
-
+  display: ${(props) => (props.small === "true" ? "none" : "block")};
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   > header {
@@ -287,25 +295,21 @@ const TextContent = styled.div`
 const NameContainer = styled.div`
   z-index: 10;
   display: flex;
+  justify-content: ${(props) => (props.small === "true" ? "center" : "")};
+  align-items: ${(props) => (props.small === "true" ? "center" : "")};
   flex-direction: column;
   color: ${(props) =>
     props.theme.name === "dark" ? props.theme.normalFontColor : "black"};
   font-family: "Chango", cursive;
+  margin-top: ${(props) => (props.small === "true" ? "4rem" : "")};
   > div {
     display: flex;
     margin-bottom: 5rem;
   }
-
-  > img {
-    position: fixed;
-    top: 35vh;
-    left: 0;
-    width: 40vw;
-  }
 `;
 const FirstName = styled(animated.h1)`
   font-size: 6vw;
-  margin-right: 2vw;
+  margin: 3.5vw 2vw 0 -2vw;
 `;
 const LastName = styled(animated.h1)`
   font-size: 6vw;
@@ -313,58 +317,88 @@ const LastName = styled(animated.h1)`
 const MyTitle = styled(animated.div)`
   height: 100%;
   margin: 0 0 1rem 0;
-  align-items: center;
+  align-items: ${(props) => (props.small === "true" ? "" : "center")};
   color: ${(props) =>
     props.theme.name === "dark" ? props.theme.normalFontColor : "black"};
+  display: ${(props) => (props.small === "true" ? "flex" : "block")};
+
   > h1 {
-    text-align: right;
+    text-align: ${(props) => (props.small === "true" ? "center" : "right")};
     font-size: 7.5vw;
-    margin: 20vh 14vw 0 0;
+    margin: ${(props) => (props.small === "true" ? "0" : "20vh 14vw 0 0")};
   }
+`;
+
+const PhoneContainer = styled(animated.div)`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: ${(props) => (props.small === "true" ? "center" : "")};
+  position: ${(props) => (props.small === "true" ? "" : "absolute")};
+  left: ${(props) => (props.small === "true" ? "" : "0")};
+  top: ${(props) => (props.small === "true" ? "" : "35vh")};
+  > div {
+    width: fit-content;
+    display: flex;
+    justify-content: right;
+    position: absolute;
+  }
+`;
+
+const Phone = styled(animated.img)`
+  width: ${(props) => (props.small === "true" ? "50vw" : "40vw")};
 `;
 
 const PhoneScreen = styled(animated.div)`
   display: flex;
   flex-direction: column;
-  position: fixed;
-  top: 29.8vh;
-  left: 23.2vw;
-  transform: perspective(1000px) rotateX(28deg) rotateY(-6deg) rotateZ(6.5deg);
+  position: absolute;
+  top: 0;
+  left: ${(props) => (props.small === "true" ? "30vw" : "23.2vw")};
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  /* background-color: green; */
-  width: 14.5vw;
-  height: 61vh;
+  width: ${(props) => (props.small === "true" ? "17vw" : "14.5vw")};
 `;
 const AppBar = styled(animated.header)`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: 5.5vh;
+  margin: ${(props) =>
+    props.small === "true" ? "1vh 0 1vh 2.4vw" : "2vh 0 0 2.4vw"};
   color: black;
-  font-size: 0.8vw;
+  transform: perspective(1000px) rotateX(35deg) rotateY(-8deg) rotateZ(6deg);
+
+  > section:nth-child(1) {
+    font-size: ${(props) => (props.small === "true" ? "1.2vw" : "0.9vw")};
   }
   > section:nth-child(2) {
-    margin-right: -0.2vw;
-    >* {
+    margin-right: 1.5vw;
+    font-size: ${(props) => (props.small === "true" ? "0.8vw" : "0.7vw")};
+    > * {
       margin-right: 0.2vw;
     }
   }
 `;
 const PhoneContent = styled(animated.div)`
-  transform: perspective(1000px) rotateX(-5deg) rotateY(0deg) rotateZ(0deg);
+  transform: ${(props) =>
+    props.small === "true"
+      ? "rotateX(30deg) rotateY(-20deg) rotateZ(12.5deg)"
+      : "rotateX(30deg) rotateY(-20deg) rotateZ(13.5deg)"};
   width: 90%;
   display: flex;
   flex-direction: column;
   color: black;
+  margin: ${(props) =>
+    props.small === "true" ? "0.5vh 0 0 0.6vw" : "2vh 0 0 0.6vw"};
   > h1 {
-    font-size: 2vw;
+    font-size: ${(props) => (props.small === "true" ? "1.6vw" : "1.4vw")};
   }
   > span {
-    font-size: 1.1vw;
-    margin-bottom: 1vh;
+    font-size: ${(props) => (props.small === "true" ? "1.2vw" : "1vw")};
+    margin-bottom: 0.7vh;
   }
 `;
 
-const Phone = styled(animated.img)``;
-const TypographyContainer = styled(animated.div)``;
+const TypographyContainer = styled(animated.div)`
+  display: ${(props) => (props.small === "true" ? "none" : "block")};
+`;

@@ -20,7 +20,7 @@ export default function GetTime() {
       getTime();
     }, 1000);
     return function cleanUp() {
-      clearInterval(getTime());
+      clearTimeout(getTime());
     };
   }, []);
 
