@@ -24,9 +24,8 @@ import logo8 from "../assets/easterEggs/logo8.webp";
 import logo9 from "../assets/easterEggs/logo9.webp";
 import logo10 from "../assets/easterEggs/logo10.webp";
 
-export default function SideBarMenu({ setPage, setDarkMode }) {
+export default function SideBarMenu({ setPage, light, setLight }) {
   const [easter, setEaster] = useState(false);
-  const [light, setLight] = useState(0);
 
   const logos = [
     logo1,
@@ -39,15 +38,14 @@ export default function SideBarMenu({ setPage, setDarkMode }) {
     logo8,
     logo9,
     logo10,
+    logo10,
   ];
-
-  light === 9 ? setDarkMode(true) : setDarkMode(false);
 
   return (
     <SideBarContainer>
       <MenuHeader
         onClick={() => {
-          light >= 9 ? setLight(0) : setLight(light + 1);
+          light >= 11 ? setLight(0) : setLight(light + 1);
         }}
       >
         <img alt="site logo" src={light === 0 ? logo : logos[light]} />
@@ -74,7 +72,7 @@ export default function SideBarMenu({ setPage, setDarkMode }) {
             <li>1. Find a movie ticket and click it!</li>
             <li>2. Try to turn off the lights and see what happens</li>
             <li>3. Spin my card 3 times!</li>
-            <li>4. Type "break" and see what happens</li>
+            <li>4. Type "break" and see what happens (esc to escape)</li>
           </ul>
         </EasterEgg>
       </SideMenuList>
@@ -155,6 +153,10 @@ const SideMenuList = styled.ul`
       text-shadow: 3px 1px 3px rgba(255, 255, 255, 0.9);
     }
 
+    &:hover {
+      filter: drop-shadow(3px 1px 15px rgba(255, 255, 255, 1));
+    }
+
     > p {
       font-size: 1rem;
       margin: 0;
@@ -174,6 +176,9 @@ const ContactIcons = styled.footer`
     width: 2.5rem;
     height: auto;
     margin: 0.5rem 0;
+  }
+  > a:nth-child(1) > img {
+    border-radius: 3rem;
   }
 `;
 

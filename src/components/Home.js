@@ -11,18 +11,23 @@ import {
   faSignal,
   faWifi,
 } from "@fortawesome/free-solid-svg-icons";
+import "../animation.css";
 
-export default function Home({ theme }) {
+export default function Home({ theme, broken }) {
   const typing = useRef(false);
   const txt = useRef("");
   const deleteWord = useRef(false);
   const wordIndex = useRef(0);
 
   const typeWords = () => {
-    const words = [
-      "const sayHello = () => {</br> &nbsp&nbsp console.log('Hello world!);</br>}</br></br>sayHello();",
-      "import axios from 'axios';</br>import { useState, useEffect } from 'react';</br></br>const [portfolio, setPortfolio] = useState();</br></br>async function getCoolWebsite() {</br>&nbsp const result = await axios.get('www.api.superawesomewebsite.com/data?id=isaac');</br>&nbsp setPortfolio(result.data);</br>}</br></br>useEffect(()=>{</br>&nbsp getCoolWebsite();</br>}, [])",
-    ];
+    const words = broken
+      ? [
+          "Ad sunt velit $^()$eiusmod irure sin---#5**-t. Laboris ea cillum of()(@@@ficia enim esse inci#%(_#''#_@+$=diduMollit exercita$7^#%@#$@6tion nulla reprehenderit 47$%$()ad aliquip esse ut.Ad sunt velit ei#%#%FDusm@%%(L:D>DFJood irure sint. Lab7#oris ea cillum o7$Wfficia enim esse incididunt aliqua nosiqua nostrud ip$^%sum adipisi#^P%(JDJ)@!cing culpa id es37%%%%%se ipsum. Mollit exercita$7^#%@#$@6tion nulla reprehenderit 47$%$()ad aliquip esse ut.Ad sunt velit ei#%#%FDusm@%%(L:D>DFJood irure sint. Lab7#oris ea cillum o7$Wfficia enim esse incididunt aliqua nosMollit exercita$7^#%@#$@6tion nulla reprehenderit 47$%$()ad aliquip esse ut.Ad sunt velit ei#%#%FDusm@%%(L:D>DFJood irure sint. Lab7#oris ea cillum o7$Wfficia enim esse incididunt aliqua nost!!!GL$@6tion nulla reprehenderit 47$%$()ad aliquip esse ut.Ad sunt velit ei#%#%FDusm@%%(L:D>DFJood irure sint. Lab7$@6tion nulla reprehenderit 47$%$()ad aliquip esse ut.Ad sunt velit ei#%#%FDusm@%%(L:D>DFJood irure sint. Lab7#oris ea cillum o7$Wfficia enim esse incididunt aliqua nost!!!GL#oris ea cillum o7$Wfficia enim esse incididunt aliqua nost!!!GLDJ(S!1rud ipsum adipi%#)%(TELJ0sicing ETE#$#culpa id esse ipsum. Mollit exercitat)@(&@#ion nulla reprehenderit ad aliquip esse ut.",
+        ]
+      : [
+          "const sayHello = () => {</br> &nbsp&nbsp console.log('Hello world!);</br>}</br></br>sayHello();",
+          "import axios from 'axios';</br>import { useState, useEffect } from 'react';</br></br>const [portfolio, setPortfolio] = useState();</br></br>async function getCoolWebsite() {</br>&nbsp const result = await axios.get('www.api.superawesomewebsite.com/data?id=isaac');</br>&nbsp setPortfolio(result.data);</br>}</br></br>useEffect(()=>{</br>&nbsp getCoolWebsite();</br>}, [])",
+        ];
     let wait = 4000;
 
     const currentIndex = wordIndex.current % words.length;
@@ -37,7 +42,7 @@ export default function Home({ theme }) {
 
     txtElement && (txtElement.innerHTML = txt.current);
 
-    let speed = 50;
+    let speed = broken ? 10 : 50;
 
     if (deleteWord.current) {
       speed /= 5;
@@ -75,42 +80,50 @@ export default function Home({ theme }) {
     config: { duration: 2000 },
     opacity: 1,
     delay: 4500,
-    from: { opacity: 0 },
+    from: { opacity: 1 },
   });
 
   const fadeIn_firstName = useSpring({
     config: { duration: 1500 },
     opacity: 1,
     delay: 500,
-    from: { opacity: 0 },
+    from: { opacity: 1 },
   });
 
   const fadeIn_lastName = useSpring({
     config: { duration: 1500 },
     opacity: 1,
     delay: 1500,
-    from: { opacity: 0 },
+    from: { opacity: 1 },
   });
 
   const fadeIn_title = useSpring({
     config: { duration: 1500 },
     opacity: 1,
     delay: 2500,
-    from: { opacity: 0 },
+    from: { opacity: 1 },
   });
 
   return (
     <HomeContainer>
       <TypographyContainer style={fadeIn_rest}>
-        <Typography theme={theme} />
+        <Typography theme={theme} broken={broken} />
       </TypographyContainer>
       <NameContainer theme={theme}>
         <div>
           <FirstName style={fadeIn_firstName}>Isaac</FirstName>
           <LastName style={fadeIn_lastName}>Choi</LastName>
         </div>
-        <Phone src={phoneImg} alt="phone illustration" style={fadeIn_rest} />
-        <PhoneScreen style={fadeIn_rest}>
+        <Phone
+          src={phoneImg}
+          alt="phone illustration"
+          style={fadeIn_rest}
+          className={broken ? "shake" : ""}
+        />
+        <PhoneScreen
+          style={fadeIn_rest}
+          className={broken ? "shakeScreen" : ""}
+        >
           <AppBar>
             <section>{<GetTime />}</section>
             <section>
@@ -130,7 +143,7 @@ export default function Home({ theme }) {
           <h1>Front End Developer</h1>
         </MyTitle>
       </NameContainer>
-      <TypingContainer style={fadeIn_rest}>
+      <TypingContainer style={fadeIn_rest} theme={theme}>
         <header>
           <WindowMenu>
             <div></div>
@@ -159,6 +172,9 @@ export default function Home({ theme }) {
               <li>10</li>
               <li>11</li>
               <li>12</li>
+              <li>13</li>
+              <li>14</li>
+              <li>15</li>
             </ol>
           </LineNumber>
           <section className="txtElement">{txt.current}</section>
@@ -182,14 +198,15 @@ const TypingContainer = styled(animated.div)`
   left: 55vw;
   top: 5vh;
   width: 40vw;
-  height: 35vh;
+  height: fit-content;
+
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   > header {
     display: flex;
-    width: 100%;
+    width: 40vw;
     height: 4vh;
-    background-color: rgba(19, 22, 51, 0.82);
+    background-color: rgb(104, 98, 219, 0.7);
   }
 `;
 
@@ -221,7 +238,7 @@ const WindowMenu = styled.section`
 
 const WindowTab = styled.section`
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   align-self: flex-end;
   margin-left: 1rem;
   background-color: #2d2d2d;
@@ -231,10 +248,10 @@ const WindowTab = styled.section`
   height: 80%;
 
   > div:nth-child(1) > img {
-    width: 1.8rem;
+    width: 1.5vw;
   }
   > div:nth-child(2) {
-    font-size: 1.2rem;
+    font-size: 0.9vw;
     color: rgba(255, 255, 255, 0.8);
     padding: 0.5rem;
   }
@@ -243,10 +260,11 @@ const WindowTab = styled.section`
 const LineNumber = styled.section`
   > ol {
     padding: 1rem 1rem 0 1rem;
-    margin: 0;
+    margin: 0 0 3rem 0;
     > li {
       list-style: none;
       color: rgba(255, 255, 255, 0.8);
+      font-size: 0.9vw;
     }
   }
 `;
@@ -262,6 +280,7 @@ const TextContent = styled.div`
     word-spacing: 4px;
     letter-spacing: 2px;
     background-color: #2d2d2d;
+    font-size: 0.8vw;
   }
 `;
 
@@ -286,12 +305,15 @@ const NameContainer = styled.div`
 `;
 const FirstName = styled(animated.h1)`
   font-size: 6vw;
-  margin-right: 5rem;
+  margin-right: 2vw;
 `;
 const LastName = styled(animated.h1)`
   font-size: 6vw;
 `;
 const MyTitle = styled(animated.div)`
+  height: 100%;
+  margin: 0 0 1rem 0;
+  align-items: center;
   color: ${(props) =>
     props.theme.name === "dark" ? props.theme.normalFontColor : "black"};
   > h1 {

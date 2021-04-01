@@ -1,27 +1,28 @@
 import styled from "styled-components";
+import "../animation.css";
 
-export default function Typography({ theme }) {
+export default function Typography({ theme, broken }) {
   return (
     <TypographyContainer theme={theme}>
-      <div>Javascript</div>
+      <div className={broken ? "fly5" : ""}>Javascript</div>
       <div>HTML</div>
       <div>CSS</div>
       <div>React</div>
-      <div>ReactNative</div>
-      <div>Linux</div>
+      <div className={broken ? "fly3" : ""}>ReactNative</div>
+      <div className={broken ? "fly4" : ""}>Linux</div>
       <div>UBUNTU</div>
       <div>EXPO</div>
       <div>GitHub</div>
       <div>NODE JS</div>
       <div>EXPRESS</div>
       <div>Bootstrap</div>
-      <div>NextJS</div>
-      <div>Styled-Components</div>
+      <div className={broken ? "fly3" : ""}>NextJS</div>
+      <div className={broken ? "fly4" : ""}>Styled-Components</div>
       <div>VSCode</div>
       <div>Flutter</div>
       <div>Dart</div>
       <div>Heroku</div>
-      <div>TypeScript</div>
+      <div className={broken ? "fly3" : ""}>TypeScript</div>
       <div>Material Design</div>
       <div>Firebase</div>
       <div>Vue</div>
@@ -29,7 +30,7 @@ export default function Typography({ theme }) {
       <div>Puppeteer</div>
       <div>Oauth</div>
       <div>Passport</div>
-      <div>Jquery</div>
+      <div className={broken ? "fly1" : ""}>Jquery</div>
     </TypographyContainer>
   );
 }

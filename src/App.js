@@ -18,6 +18,15 @@ function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [broken, setBroken] = useState(false);
   const easterEggCode = useRef([]);
+  const [light, setLight] = useState(0);
+
+  if (light === 9) {
+    setLight(10);
+    setDarkMode(true);
+  } else if (light >= 11) {
+    setDarkMode(false);
+    setLight(0);
+  }
 
   useEffect(() => {
     window.addEventListener("keydown", (e) => {
@@ -39,6 +48,8 @@ function App() {
           setPage={setPage}
           setDarkMode={setDarkMode}
           broken={broken}
+          setLight={setLight}
+          light={light}
         />
       </SideBar>
       {page === "theater" ? (

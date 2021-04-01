@@ -254,12 +254,12 @@ export default function About({ broken, theme }) {
         </SummaryContainer>
       </ProfileContainer>
       <Divider broken={broken} className={broken && "rotate"} theme={theme} />
-      <SkillContainer className={broken && "pop"} theme={theme}>
+      <SkillContainer theme={theme}>
         <section>
           <div>
-            <h2>Confident Skills</h2>
+            <h2 className={broken ? "shake" : ""}>Confident Skills</h2>
             <div>
-              <div>
+              <div className={broken ? "pop" : ""}>
                 <img alt="html icon" src={html} />
                 <p>HTML</p>
               </div>
@@ -271,7 +271,7 @@ export default function About({ broken, theme }) {
                 <img alt="javascript icon" src={javascript} />
                 <p>Javascript</p>
               </div>
-              <div>
+              <div className={broken ? "fly6" : ""}>
                 <img alt="react icon" src={react} />
                 <p>React</p>
               </div>
@@ -283,15 +283,15 @@ export default function About({ broken, theme }) {
                 <img alt="reactnative icon" src={reactnative} />
                 <p>React Native</p>
               </div>
-              <div>
+              <div className={broken ? "pop" : ""}>
                 <img alt="expo icon" src={expo} />
                 <p>Expo</p>
               </div>
-              <div>
+              <div className={broken ? "fly3" : ""}>
                 <img alt="nodejs icon" src={nodejs} />
                 <p>Node JS</p>
               </div>
-              <div>
+              <div className={broken ? "fly7" : ""}>
                 <img alt="bootstrap icon" src={bootstrap} />
                 <p>Bootstrap</p>
               </div>
@@ -299,7 +299,7 @@ export default function About({ broken, theme }) {
                 <img alt="materialdesign icon" src={materialdesign} />
                 <p>Material Design</p>
               </div>
-              <div>
+              <div className={broken ? "fly3" : ""}>
                 <GithubIcon alt="github icon" src={github} name="github" />
                 <p>Github</p>
               </div>
@@ -311,7 +311,7 @@ export default function About({ broken, theme }) {
                 <img alt="firebase icon" src={firebase} />
                 <p>Firebase</p>
               </div>
-              <div>
+              <div className={broken ? "fly8" : ""}>
                 <img alt="heroku icon" src={heroku} />
                 <p>Heroku</p>
               </div>
@@ -324,11 +324,15 @@ export default function About({ broken, theme }) {
         </section>
 
         <section>
-          <div>
-            <h2>Have experienced</h2>
+          <div className={broken ? "pop" : ""}>
+            <h2 className={broken ? "shake" : ""}>Have experienced</h2>
             <div>
               <div>
-                <img alt="express icon" src={express} />
+                <img
+                  className={broken ? "fly4" : ""}
+                  alt="express icon"
+                  src={express}
+                />
                 <p>Express</p>
               </div>
               <div>
@@ -347,11 +351,11 @@ export default function About({ broken, theme }) {
                 <img alt="cucumber icon" src={cucumber} />
                 <p>Cucumber</p>
               </div>
-              <div>
+              <div className={broken ? "fly3" : ""}>
                 <img alt="semanticui icon" src={semanticui} />
                 <p>Semantic UI</p>
               </div>
-              <div>
+              <div className={broken ? "fly4" : ""}>
                 <img alt="typescript icon" src={typescript} />
                 <p>Typescript</p>
               </div>
@@ -359,7 +363,7 @@ export default function About({ broken, theme }) {
                 <img alt="angular icon" src={angular} />
                 <p>Angular</p>
               </div>
-              <div>
+              <div className={broken ? "fly5" : ""}>
                 <img alt="aws icon" src={aws} />
                 <p>AWS</p>
               </div>
@@ -371,7 +375,7 @@ export default function About({ broken, theme }) {
                 <img alt="jquery icon" src={jquery} />
                 <p>Jquery</p>
               </div>
-              <div>
+              <div className={broken ? "fly3" : ""}>
                 <img alt="mysql icon" src={mysql} />
                 <p>MySQL</p>
               </div>
@@ -383,9 +387,9 @@ export default function About({ broken, theme }) {
           </div>
 
           <div>
-            <h2>Currently improving</h2>
+            <h2 className={broken ? "fly3" : ""}>Currently improving</h2>
             <div>
-              <div>
+              <div className={broken ? "fly9" : ""}>
                 <img alt="flutter icon" src={flutter} />
                 <p>Flutter</p>
               </div>
@@ -397,11 +401,11 @@ export default function About({ broken, theme }) {
                 <img alt="nodejs icon" src={nodejs} />
                 <p>Node JS</p>
               </div>
-              <div>
+              <div className={broken ? "fly9" : ""}>
                 <img alt="express icon" src={express} />
                 <p>Express</p>
               </div>
-              <div>
+              <div className={broken ? "fly5" : ""}>
                 <img alt="oauth icon" src={oauth} />
                 <p>Oauth</p>
               </div>

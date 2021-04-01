@@ -19,6 +19,9 @@ export default function GetTime() {
     setInterval(() => {
       getTime();
     }, 1000);
+    return function cleanUp() {
+      clearInterval(getTime());
+    };
   }, []);
 
   return `${time.hr}:${time.min}`;
