@@ -129,8 +129,8 @@ const MenuHeader = styled.header`
 const SideMenuList = styled.ul`
   height: 100%;
   list-style: none;
-  margin: 0 0 20rem 0;
   padding: 0;
+  margin-top: -15vh;
 
   > li {
     margin: 3rem 0;
@@ -171,9 +171,10 @@ const ContactIcons = styled.footer`
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+  margin-top: 5vh;
 
   > a > img {
-    width: 2.5rem;
+    width: 3vh;
     height: auto;
     margin: 0.5rem 0;
   }
