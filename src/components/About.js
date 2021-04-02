@@ -181,7 +181,7 @@ export default function About({ broken, theme, screenWidth }) {
           ) : (
             <p>
               Sorry, my conscience is telling me that I shouldn't be more than
-              level 3 for now!
+              level 3 for now!!
             </p>
           )}
         </Modal>
