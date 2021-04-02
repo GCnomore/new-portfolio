@@ -272,7 +272,7 @@ export default function About({ broken, theme, screenWidth }) {
         theme={theme}
         small={screenWidth}
       />
-      <SkillContainer theme={theme}>
+      <SkillContainer theme={theme} small={screenWidth}>
         <section>
           <div>
             <h2 className={broken ? "shake" : ""}>Confident Skills</h2>
@@ -617,16 +617,19 @@ const SkillContainer = styled.section`
 
       > div {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: ${(props) =>
+          props.small === "true"
+            ? "1fr 1fr 1fr 1fr 1fr 1fr 1fr"
+            : "1fr 1fr 1fr 1fr 1fr"};
         justify-content: center;
         align-items: center;
-        grid-gap: 1rem 0.25rem;
-        font-size: 0.75vw;
+        grid-gap: ${(props) => (props.small === "true" ? "0" : "1rem 0.25rem")};
         margin-bottom: 3rem;
+        font-size: ${(props) => (props.small === "true" ? "1.5vw" : "0.75vw")};
 
         > div {
           > img {
-            width: 3.5vw;
+            width: ${(props) => (props.small === "true" ? "5vw" : "3.5vw")};
             padding: 0.5rem;
             filter: ${(props) => `drop-shadow(${props.theme.dropShadow})`};
           }
