@@ -124,6 +124,7 @@ const SideBar = styled.div`
 const ContentsContainer = styled.div`
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
+  /* overflow: hidden; */
+  overflow-x: hidden;
   background-color: ${(props) => props.theme.backgroundColor};
 `;

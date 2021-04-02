@@ -42,7 +42,7 @@ import semanticui from "../assets/icons/semanticui.webp";
 import jest from "../assets/icons/jest.webp";
 import express from "../assets/icons/express.webp";
 
-export default function About({ broken, theme }) {
+export default function About({ broken, theme, screenWidth }) {
   const [flipCard, setFlipCard] = useState("");
   const [levelUp, setLevelUp] = useState(0);
   const [showModal, setShowModal] = useState(false);
@@ -50,13 +50,13 @@ export default function About({ broken, theme }) {
   const fadeIn = useSpring({
     config: { duration: 1000 },
     opacity: 1,
-    from: { opacity: 0 },
+    from: { opacity: 1 },
   });
 
   const fadeIn_card = useSpring({
     config: { duration: 800 },
     opacity: 1,
-    from: { opacity: 0 },
+    from: { opacity: 1 },
     delay: 1400,
   });
 
@@ -203,10 +203,24 @@ export default function About({ broken, theme }) {
   }, [broken]);
 
   return (
-    <AboutContainer theme={theme} style={fadeIn}>
+    <AboutContainer theme={theme} style={fadeIn} small={screenWidth}>
       {showModal && renderModal()}
-      <ProfileContainer theme={theme}>
+      <ProfileContainer theme={theme} small={screenWidth}>
+        <Crown
+          className={flipCard === "" ? "bounce" : flipCard}
+          lvl={broken ? null : levelUp}
+          onClick={() => {
+            broken ? setFlipCard("lvlUp") : setFlipCard("flip");
+            setLevelUp(levelUp + 1);
+            setTimeout(() => {
+              setFlipCard("");
+            }, 1000);
+          }}
+        >
+          <div>{renderCrown()}</div>
+        </Crown>
         <ProfileCard
+          small={screenWidth}
           theme={theme}
           onClick={() => {
             broken ? setFlipCard("lvlUp") : setFlipCard("flip");
@@ -222,7 +236,6 @@ export default function About({ broken, theme }) {
             <p>LV. {broken ? levelUp : renderLevel()}</p>
             <p>ALL ROUNDER</p>
           </header>
-          <Crown lvl={broken ? null : levelUp}>{renderCrown()}</Crown>
           <img src={portrait} alt="author" />
           <h1>FRONT END DEVELOPER</h1>
           <p>READY FOR ANYTHING</p>
@@ -239,7 +252,7 @@ export default function About({ broken, theme }) {
             </div>
           </div>
         </ProfileCard>
-        <SummaryContainer broken={broken} theme={theme}>
+        <SummaryContainer broken={broken} theme={theme} small={screenWidth}>
           <h2>A BIT ABOUT ME</h2>
           <p>
             I’ve always admired programmers since I noticed that almost
@@ -253,7 +266,12 @@ export default function About({ broken, theme }) {
           </p>
         </SummaryContainer>
       </ProfileContainer>
-      <Divider broken={broken} className={broken && "rotate"} theme={theme} />
+      <Divider
+        broken={broken}
+        className={broken && "rotate"}
+        theme={theme}
+        small={screenWidth}
+      />
       <SkillContainer theme={theme}>
         <section>
           <div>
@@ -302,10 +320,6 @@ export default function About({ broken, theme }) {
               <div className={broken ? "fly3" : ""}>
                 <GithubIcon alt="github icon" src={github} name="github" />
                 <p>Github</p>
-              </div>
-              <div>
-                <img alt="mongodb icon" src={mongodb} />
-                <p>Mongo DB</p>
               </div>
               <div>
                 <img alt="firebase icon" src={firebase} />
@@ -427,27 +441,32 @@ export default function About({ broken, theme }) {
 
 const AboutContainer = styled(animated.div)`
   width: 100%;
-  height: 100vh;
+  height: fit-content;
   display: flex;
-  justify-content: center;
+  flex-direction: ${(props) => (props.small === "true" ? "column" : "row")};
   margin-left: 2vw;
   background-color: ${(props) => props.theme.backgroundColor};
-  > section {
+
+  > section:nth-child(3) {
     width: 100%;
-    padding: 0 5rem;
   }
 `;
 
 const ProfileContainer = styled.section`
   display: flex;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: ${(props) => (props.small === "true" ? "row" : "column")};
   align-items: center;
+  width: ${(props) => (props.small === "true" ? "100%" : "65%")};
+  padding: ${(props) => (props.small === "true" ? "5rem" : "0 5rem")};
 `;
 
 const ProfileCard = styled(animated.div)`
   font-family: "Exo", sans-serif;
-  width: 25rem;
+  width: ${(props) => (props.small === "true" ? "40%" : "19vw")};
+  height: 27.5vw;
+  padding: ${(props) => (props.small === "true" ? "2rem 0" : "1rem 0")};
+  margin: ${(props) => (props.small === "true" ? "0 7vw" : "")};
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -478,24 +497,24 @@ const ProfileCard = styled(animated.div)`
 
     > p:nth-child(1) {
       margin: 0;
-      font-size: 2rem;
+      font-size: 1.3vw;
       font-weight: 600;
     }
     > p:nth-child(2) {
       margin: 0;
-      font-size: 1.2rem;
+      font-size: 0.8vw;
       font-weight: 600;
     }
   }
 
   > h1 {
-    font-size: 2rem;
+    font-size: 1.4vw;
     margin: 0;
     z-index: 200;
   }
 
   > img {
-    width: 18rem;
+    width: 13vw;
     border-radius: 50%;
     align-self: center;
     opacity: 0.9;
@@ -503,7 +522,7 @@ const ProfileCard = styled(animated.div)`
   }
 
   > p {
-    font-size: 1.6rem;
+    font-size: 1.1vw;
     margin: 0;
     z-index: 200;
   }
@@ -511,7 +530,7 @@ const ProfileCard = styled(animated.div)`
   > div {
     z-index: 400;
     > h2 {
-      font-size: 1.2rem;
+      font-size: 0.9vw;
       margin-top: 2rem;
       z-index: 200;
     }
@@ -521,6 +540,7 @@ const ProfileCard = styled(animated.div)`
       grid-gap: 0.5rem;
       margin-bottom: 1rem;
       z-index: 200;
+      font-size: 0.8vw;
 
       > p {
         margin: 0;
@@ -532,6 +552,7 @@ const ProfileCard = styled(animated.div)`
 
 const SummaryContainer = styled.section`
   margin-top: 5rem;
+  width: 100%;
   font-size: ${(props) => (props.broken ? "1px;" : "1.2rem")};
   color: ${(props) => {
     if (props.broken) {
@@ -567,6 +588,8 @@ const SummaryContainer = styled.section`
   > p {
     text-shadow: ${(props) =>
       props.theme.name === "dark" && `${props.theme.textShadow}`};
+    font-size: ${(props) => (props.small === "true" ? "0.9rem" : "1rem")};
+    width: 35vw;
   }
 `;
 
@@ -586,7 +609,7 @@ const SkillContainer = styled.section`
       align-items: center;
 
       > h2 {
-        font-size: 3rem;
+        font-size: 2vw;
         font-family: "Luckiest Guy", cursive;
         letter-spacing: 2px;
         word-spacing: 0.5rem;
@@ -598,12 +621,12 @@ const SkillContainer = styled.section`
         justify-content: center;
         align-items: center;
         grid-gap: 1rem 0.25rem;
-        font-size: 1rem;
+        font-size: 0.75vw;
         margin-bottom: 3rem;
 
         > div {
           > img {
-            width: 5rem;
+            width: 3.5vw;
             padding: 0.5rem;
             filter: ${(props) => `drop-shadow(${props.theme.dropShadow})`};
           }
@@ -622,7 +645,7 @@ const SkillContainer = styled.section`
 
   > section:nth-child(2) {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
 
     > div {
       display: flex;
@@ -630,7 +653,7 @@ const SkillContainer = styled.section`
       text-align: center;
 
       > h2 {
-        font-size: 2rem;
+        font-size: 1.45vw;
         font-family: "Luckiest Guy", cursive;
         letter-spacing: 2px;
         word-spacing: 0.5rem;
@@ -639,13 +662,14 @@ const SkillContainer = styled.section`
       > div {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-gap: 1rem 2rem;
+        grid-gap: 0.8vw 1vw;
         font-size: 1rem;
 
         > div {
           > img {
-            width: 3rem;
+            width: 2.5vw;
             filter: ${(props) => `drop-shadow(${props.theme.dropShadow})`};
+            margin-bottom: 0.5rem;
           }
           > p {
             margin: 0;
@@ -654,6 +678,7 @@ const SkillContainer = styled.section`
               sans-serif;
             text-shadow: ${(props) =>
               props.theme.name === "dark" && `${props.theme.textShadow}`};
+            font-size: 0.75vw;
           }
         }
       }
@@ -662,72 +687,90 @@ const SkillContainer = styled.section`
 `;
 
 const Divider = styled.div`
-  width: ${(props) => (props.broken ? "30px" : "5px")};
-  height: ${(props) => (props.broken ? "50vh" : "85vh")};
-  background-color: rgba(0, 0, 0, 0.2);
+  width: ${(props) =>
+    (props.broken ? "30px" : "2px") && props.small === "true" ? "60%" : "2px"};
+  height: ${(props) =>
+    (props.broken ? "50vh" : "85vh") && props.small === "true"
+      ? "2px"
+      : "85vh"};
+  background-color: ${(props) =>
+    props.theme.name === "dark" ? "white" : "rgba(0, 0, 0, 0.2)"};
+  border-radius: 10rem;
+  box-shadow: ${(props) =>
+    props.theme.name === "dark"
+      ? "0px 0px 8px 1px rgba(255, 255, 255, 0.7)"
+      : ""};
   align-self: center;
   position: ${(props) => (props.broken ? "fixed" : "relative")};
 `;
 
 const Crown = styled.div`
-  position: absolute;
-  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 250;
+  cursor: pointer;
+  user-select: none;
+  > div {
+    position: absolute;
+    height: 100vh;
+    top: -4vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const Level2Crown = styled.img`
-  position: absolute;
   z-index: 100;
-  top: -30vh;
-  left: 3.5vw;
-  width: 15rem;
+  margin-top: 3vw;
+  width: 12vw;
 `;
 const Level3Crown = styled.img`
   position: absolute;
-  width: 14rem;
-  top: -23vh;
-  left: 4vw;
+  width: 10.5vw;
+  margin-top: 6vw;
 `;
 
 const GoldBrooch = styled.img`
   position: absolute;
-  left: 0;
-  top: -20vh;
-  width: 25rem;
+  margin-top: 8.5vw;
+  width: 18vw;
 `;
 
 const GoldFrame = styled.img`
-  position: absolute;
   z-index: 100;
-  top: -38vh;
-  left: -6vw;
-  width: 43rem;
+  margin-left: 1.5rem;
+  width: 31vw;
+  align-self: right;
 `;
 const GoldBar = styled.img`
   position: absolute;
   z-index: 101;
-  top: 0;
-  left: -10vw;
-  width: 20rem;
+  top: 20vw;
+  left: -5vw;
+  width: 14.5vw;
 `;
 const GoldRod = styled.img`
   position: absolute;
   z-index: 101;
-  top: -40vh;
-  left: 10vw;
-  width: 20rem;
+  top: 2vw;
+  left: 20vw;
+  width: 15vw;
 `;
 const GoldChest = styled.img`
   position: absolute;
   z-index: 101;
-  top: 5vh;
-  left: 10vw;
-  width: 30rem;
+  top: 20vw;
+  left: 20vw;
+  width: 23vw;
 `;
 const GoldCastle = styled.img`
   position: absolute;
-  z-index: 1;
-  top: -50vh;
-  left: 0vw;
+  z-index: -1;
+  top: -4vw;
+  left: 10vw;
   width: 100rem;
 `;
 
@@ -748,7 +791,6 @@ const Modal = styled.div`
   z-index: 2000;
   color: white;
   width: 45rem;
-  height: 25rem;
   background-color: rgba(0, 0, 0, 0.5);
   font-size: 3rem;
   padding: 2rem;

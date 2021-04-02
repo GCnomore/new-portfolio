@@ -81,28 +81,28 @@ export default function Home({ theme, broken, screenWidth }) {
     config: { duration: 2000 },
     opacity: 1,
     delay: 4500,
-    from: { opacity: 1 },
+    from: { opacity: 0 },
   });
 
   const fadeIn_firstName = useSpring({
     config: { duration: 1500 },
     opacity: 1,
     delay: 500,
-    from: { opacity: 1 },
+    from: { opacity: 0 },
   });
 
   const fadeIn_lastName = useSpring({
     config: { duration: 1500 },
     opacity: 1,
     delay: 1500,
-    from: { opacity: 1 },
+    from: { opacity: 0 },
   });
 
   const fadeIn_title = useSpring({
     config: { duration: 1500 },
     opacity: 1,
     delay: 2500,
-    from: { opacity: 1 },
+    from: { opacity: 0 },
   });
 
   return (
