@@ -331,12 +331,12 @@ const MyTitle = styled(animated.div)`
 
 const PhoneContainer = styled(animated.div)`
   width: 100%;
-  height: 100%;
   display: flex;
   justify-content: ${(props) => (props.small === "true" ? "center" : "")};
   position: ${(props) => (props.small === "true" ? "" : "absolute")};
   left: ${(props) => (props.small === "true" ? "" : "0")};
   top: ${(props) => (props.small === "true" ? "" : "35vh")};
+
   > div {
     width: fit-content;
     display: flex;

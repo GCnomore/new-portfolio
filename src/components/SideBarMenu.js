@@ -23,7 +23,7 @@ import logo7 from "../assets/easterEggs/logo7.webp";
 import logo8 from "../assets/easterEggs/logo8.webp";
 import logo9 from "../assets/easterEggs/logo9.webp";
 import logo10 from "../assets/easterEggs/logo10.webp";
-
+import { animated, useSpring } from "react-spring";
 export default function SideBarMenu({ setPage, light, setLight }) {
   const [easter, setEaster] = useState(false);
 
@@ -41,16 +41,31 @@ export default function SideBarMenu({ setPage, light, setLight }) {
     logo10,
   ];
 
+  const stretch = useSpring({
+    config: { duration: 1200 },
+    height: "100vh",
+    from: { height: "0vh" },
+    delay: 500,
+  });
+
+  const fadeIn = useSpring({
+    config: { duration: 1000 },
+    opacity: 1,
+    from: { opacity: 0 },
+    delay: 1800,
+  });
+
   return (
-    <SideBarContainer>
+    <SideBarContainer style={stretch}>
       <MenuHeader
+        style={fadeIn}
         onClick={() => {
           light >= 11 ? setLight(0) : setLight(light + 1);
         }}
       >
         <img alt="site logo" src={light === 0 ? logo : logos[light]} />
       </MenuHeader>
-      <SideMenuList>
+      <SideMenuList style={fadeIn}>
         <li onClick={() => setPage("")}>
           <FontAwesomeIcon icon={faHome} />
           <p>Home</p>
@@ -76,7 +91,7 @@ export default function SideBarMenu({ setPage, light, setLight }) {
           </ul>
         </EasterEgg>
       </SideMenuList>
-      <ContactIcons>
+      <ContactIcons style={fadeIn}>
         <a rel="noreferrer" target="_blank" href="https://github.com/GCnomore">
           <img alt="github icon" src={github} />
         </a>
@@ -102,7 +117,7 @@ export default function SideBarMenu({ setPage, light, setLight }) {
   );
 }
 
-const SideBarContainer = styled.section`
+const SideBarContainer = styled(animated.section)`
   width: 100%;
   height: 100vh;
   background-color: rgb(0, 0, 0, 0.7);
@@ -113,7 +128,7 @@ const SideBarContainer = styled.section`
   justify-content: space-between;
 `;
 
-const MenuHeader = styled.header`
+const MenuHeader = styled(animated.header)`
   width: 100%;
   height: 100%;
   display: flex;
@@ -126,7 +141,7 @@ const MenuHeader = styled.header`
   }
 `;
 
-const SideMenuList = styled.ul`
+const SideMenuList = styled(animated.ul)`
   height: 100%;
   list-style: none;
   padding: 0;
@@ -164,7 +179,7 @@ const SideMenuList = styled.ul`
   }
 `;
 
-const ContactIcons = styled.footer`
+const ContactIcons = styled(animated.footer)`
   width: 100%;
   height: 100%;
   display: flex;
@@ -189,8 +204,8 @@ const EasterEgg = styled.div`
   left: 5vw;
   top: 40vh;
   background-color: rgba(0, 0, 0, 0.6);
-  width: 18vw;
-  padding: 1rem;
+  width: 18rem;
+  padding: 2rem;
   display: ${(props) => (props.show ? "block" : "none")};
 
   > h2 {

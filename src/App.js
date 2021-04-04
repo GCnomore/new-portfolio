@@ -113,7 +113,7 @@ const AppContainer = styled.div`
 
 const SideBar = styled.div`
   width: ${(props) => (props.broken ? "14rem;" : "4.8rem")};
-  height: 100vh;
+  /* height: 100vh; */
   position: fixed;
   z-index: 1005;
   left: ${(props) => (props.broken ? "10vw;" : "0")};

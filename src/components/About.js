@@ -51,6 +51,7 @@ export default function About({ broken, theme, screenWidth }) {
     config: { duration: 1000 },
     opacity: 1,
     from: { opacity: 1 },
+    delay: 300,
   });
 
   const fadeIn_card = useSpring({
@@ -66,71 +67,131 @@ export default function About({ broken, theme, screenWidth }) {
       if (levelUp === 1)
         return (
           <>
-            <Level2Crown src={lvl_2_crown} alt="gold crown" />
+            <Level2Crown
+              small={screenWidth}
+              src={lvl_2_crown}
+              alt="gold crown"
+            />
           </>
         );
 
       if (levelUp === 2)
         return (
           <>
-            <Level3Crown src={lvl_3_crown} alt="gold crown" />
+            <Level3Crown
+              small={screenWidth}
+              src={lvl_3_crown}
+              alt="gold crown"
+            />
           </>
         );
       if (levelUp === 3)
         return (
           <>
-            <Level3Crown src={lvl_3_crown} alt="gold crown" />
-            <GoldBrooch src={lvl_3_brooch} alt="gold brooch" />
+            <Level3Crown
+              small={screenWidth}
+              src={lvl_3_crown}
+              alt="gold crown"
+            />
+            <GoldBrooch
+              small={screenWidth}
+              src={lvl_3_brooch}
+              alt="gold brooch"
+            />
           </>
         );
       if (levelUp === 4)
         return (
           <>
-            <Level3Crown src={lvl_3_crown} alt="gold crown" />
-            <GoldBrooch src={lvl_3_brooch} alt="gold brooch" />
-            <GoldFrame src={goldFrame} alt="gold frame" />
+            <Level3Crown
+              small={screenWidth}
+              src={lvl_3_crown}
+              alt="gold crown"
+            />
+            <GoldBrooch
+              small={screenWidth}
+              src={lvl_3_brooch}
+              alt="gold brooch"
+            />
+            <GoldFrame small={screenWidth} src={goldFrame} alt="gold frame" />
           </>
         );
       if (levelUp === 5)
         return (
           <>
-            <Level3Crown src={lvl_3_crown} alt="gold crown" />
-            <GoldBrooch src={lvl_3_brooch} alt="gold brooch" />
-            <GoldFrame src={goldFrame} alt="gold frame" />
-            <GoldRod src={goldRod} alt="gold rod" />
+            <Level3Crown
+              small={screenWidth}
+              src={lvl_3_crown}
+              alt="gold crown"
+            />
+            <GoldBrooch
+              small={screenWidth}
+              src={lvl_3_brooch}
+              alt="gold brooch"
+            />
+            <GoldFrame small={screenWidth} src={goldFrame} alt="gold frame" />
+            <GoldRod small={screenWidth} src={goldRod} alt="gold rod" />
           </>
         );
       if (levelUp === 6)
         return (
           <>
-            <Level3Crown src={lvl_3_crown} alt="gold crown" />
-            <GoldBrooch src={lvl_3_brooch} alt="gold brooch" />
-            <GoldFrame src={goldFrame} alt="gold frame" />
-            <GoldRod src={goldRod} alt="gold rod" />
-            <GoldBar src={goldBar} alt="gold bar" />
+            <Level3Crown
+              small={screenWidth}
+              src={lvl_3_crown}
+              alt="gold crown"
+            />
+            <GoldBrooch
+              small={screenWidth}
+              src={lvl_3_brooch}
+              alt="gold brooch"
+            />
+            <GoldFrame small={screenWidth} src={goldFrame} alt="gold frame" />
+            <GoldRod small={screenWidth} src={goldRod} alt="gold rod" />
+            <GoldBar small={screenWidth} src={goldBar} alt="gold bar" />
           </>
         );
       if (levelUp === 7)
         return (
           <>
-            <Level3Crown src={lvl_3_crown} alt="gold crown" />
-            <GoldBrooch src={lvl_3_brooch} alt="gold brooch" />
-            <GoldFrame src={goldFrame} alt="gold frame" />
-            <GoldRod src={goldRod} alt="gold rod" />
-            <GoldBar src={goldBar} alt="gold bar" />
-            <GoldChest src={goldChest} alt="gold chest" />
+            <Level3Crown
+              small={screenWidth}
+              src={lvl_3_crown}
+              alt="gold crown"
+            />
+            <GoldBrooch
+              small={screenWidth}
+              src={lvl_3_brooch}
+              alt="gold brooch"
+            />
+            <GoldFrame small={screenWidth} src={goldFrame} alt="gold frame" />
+            <GoldRod small={screenWidth} src={goldRod} alt="gold rod" />
+            <GoldBar small={screenWidth} src={goldBar} alt="gold bar" />
+            <GoldChest small={screenWidth} src={goldChest} alt="gold chest" />
           </>
         );
       if (levelUp === 8)
         return (
           <>
-            <Level3Crown src={lvl_3_crown} alt="gold crown" />
-            <GoldBrooch src={lvl_3_brooch} alt="gold brooch" />
-            <GoldFrame src={goldFrame} alt="gold frame" />
-            <GoldRod src={goldRod} alt="gold rod" />
-            <GoldBar src={goldBar} alt="gold bar" />
-            <GoldChest src={goldChest} alt="gold chest" />
-            <GoldCastle src={goldCastle} alt="gold castle" />
+            <Level3Crown
+              small={screenWidth}
+              src={lvl_3_crown}
+              alt="gold crown"
+            />
+            <GoldBrooch
+              small={screenWidth}
+              src={lvl_3_brooch}
+              alt="gold brooch"
+            />
+            <GoldFrame small={screenWidth} src={goldFrame} alt="gold frame" />
+            <GoldRod small={screenWidth} src={goldRod} alt="gold rod" />
+            <GoldBar small={screenWidth} src={goldBar} alt="gold bar" />
+            <GoldChest small={screenWidth} src={goldChest} alt="gold chest" />
+            <GoldCastle
+              small={screenWidth}
+              src={goldCastle}
+              alt="gold castle"
+            />
           </>
         );
     }
@@ -139,14 +200,26 @@ export default function About({ broken, theme, screenWidth }) {
       if (levelUp >= 6) {
         return (
           <>
-            <Level3Crown src={lvl_3_crown} alt="gold crown" />
-            <GoldBrooch src={lvl_3_brooch} alt="gold brooch" />
+            <Level3Crown
+              small={screenWidth}
+              src={lvl_3_crown}
+              alt="gold crown"
+            />
+            <GoldBrooch
+              small={screenWidth}
+              src={lvl_3_brooch}
+              alt="gold brooch"
+            />
           </>
         );
       } else if (levelUp >= 3) {
         return (
           <>
-            <Level2Crown src={lvl_2_crown} alt="gold crown" />
+            <Level2Crown
+              small={screenWidth}
+              src={lvl_2_crown}
+              alt="gold crown"
+            />
           </>
         );
       }
@@ -444,7 +517,7 @@ const AboutContainer = styled(animated.div)`
   height: fit-content;
   display: flex;
   flex-direction: ${(props) => (props.small === "true" ? "column" : "row")};
-  margin-left: 2vw;
+  margin-left: ${(props) => (props.small === "true" ? "" : "2vw")};
   background-color: ${(props) => props.theme.backgroundColor};
 
   > section:nth-child(3) {
@@ -455,17 +528,16 @@ const AboutContainer = styled(animated.div)`
 const ProfileContainer = styled.section`
   display: flex;
   justify-content: center;
-  flex-direction: ${(props) => (props.small === "true" ? "row" : "column")};
+  flex-direction: column;
   align-items: center;
   width: ${(props) => (props.small === "true" ? "100%" : "65%")};
-  padding: ${(props) => (props.small === "true" ? "5rem" : "0 5rem")};
+  padding: ${(props) => (props.small === "true" ? "5rem 0" : "0 5rem")};
 `;
 
 const ProfileCard = styled(animated.div)`
   font-family: "Exo", sans-serif;
-  width: ${(props) => (props.small === "true" ? "40%" : "19vw")};
-  height: 27.5vw;
-  padding: ${(props) => (props.small === "true" ? "2rem 0" : "1rem 0")};
+  width: fit-content;
+  padding: ${(props) => (props.small === "true" ? "0.5rem 0" : "1rem 0")};
   margin: ${(props) => (props.small === "true" ? "0 7vw" : "")};
   display: flex;
   justify-content: center;
@@ -491,38 +563,41 @@ const ProfileCard = styled(animated.div)`
   > header {
     display: flex;
     justify-content: space-between;
-    padding: 1rem 0.5rem;
+    padding: ${(props) =>
+      props.small === "true" ? "0.1rem 0.5rem" : "0.5rem 1rem"};
     align-items: center;
     z-index: 400;
 
     > p:nth-child(1) {
       margin: 0;
-      font-size: 1.3vw;
+      font-size: ${(props) => (props.small === "true" ? "2vw" : "1.3vw")};
       font-weight: 600;
     }
     > p:nth-child(2) {
       margin: 0;
-      font-size: 0.8vw;
+      font-size: ${(props) => (props.small === "true" ? "1.5vw" : "0.8vw")};
       font-weight: 600;
     }
   }
 
   > h1 {
-    font-size: 1.4vw;
-    margin: 0;
+    font-size: ${(props) => (props.small === "true" ? "2.5vw" : "1.4vw")};
+    margin: 0 1.5rem;
     z-index: 200;
   }
 
   > img {
-    width: 13vw;
+    width: ${(props) => (props.small === "true" ? "25vw" : "13vw")};
+    min-width: 8rem;
     border-radius: 50%;
     align-self: center;
     opacity: 0.9;
     z-index: 200;
+    padding: ${(props) => (props.small === "true" ? "0 2rem" : "0 4rem")};
   }
 
   > p {
-    font-size: 1.1vw;
+    font-size: ${(props) => (props.small === "true" ? "2vw" : "1.1vw")};
     margin: 0;
     z-index: 200;
   }
@@ -530,7 +605,7 @@ const ProfileCard = styled(animated.div)`
   > div {
     z-index: 400;
     > h2 {
-      font-size: 0.9vw;
+      font-size: ${(props) => (props.small === "true" ? "1.8vw" : "0.9vw")};
       margin-top: 2rem;
       z-index: 200;
     }
@@ -540,7 +615,7 @@ const ProfileCard = styled(animated.div)`
       grid-gap: 0.5rem;
       margin-bottom: 1rem;
       z-index: 200;
-      font-size: 0.8vw;
+      font-size: ${(props) => (props.small === "true" ? "1.5vw" : "0.8vw")};
 
       > p {
         margin: 0;
@@ -551,6 +626,10 @@ const ProfileCard = styled(animated.div)`
 `;
 
 const SummaryContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin-top: 5rem;
   width: 100%;
   font-size: ${(props) => (props.broken ? "1px;" : "1.2rem")};
@@ -589,7 +668,7 @@ const SummaryContainer = styled.section`
     text-shadow: ${(props) =>
       props.theme.name === "dark" && `${props.theme.textShadow}`};
     font-size: ${(props) => (props.small === "true" ? "0.9rem" : "1rem")};
-    width: 35vw;
+    width: ${(props) => (props.small === "true" ? "70vw" : "35vw")};
   }
 `;
 
@@ -598,6 +677,7 @@ const SkillContainer = styled.section`
   justify-content: center;
   flex-direction: column;
   color: ${(props) => props.theme.normalFontColor};
+  padding: ${(props) => (props.small === "true" ? "3rem 0" : "1rem")};
 
   > section:nth-child(1) {
     width: 100%;
@@ -625,11 +705,10 @@ const SkillContainer = styled.section`
         align-items: center;
         grid-gap: ${(props) => (props.small === "true" ? "0" : "1rem 0.25rem")};
         margin-bottom: 3rem;
-        font-size: ${(props) => (props.small === "true" ? "1.5vw" : "0.75vw")};
 
         > div {
           > img {
-            width: ${(props) => (props.small === "true" ? "5vw" : "3.5vw")};
+            width: ${(props) => (props.small === "true" ? "7vw" : "3.5vw")};
             padding: 0.5rem;
             filter: ${(props) => `drop-shadow(${props.theme.dropShadow})`};
           }
@@ -640,6 +719,8 @@ const SkillContainer = styled.section`
               sans-serif;
             text-shadow: ${(props) =>
               props.theme.name === "dark" && `${props.theme.textShadow}`};
+            font-size: ${(props) =>
+              props.small === "true" ? "1.5vw" : "1rem"};
           }
         }
       }
@@ -664,13 +745,15 @@ const SkillContainer = styled.section`
 
       > div {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-gap: 0.8vw 1vw;
+        grid-template-columns: ${(props) =>
+          props.small === "true" ? "1fr 1fr 1fr 1fr 1fr" : "1fr 1fr 1fr 1fr"};
+        grid-gap: ${(props) =>
+          props.small === "true" ? "0.8vw 1vw" : "0.8vw 0.5vw"};
         font-size: 1rem;
 
         > div {
           > img {
-            width: 2.5vw;
+            width: ${(props) => (props.small === "true" ? "4vw" : "2.5vw")};
             filter: ${(props) => `drop-shadow(${props.theme.dropShadow})`};
             margin-bottom: 0.5rem;
           }
@@ -681,7 +764,8 @@ const SkillContainer = styled.section`
               sans-serif;
             text-shadow: ${(props) =>
               props.theme.name === "dark" && `${props.theme.textShadow}`};
-            font-size: 0.75vw;
+            font-size: ${(props) =>
+              props.small === "true" ? "1.25vw" : "0.9rem"};
           }
         }
       }
@@ -717,7 +801,6 @@ const Crown = styled.div`
   user-select: none;
   > div {
     position: absolute;
-    height: 100vh;
     top: -4vw;
     display: flex;
     flex-direction: column;
@@ -727,25 +810,26 @@ const Crown = styled.div`
 
 const Level2Crown = styled.img`
   z-index: 100;
-  margin-top: 3vw;
-  width: 12vw;
+  margin-top: ${(props) => (props.small === "true" ? "1vw" : "3vw")};
+  width: ${(props) => (props.small === "true" ? "20vw" : "12vw")};
 `;
 const Level3Crown = styled.img`
   position: absolute;
-  width: 10.5vw;
+  width: ${(props) => (props.small === "true" ? "18vw" : "10.5vw")};
   margin-top: 6vw;
 `;
 
 const GoldBrooch = styled.img`
   position: absolute;
   margin-top: 8.5vw;
-  width: 18vw;
+  width: ${(props) => (props.small === "true" ? "32vw" : "18vw")};
 `;
 
 const GoldFrame = styled.img`
   z-index: 100;
   margin-left: 1.5rem;
-  width: 31vw;
+  margin-top: ${(props) => (props.small === "true" ? "-5vw" : "0")};
+  width: ${(props) => (props.small === "true" ? "55.5vw" : "31vw")};
   align-self: right;
 `;
 const GoldBar = styled.img`
@@ -753,28 +837,28 @@ const GoldBar = styled.img`
   z-index: 101;
   top: 20vw;
   left: -5vw;
-  width: 14.5vw;
+  width: ${(props) => (props.small === "true" ? "25vw" : "14.5vw")};
 `;
 const GoldRod = styled.img`
   position: absolute;
   z-index: 101;
   top: 2vw;
-  left: 20vw;
-  width: 15vw;
+  left: ${(props) => (props.small === "true" ? "38vw" : "20vw")};
+  width: ${(props) => (props.small === "true" ? "20vw" : "15vw")};
 `;
 const GoldChest = styled.img`
   position: absolute;
   z-index: 101;
   top: 20vw;
-  left: 20vw;
-  width: 23vw;
+  left: ${(props) => (props.small === "true" ? "45vw" : "20vw")};
+  width: ${(props) => (props.small === "true" ? "30vw" : "23vw")};
 `;
 const GoldCastle = styled.img`
   position: absolute;
-  z-index: -1;
+  z-index: -1000;
   top: -4vw;
   left: 10vw;
-  width: 100rem;
+  width: ${(props) => (props.small === "true" ? "100vw" : "80vw")};
 `;
 
 const ModalBackDrop = styled.div`
