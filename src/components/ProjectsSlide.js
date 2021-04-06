@@ -17,7 +17,13 @@ import {
   faTicketAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function About({ setPage, broken, theme, setBroken }) {
+export default function About({
+  setPage,
+  broken,
+  theme,
+  setBroken,
+  screenWidth,
+}) {
   const [slide, setSlide] = useState({
     gcBoard: {
       index: 0,
@@ -41,6 +47,7 @@ export default function About({ setPage, broken, theme, setBroken }) {
   const [sortBy, setSortBy] = useState("none");
   const [showDetail, setShowDetail] = useState("");
   const [brokenTicket, setBrokenTicket] = useState(800);
+  const [showModal, setShowModal] = useState(false);
 
   const fadeIn_sortContainer = useSpring({
     config: { duration: 2000 },
@@ -66,14 +73,34 @@ export default function About({ setPage, broken, theme, setBroken }) {
     grabAndSlide("app", 1.2);
   }, []);
 
+  const renderModal = () => {
+    return (
+      <ModalBackDrop
+        onClick={(e) => {
+          const condition = Array.from(e.target.classList);
+          if (condition.length !== 0) {
+            if (condition[0].includes("BackDrop")) {
+              setShowModal(false);
+            }
+          }
+        }}
+      >
+        <Modal>
+          <p>You need bigger screen to access this. (1500px+)</p>
+        </Modal>
+      </ModalBackDrop>
+    );
+  };
+
   const renderProjectSlide = (project, state) => {
     const length = project.images.length;
     if (project.tag.includes(sortBy) || sortBy === "none") {
       return (
         <Project
-          width={project.name === "kokoatalk" ? "fit-content" : null}
+          kokoatalk={project.name === "kokoatalk"}
           theme={theme}
           style={fadeIn_projectContainer}
+          screenWidth={screenWidth}
         >
           <button
             onClick={() => {
@@ -108,6 +135,7 @@ export default function About({ setPage, broken, theme, setBroken }) {
                   show={project.name === showDetail}
                 />
                 <ProjectDescription
+                  screenWidth={screenWidth}
                   show={
                     showDetail === project.name
                       ? false
@@ -122,6 +150,7 @@ export default function About({ setPage, broken, theme, setBroken }) {
                   show={project.name === showDetail}
                   kokoatalk={project.name === "kokoatalk"}
                   onMouseLeave={() => setShowDetail("")}
+                  screenWidth={screenWidth}
                 >
                   <div>
                     <h2>{project.name.toUpperCase()}</h2>
@@ -189,7 +218,12 @@ export default function About({ setPage, broken, theme, setBroken }) {
 
   return (
     <ProjectContainer className="app">
-      <SortContainer theme={theme} style={fadeIn_sortContainer}>
+      {showModal && renderModal()}
+      <SortContainer
+        theme={theme}
+        style={fadeIn_sortContainer}
+        screenWidth={screenWidth}
+      >
         <h2>Sort by</h2>
         <div>
           <SortIcon
@@ -200,6 +234,7 @@ export default function About({ setPage, broken, theme, setBroken }) {
             selected={sortBy}
             className={broken ? "fly1" : ""}
             theme={theme}
+            screenWidth={screenWidth}
           />
           <SortIcon
             src={reactNative}
@@ -209,6 +244,7 @@ export default function About({ setPage, broken, theme, setBroken }) {
             selected={sortBy}
             className={broken ? "fly2" : ""}
             theme={theme}
+            screenWidth={screenWidth}
           />
           <SortIcon
             src={nodeJS}
@@ -218,6 +254,7 @@ export default function About({ setPage, broken, theme, setBroken }) {
             selected={sortBy}
             className={broken ? "fly3" : ""}
             theme={theme}
+            screenWidth={screenWidth}
           />
           <SortIcon
             src={vue}
@@ -227,6 +264,7 @@ export default function About({ setPage, broken, theme, setBroken }) {
             selected={sortBy}
             className={broken ? "fly4" : ""}
             theme={theme}
+            screenWidth={screenWidth}
           />
           <SortIcon
             src={jquery}
@@ -236,6 +274,7 @@ export default function About({ setPage, broken, theme, setBroken }) {
             selected={sortBy}
             className={broken ? "fly5" : ""}
             theme={theme}
+            screenWidth={screenWidth}
           />
         </div>
         <h2
@@ -246,7 +285,7 @@ export default function About({ setPage, broken, theme, setBroken }) {
           Clear
         </h2>
       </SortContainer>
-      <ProjectSlider>
+      <ProjectSlider screenWidth={screenWidth}>
         {renderProjectSlide(projects.gcBoard, "gcBoard")}
         {renderProjectSlide(projects.movieHunt, "movieHunt")}
         {renderProjectSlide(projects.pokedex, "pokedex")}
@@ -259,6 +298,7 @@ export default function About({ setPage, broken, theme, setBroken }) {
         theme={theme}
         style={fadeIn_ticket}
         brokenTicket={brokenTicket}
+        screenWidth={screenWidth}
       >
         <FontAwesomeIcon
           icon={faTicketAlt}
@@ -268,12 +308,20 @@ export default function About({ setPage, broken, theme, setBroken }) {
               if (brokenTicket <= 25) {
                 setBrokenTicket(brokenTicket - 1);
                 if (brokenTicket <= 3.5) {
-                  setBroken(false);
-                  setPage("theater");
+                  if (screenWidth !== "true") {
+                    setBroken(false);
+                    setPage("theater");
+                  } else {
+                    setShowModal(true);
+                  }
                 }
               }
             } else {
-              setPage("theater");
+              if (window.innerWidth > 1500) {
+                setPage("theater");
+              } else {
+                setShowModal(true);
+              }
             }
           }}
         />
@@ -292,7 +340,8 @@ const ProjectContainer = styled.div`
 `;
 
 const SortContainer = styled(animated.section)`
-  position: fixed;
+  position: ${(props) =>
+    props.screenWidth === "mobile" ? "relative" : "fixed"};
   display: flex;
   width: 100%;
   justify-content: center;
@@ -300,7 +349,19 @@ const SortContainer = styled(animated.section)`
   align-items: center;
   font-family: "Luckiest Guy", cursive;
   font-size: 1.6rem;
-  margin-left: 3vw;
+  margin-top: ${(props) => {
+    if (props.screenWidth === "small") {
+      return "5rem";
+    } else if (props.screenWidth === "mobile") {
+      return "5rem";
+    } else {
+      return "";
+    }
+  }};
+  margin-left: ${(props) =>
+    props.screenWidth === "mobile" || props.screenWidth === "small"
+      ? "0"
+      : "3vw"};
   color: ${(props) => (props.theme ? props.theme.normalFontColor : "black")};
 
   h2:nth-child(3) {
@@ -330,9 +391,27 @@ const SortContainer = styled(animated.section)`
 `;
 
 const SortIcon = styled.img`
-  width: 5rem;
-  height: 5rem;
-  margin: 0 1rem;
+  width: ${(props) => {
+    if (props.screenWidth === "mobile") {
+      return "9vw";
+    } else if (props.screenWidth === "small") {
+      return "7vw";
+    } else {
+      return "4.5rem";
+    }
+  }};
+  height: ${(props) => {
+    if (props.screenWidth === "mobile") {
+      return "9vw";
+    } else if (props.screenWidth === "small") {
+      return "7vw";
+    } else {
+      return "4.5rem";
+    }
+  }};
+  min-width: 3.5rem;
+  min-height: 3.5rem;
+  margin: ${(props) => (props.screenWidth === "mobile" ? "0 1.5vw" : "0 1rem")};
   filter: ${(props) => props.theme && `drop-shadow(${props.theme.dropShadow})`};
   cursor: pointer;
   transition: 0.5s ease-in-out;
@@ -348,28 +427,57 @@ const SortIcon = styled.img`
 `;
 
 const ProjectSlider = styled.section`
-  margin-top: 8rem;
+  margin-top: ${(props) => (props.screenWidth === "mobile" ? "0" : "8rem")};
   width: fit-content;
   height: 100vh;
   display: flex;
-  padding: 5rem 1rem;
+  flex-direction: ${(props) =>
+    props.screenWidth === "mobile" ? "column" : "row"};
+  padding: ${(props) =>
+    props.screenWidth === "small" || props.screenWidth === "mobile"
+      ? "5rem 0"
+      : "5rem 1rem"};
   align-items: center;
+
+  > div:nth-child(1) {
+    margin: ${(props) => {
+      if (props.screenWidth === "small") {
+        return "5rem 8rem 0 2rem";
+      } else if (props.screenWidth === "mobile") {
+        return "0 0 4rem 0";
+      } else {
+        return "0 8rem";
+      }
+    }};
+  }
 `;
 
 const Project = styled(animated.div)`
   display: flex;
-  width: ${(props) => (props.width ? props.width : "50vw")};
+  width: ${(props) => {
+    if (props.kokoatalk) {
+      return "fit-content";
+    } else if (props.screenWidth === "small") {
+      return "95vw";
+    } else if (props.screenWidth === "mobile") {
+      return "100%";
+    } else {
+      return "70rem";
+    }
+  }};
   height: fit-content;
-  margin: 0 8rem;
-  padding: 1rem 1rem;
+  margin: ${(props) => (props.screenWidth === "mobile" ? "4rem 0" : "0 8rem")};
+  padding: ${(props) => (props.screenWidth === "mobile" ? "0" : "1rem 1rem")};
+  transition: 0.5s ease-in-out;
 
   > button {
     border: none;
     outline: none;
     height: fit-content;
     align-self: center;
-    padding: 2rem 1rem;
-    font-size: 3rem;
+    padding: ${(props) =>
+      props.screenWidth === "mobile" ? "2vw" : "2rem 1rem"};
+    font-size: ${(props) => (props.screenWidth === "mobile" ? "1rem" : "3rem")};
     transition: 0.4s;
     cursor: pointer;
     background-color: transparent;
@@ -404,10 +512,11 @@ const ProjectDetails = styled.div`
   position: absolute;
   left: 0;
   top: 0;
-  flex-direction: column;
   background-color: rgba(0, 0, 0, 0.6);
   color: white;
   z-index: ${(props) => (props.show ? 100 : -100)};
+  display: flex;
+  flex-direction: column;
 
   > div:nth-child(1) {
     width: 100%;
@@ -416,8 +525,19 @@ const ProjectDetails = styled.div`
 
     > h2 {
       text-align: center;
-      font-size: ${(props) => (props.kokoatalk ? "2rem" : "3rem")};
-      margin: 1rem 0 1rem 0;
+      font-size: ${(props) => {
+        if (props.kokoatalk) {
+          return "2rem";
+        } else if (props.screenWidth === "small") {
+          return "2.5vw";
+        } else if (props.screenWidth === "mobile") {
+          return "4vw";
+        } else {
+          return "3rem";
+        }
+      }};
+      margin: ${(props) =>
+        props.screenWidth === "mobile" ? "0.5rem 0 0.5rem 0" : "1rem 0 1rem 0"};
       text-decoration: underline;
     }
   }
@@ -425,24 +545,74 @@ const ProjectDetails = styled.div`
     overflow: hidden;
     display: ${(props) => (props.kokoatalk ? "block" : "flex")};
     justify-content: space-between;
-    font-size: 1.2rem;
     ${(props) =>
       props.kokoatalk &&
-      "> section{ font-size: 0.8rem; padding: 0 !important;  >h2 {font-size: 1.3rem;}}"}
+      "> section{ font-size: 0.9rem; padding: 0 !important;  >h2 {font-size: 1.3rem;}}"}
 
     > section {
-      padding: 0 3rem;
+      padding: ${(props) =>
+        props.screenWidth === "small" || props.screenWidth === "mobile"
+          ? "0 1.5vw"
+          : "0 3rem"};
       width: 100%;
       text-align: center;
       height: fit-content;
+      > div {
+        padding: ${(props) => (props.kokoatalk ? "0 0.2rem" : "")};
+        font-size: ${(props) => {
+          if (props.kokoatalk) {
+            return "0.9rem";
+          } else if (props.screenWidth === "mobile") {
+            return "2vw";
+          } else if (props.screenWidth === "small") {
+            return "1.5vw";
+          } else {
+            return "1rem";
+          }
+        }};
+      }
 
       > h2 {
         text-decoration: underline;
-        margin: ${(props) => (props.kokoatalk ? "3rem 0 1rem 0" : "2rem 0")};
+        margin: ${(props) => {
+          if (props.kokoatalk) {
+            return "2rem 0 1rem 0";
+          } else if (props.screenWidth === "mobile") {
+            return "0 0 1rem 0";
+          } else if (props.screenWidth === "small") {
+          } else {
+            return "0 0 2rem 0";
+          }
+        }};
+        font-size: ${(props) => {
+          if (props.kokoatalk) {
+            return "1.3rem";
+          } else if (props.screenWidth === "mobile") {
+            return "3.2vw";
+          } else if (props.screenWidth === "small") {
+            return "2vw";
+          } else {
+            return "1.8rem";
+          }
+        }};
       }
       > a {
         color: white;
-        margin: 2rem;
+        margin: ${(props) =>
+          props.screenWidth === "small" || props.screenWidth === "mobile"
+            ? "1vw"
+            : "2rem"};
+        font-size: ${(props) => {
+          if (props.kokoatalk) {
+            return "0.9rem";
+          } else if (props.screenWidth === "mobile") {
+            return "2vw";
+          } else if (props.screenWidth === "small") {
+            return "1.5vw";
+          } else {
+            return "1rem";
+          }
+        }};
       }
     }
 
@@ -453,7 +623,10 @@ const ProjectDetails = styled.div`
       ${(props) => props.kokoatalk && "grid-gap: 0; padding: 0 1rem;"}
 
       > p {
-        margin: 0.5rem 0;
+        margin: ${(props) =>
+          props.screenWidth === "mobile" || props.screenWidth === "small"
+            ? "0.2rem 0"
+            : "0.5rem 0"};
       }
     }
   }
@@ -473,9 +646,10 @@ const ProjectDescription = styled.div`
     color: white;
     margin: 0;
     padding: 0.3rem 0;
-    top: -5rem;
+    top: ${(props) => (props.screenWidth === "mobile" ? "-7vw" : "-5rem")};
     width: 100%;
-    font-size: 1.2rem;
+    font-size: ${(props) =>
+      props.screenWidth === "mobile" ? "2vw" : "1.2rem"};
   }
 `;
 
@@ -484,7 +658,6 @@ const Divider = styled.div`
   height: 20rem;
   background-color: rgba(255, 255, 255, 0.4);
   align-self: center;
-  /* margin-bottom: -10rem; */
   display: ${(props) => (props.show ? "block" : "none")};
 `;
 
@@ -495,7 +668,31 @@ const ToTheater = styled(animated.div)`
   bottom: 5vh;
   text-align: center;
   color: ${(props) => (props.theme ? props.theme.normalFontColor : "black")};
+  display: ${(props) => (props.screenWidth === "mobile" ? "none" : "")};
+
   > svg {
     cursor: pointer;
   }
+`;
+
+const ModalBackDrop = styled.div`
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Modal = styled.div`
+  z-index: 2000;
+  color: white;
+  width: 45rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-size: 3rem;
+  padding: 2rem;
 `;

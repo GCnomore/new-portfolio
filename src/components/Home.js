@@ -49,8 +49,9 @@ export default function Home({ theme, broken, screenWidth }) {
     }
 
     if (!deleteWord.current && txt.current === fullText) {
-      speed = wait;
-      deleteWord.current = true;
+      setTimeout(() => {
+        deleteWord.current = true;
+      }, wait);
     } else if (deleteWord.current && txt.current === "") {
       deleteWord.current = false;
       wordIndex.current++;
@@ -63,16 +64,17 @@ export default function Home({ theme, broken, screenWidth }) {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      typing.current = true;
-      txt.current = "";
-      deleteWord.current = false;
-      wordIndex.current = 0;
-      typing.current && typeWords();
-    }, 5000);
+    clearTimeout(typeWords());
+    wordIndex.current = 0;
+    txt.current = "";
+    typing.current = true;
+    typing.current && typeWords();
 
     return () => {
       typing.current = false;
+      txt.current = "";
+      deleteWord.current = false;
+      wordIndex.current = 0;
       clearTimeout(typeWords());
     };
   }, []);
@@ -106,34 +108,34 @@ export default function Home({ theme, broken, screenWidth }) {
   });
 
   return (
-    <HomeContainer small={screenWidth}>
-      <TypographyContainer style={fadeIn_rest} small={screenWidth}>
+    <HomeContainer screenWidth={screenWidth}>
+      <TypographyContainer style={fadeIn_rest} screenWidth={screenWidth}>
         <Typography theme={theme} broken={broken} />
       </TypographyContainer>
-      <NameContainer theme={theme} small={screenWidth}>
+      <NameContainer theme={theme} screenWidth={screenWidth}>
         <div>
           <FirstName style={fadeIn_firstName}>Isaac</FirstName>
           <LastName style={fadeIn_lastName}>Choi</LastName>
         </div>
-        <MyTitle theme={theme} style={fadeIn_title} small={screenWidth}>
+        <MyTitle theme={theme} style={fadeIn_title} screenWidth={screenWidth}>
           <h1>Front End Developer</h1>
         </MyTitle>
       </NameContainer>
-      <PhoneContainer small={screenWidth}>
+      <PhoneContainer screenWidth={screenWidth}>
         <div>
           <Phone
             src={phoneImg}
             alt="phone illustration"
             style={fadeIn_rest}
             className={broken ? "shake" : ""}
-            small={screenWidth}
+            screenWidth={screenWidth}
           />
           <PhoneScreen
             style={fadeIn_rest}
             className={broken ? "shakeScreen" : ""}
-            small={screenWidth}
+            screenWidth={screenWidth}
           >
-            <AppBar small={screenWidth}>
+            <AppBar screenWidth={screenWidth}>
               <section>{<GetTime />}</section>
               <section>
                 <FontAwesomeIcon icon={faSignal} />
@@ -141,7 +143,7 @@ export default function Home({ theme, broken, screenWidth }) {
                 <FontAwesomeIcon icon={faBatteryFull} />
               </section>
             </AppBar>
-            <PhoneContent small={screenWidth}>
+            <PhoneContent screenWidth={screenWidth}>
               <h1>Isaac Choi Portfolio</h1>
               <span>Welcome to my website!</span>
               <span>I am a front end developer based in LA</span>
@@ -150,7 +152,11 @@ export default function Home({ theme, broken, screenWidth }) {
           </PhoneScreen>
         </div>
       </PhoneContainer>
-      <TypingContainer style={fadeIn_rest} theme={theme} small={screenWidth}>
+      <TypingContainer
+        style={fadeIn_rest}
+        theme={theme}
+        screenWidth={screenWidth}
+      >
         <header>
           <WindowMenu>
             <div></div>
@@ -194,9 +200,15 @@ export default function Home({ theme, broken, screenWidth }) {
 const HomeContainer = styled.div`
   width: 100%;
   height: 100%;
-  padding: ${(props) => (props.small === "true" ? "0" : "0 0 0 10rem")};
+  padding: ${(props) =>
+    props.screenWidth === "small" || props.screenWidth === "mobile"
+      ? "0"
+      : "0 0 0 10rem"};
   display: flex;
-  flex-direction: ${(props) => (props.small === "true" ? "column" : "row")};
+  flex-direction: ${(props) =>
+    props.screenWidth === "small" || props.screenWidth === "mobile"
+      ? "column"
+      : "row"};
   user-select: none;
 `;
 
@@ -207,7 +219,10 @@ const TypingContainer = styled(animated.div)`
   top: 5vh;
   width: 40vw;
   height: fit-content;
-  display: ${(props) => (props.small === "true" ? "none" : "block")};
+  display: ${(props) =>
+    props.screenWidth === "small" || props.screenWidth === "mobile"
+      ? "none"
+      : "block"};
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   > header {
@@ -295,13 +310,22 @@ const TextContent = styled.div`
 const NameContainer = styled.div`
   z-index: 10;
   display: flex;
-  justify-content: ${(props) => (props.small === "true" ? "center" : "")};
-  align-items: ${(props) => (props.small === "true" ? "center" : "")};
+  justify-content: ${(props) =>
+    props.screenWidth === "small" || props.screenWidth === "mobile"
+      ? "center"
+      : ""};
+  align-items: ${(props) =>
+    props.screenWidth === "small" || props.screenWidth === "mobile"
+      ? "center"
+      : ""};
   flex-direction: column;
   color: ${(props) =>
     props.theme.name === "dark" ? props.theme.normalFontColor : "black"};
   font-family: "Chango", cursive;
-  margin-top: ${(props) => (props.small === "true" ? "4rem" : "")};
+  margin-top: ${(props) =>
+    props.screenWidth === "small" || props.screenWidth === "mobile"
+      ? "4rem"
+      : ""};
   > div {
     display: flex;
     margin-bottom: 5rem;
@@ -317,25 +341,47 @@ const LastName = styled(animated.h1)`
 const MyTitle = styled(animated.div)`
   height: 100%;
   margin: 0 0 1rem 0;
-  align-items: ${(props) => (props.small === "true" ? "" : "center")};
+  align-items: ${(props) =>
+    props.screenWidth === "small" || props.screenWidth === "mobile"
+      ? ""
+      : "center"};
   color: ${(props) =>
     props.theme.name === "dark" ? props.theme.normalFontColor : "black"};
-  display: ${(props) => (props.small === "true" ? "flex" : "block")};
+  display: ${(props) =>
+    props.screenWidth === "small" || props.screenWidth === "mobile"
+      ? "flex"
+      : "block"};
 
   > h1 {
-    text-align: ${(props) => (props.small === "true" ? "center" : "right")};
+    text-align: ${(props) =>
+      props.screenWidth === "small" || props.screenWidth === "mobile"
+        ? "center"
+        : "right"};
     font-size: 7.5vw;
-    margin: ${(props) => (props.small === "true" ? "0" : "20vh 14vw 0 0")};
+    margin: ${(props) =>
+      props.screenWidth === "small" || props.screenWidth === "mobile"
+        ? "0"
+        : "20vh 14vw 0 0"};
   }
 `;
 
 const PhoneContainer = styled(animated.div)`
   width: 100%;
   display: flex;
-  justify-content: ${(props) => (props.small === "true" ? "center" : "")};
-  position: ${(props) => (props.small === "true" ? "" : "absolute")};
-  left: ${(props) => (props.small === "true" ? "" : "0")};
-  top: ${(props) => (props.small === "true" ? "" : "35vh")};
+  justify-content: ${(props) =>
+    props.screenWidth === "small" || props.screenWidth === "mobile"
+      ? "center"
+      : ""};
+  position: ${(props) =>
+    props.screenWidth === "small" || props.screenWidth === "mobile"
+      ? ""
+      : "absolute"};
+  left: ${(props) =>
+    props.screenWidth === "small" || props.screenWidth === "mobile" ? "" : "0"};
+  top: ${(props) =>
+    props.screenWidth === "small" || props.screenWidth === "mobile"
+      ? ""
+      : "35vh"};
 
   > div {
     width: fit-content;
@@ -346,34 +392,57 @@ const PhoneContainer = styled(animated.div)`
 `;
 
 const Phone = styled(animated.img)`
-  width: ${(props) => (props.small === "true" ? "50vw" : "40vw")};
+  width: ${(props) =>
+    props.screenWidth === "small" || props.screenWidth === "mobile"
+      ? "70vw"
+      : "40vw"};
 `;
 
 const PhoneScreen = styled(animated.div)`
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 0;
-  left: ${(props) => (props.small === "true" ? "30vw" : "23.2vw")};
+  top: ${(props) =>
+    props.screenWidth === "small" || props.screenWidth === "mobile"
+      ? "1vw"
+      : "0"};
+  left: ${(props) =>
+    props.screenWidth === "small" || props.screenWidth === "mobile"
+      ? "42vw"
+      : "23.2vw"};
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  width: ${(props) => (props.small === "true" ? "17vw" : "14.5vw")};
+  width: ${(props) =>
+    props.screenWidth === "small" || props.screenWidth === "mobile"
+      ? "25vw"
+      : "14.5vw"};
 `;
 const AppBar = styled(animated.header)`
   display: flex;
   justify-content: space-between;
   width: 100%;
   margin: ${(props) =>
-    props.small === "true" ? "1vh 0 1vh 2.4vw" : "2vh 0 0 2.4vw"};
+    props.screenWidth === "small" || props.screenWidth === "mobile"
+      ? "1vh 0 3vh 2.4vw"
+      : "2vh 0 0 2.4vw"};
   color: black;
   transform: perspective(1000px) rotateX(35deg) rotateY(-8deg) rotateZ(6deg);
 
   > section:nth-child(1) {
-    font-size: ${(props) => (props.small === "true" ? "1.2vw" : "0.9vw")};
+    font-size: ${(props) =>
+      props.screenWidth === "small" || props.screenWidth === "mobile"
+        ? "1.5vw"
+        : "0.9vw"};
   }
   > section:nth-child(2) {
-    margin-right: 1.5vw;
-    font-size: ${(props) => (props.small === "true" ? "0.8vw" : "0.7vw")};
+    margin-right: ${(props) =>
+      props.screenWidth === "small" || props.screenWidth === "mobile"
+        ? "2vw"
+        : "1.5vw"};
+    font-size: ${(props) =>
+      props.screenWidth === "small" || props.screenWidth === "mobile"
+        ? "1.2vw"
+        : "0.7vw"};
     > * {
       margin-right: 0.2vw;
     }
@@ -381,24 +450,51 @@ const AppBar = styled(animated.header)`
 `;
 const PhoneContent = styled(animated.div)`
   transform: ${(props) =>
-    props.small === "true"
+    props.screenWidth === "small" || props.screenWidth === "mobile"
       ? "rotateX(30deg) rotateY(-20deg) rotateZ(12.5deg)"
       : "rotateX(30deg) rotateY(-20deg) rotateZ(13.5deg)"};
   width: 90%;
   display: flex;
   flex-direction: column;
   color: black;
-  margin: ${(props) =>
-    props.small === "true" ? "0.5vh 0 0 0.6vw" : "2vh 0 0 0.6vw"};
+  margin: ${(props) => {
+    if (props.screenWidth === "small") {
+      return "0.5vh 0 0 0.6vw";
+    } else if (props.screenWidth === "mobile") {
+      return "-2.5vh 0 0 0";
+    } else {
+      return "2vh 0 0 0.6vw";
+    }
+  }};
   > h1 {
-    font-size: ${(props) => (props.small === "true" ? "1.6vw" : "1.4vw")};
+    font-size: ${(props) => {
+      if (props.screenWidth === "small") {
+        return "2vw";
+      } else if (props.screenWidth === "mobile") {
+        return "2.5vw";
+      } else {
+        return "1.4vw";
+      }
+    }};
   }
+
   > span {
-    font-size: ${(props) => (props.small === "true" ? "1.2vw" : "1vw")};
+    font-size: ${(props) => {
+      if (props.screenWidth === "small") {
+        return "1.5vw";
+      } else if (props.screenWidth === "mobile") {
+        return "2vw";
+      } else {
+        return "1vw";
+      }
+    }};
     margin-bottom: 0.7vh;
   }
 `;
 
 const TypographyContainer = styled(animated.div)`
-  display: ${(props) => (props.small === "true" ? "none" : "block")};
+  display: ${(props) =>
+    props.screenWidth === "small" || props.screenWidth === "mobile"
+      ? "none"
+      : "block"};
 `;

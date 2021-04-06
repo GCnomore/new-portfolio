@@ -15,12 +15,16 @@ function App() {
   const [broken, setBroken] = useState(false);
   const easterEggCode = useRef([]);
   const [light, setLight] = useState(0);
-  const [screenWidth, setScreenWidth] = useState(
-    window.innerWidth <= 1118 ? "true" : "false"
-  );
+  const [screenWidth, setScreenWidth] = useState("normal");
 
   window.addEventListener("resize", () => {
-    setScreenWidth(window.innerWidth <= 1118 ? "true" : "false");
+    if (window.innerWidth <= 1118 && window.innerWidth > 840) {
+      setScreenWidth("small");
+    } else if (window.innerWidth <= 840) {
+      setScreenWidth("mobile");
+    } else {
+      setScreenWidth("normal");
+    }
   });
 
   if (light === 9) {
@@ -32,6 +36,13 @@ function App() {
   }
 
   useEffect(() => {
+    if (window.innerWidth <= 1118 && window.innerWidth > 840) {
+      setScreenWidth("small");
+    } else if (window.innerWidth <= 840) {
+      setScreenWidth("mobile");
+    } else {
+      setScreenWidth("normal");
+    }
     window.addEventListener("keydown", (e) => {
       easterEggCode.current.push(e.key);
       if (e.key === "Escape") {
@@ -45,7 +56,10 @@ function App() {
   }, []);
 
   return (
-    <AppContainer className={darkMode ? "lightsOnOff" : ""}>
+    <AppContainer
+      className={darkMode ? "lightsOnOff" : ""}
+      screenWidth={screenWidth}
+    >
       <SideBar broken={broken} screenWidth={screenWidth}>
         <SideBarMenu
           setPage={setPage}
@@ -53,6 +67,7 @@ function App() {
           broken={broken}
           setLight={setLight}
           light={light}
+          screenWidth={screenWidth}
         />
       </SideBar>
       {page === "theater" ? (
@@ -109,12 +124,31 @@ const AppContainer = styled.div`
   display: flex;
   height: 100vh;
   width: 100%;
+  flex-direction: ${(props) =>
+    props.screenWidth === "small" || props.screenWidth === "mobile"
+      ? "column"
+      : "row"};
 `;
 
 const SideBar = styled.div`
-  width: ${(props) => (props.broken ? "14rem;" : "4.8rem")};
-  /* height: 100vh; */
+  width: ${(props) => {
+    if (props.screenWidth === "small" || props.screenWidth === "mobile") {
+      if (props.broken) {
+        return "80%";
+      }
+      return "100%";
+    } else if (props.broken) {
+      return "14rem";
+    } else {
+      return "4.8rem";
+    }
+  }};
+  height: ${(props) =>
+    props.screenWidth === "small" || props.screenWidth === "mobile"
+      ? "4rem"
+      : "100%"};
   position: fixed;
+  top: ${(props) => (props.broken ? "10rem" : "")};
   z-index: 1005;
   left: ${(props) => (props.broken ? "10vw;" : "0")};
   transform: perspective(1000)
@@ -124,7 +158,6 @@ const SideBar = styled.div`
 const ContentsContainer = styled.div`
   width: 100vw;
   height: 100vh;
-  /* overflow: hidden; */
   overflow-x: hidden;
   background-color: ${(props) => props.theme.backgroundColor};
 `;

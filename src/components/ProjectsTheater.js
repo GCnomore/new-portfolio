@@ -164,7 +164,7 @@ const ProjectList = styled.div`
   position: absolute;
   width: 30vw;
   height: 35vh;
-  margin: 25vh 0 0 5vw;
+  margin: 25vh 0 0 7vw;
   transform: perspective(1000px) rotateY(15deg);
   display: flex;
 `;
