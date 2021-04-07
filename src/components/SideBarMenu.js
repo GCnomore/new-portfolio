@@ -416,13 +416,29 @@ const MobileContactIcons = styled.div`
         ? "2.5vw"
         : "2rem"};
     min-width: 1.5rem;
-    height: auto;
+    height: ${(props) =>
+      props.screenWidth === "small" || props.screenWidth === "mobile"
+        ? "2.5vw"
+        : "2rem"};
+    min-height: 1.5rem;
     margin: ${(props) =>
       props.screenWidth === "small" || props.screenWidth === "mobile"
         ? "0.5rem"
         : "0.5rem 0"};
   }
+
   > div > a:nth-child(1) > img {
     border-radius: 3rem;
+  }
+
+  > div > a:nth-child(3) > img {
+    width: ${(props) =>
+      props.screenWidth === "small" || props.screenWidth === "mobile"
+        ? "3vw"
+        : "2rem"};
+    height: ${(props) =>
+      props.screenWidth === "small" || props.screenWidth === "mobile"
+        ? "2.24vw"
+        : "1.49rem"};
   }
 `;
