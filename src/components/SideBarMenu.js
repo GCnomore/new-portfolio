@@ -228,7 +228,15 @@ const MenuHeader = styled(animated.header)`
       props.screenWidth === "small" || props.screenWidth === "mobile"
         ? "0"
         : "0.5rem"};
-    height: fit-content;
+    height: ${(props) => {
+      if (props.screenWidth === "small") {
+        return "3.5rem";
+      } else if (props.screenWidth === "mobile") {
+        return "2.5rem";
+      } else {
+        return "4rem";
+      }
+    }};
   }
 `;
 

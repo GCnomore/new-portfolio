@@ -50,23 +50,24 @@ export default function About({
   const [showModal, setShowModal] = useState(false);
 
   const fadeIn_sortContainer = useSpring({
-    config: { duration: 2000 },
+    config: { duration: 1000 },
     opacity: 1,
     from: { opacity: 0 },
+    delay: 300,
   });
 
   const fadeIn_projectContainer = useSpring({
-    config: { duration: 2000 },
-    delay: 1000,
+    config: { duration: 700 },
     opacity: 1,
     from: { opacity: 0 },
+    delay: 800,
   });
 
   const fadeIn_ticket = useSpring({
-    config: { duration: 2000 },
-    delay: 2500,
+    config: { duration: 1200 },
     opacity: 1,
     from: { opacity: 0 },
+    delay: 1800,
   });
 
   useEffect(() => {
@@ -654,7 +655,7 @@ const ProjectDescription = styled.div`
 `;
 
 const Divider = styled.div`
-  width: 2px;
+  width: 5px;
   height: 20rem;
   background-color: rgba(255, 255, 255, 0.4);
   align-self: center;

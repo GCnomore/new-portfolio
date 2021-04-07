@@ -396,6 +396,10 @@ const Phone = styled(animated.img)`
     props.screenWidth === "small" || props.screenWidth === "mobile"
       ? "70vw"
       : "40vw"};
+  height: ${(props) =>
+    props.screenWidth === "small" || props.screenWidth === "mobile"
+      ? "57.5vw"
+      : "32.5vw"};
 `;
 
 const PhoneScreen = styled(animated.div)`
@@ -410,6 +414,7 @@ const PhoneScreen = styled(animated.div)`
     props.screenWidth === "small" || props.screenWidth === "mobile"
       ? "42vw"
       : "23.2vw"};
+  bottom: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   width: ${(props) =>
@@ -417,6 +422,7 @@ const PhoneScreen = styled(animated.div)`
       ? "25vw"
       : "14.5vw"};
 `;
+
 const AppBar = styled(animated.header)`
   display: flex;
   justify-content: space-between;
