@@ -548,9 +548,9 @@ export default function About({ broken, theme, screenWidth }) {
   );
 }
 
-const AboutContainer = styled(animated.div)`
+const AboutContainer = styled(animated.main)`
   width: 100%;
-  height: fit-content;
+  height: 100%;
   display: flex;
   flex-direction: ${(props) =>
     props.screenWidth === "small" || props.screenWidth === "mobile"

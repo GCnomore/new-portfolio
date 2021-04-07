@@ -331,7 +331,7 @@ export default function About({
   );
 }
 
-const ProjectContainer = styled.div`
+const ProjectContainer = styled.main`
   width: auto;
   height: 100vh;
   display: flex;
@@ -640,22 +640,27 @@ const ProjectDescription = styled.div`
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   opacity: ${(props) => (props.show ? 1 : 0)};
   transition: 0.5s;
+  height: 100%;
+  width: 100%;
   > p {
-    position: fixed;
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(1.2px);
+    position: fixed;
     color: white;
     margin: 0;
     padding: 0.3rem 0;
     top: ${(props) => (props.screenWidth === "mobile" ? "-7vw" : "-5rem")};
     width: 100%;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
     font-size: ${(props) =>
       props.screenWidth === "mobile" ? "2vw" : "1.2rem"};
   }
 `;
 
 const Divider = styled.div`
-  width: 5px;
+  width: 3px;
   height: 20rem;
   background-color: rgba(255, 255, 255, 0.4);
   align-self: center;
@@ -663,7 +668,7 @@ const Divider = styled.div`
 `;
 
 const ToTheater = styled(animated.div)`
-  width: 100vw;
+  align-self: center;
   position: absolute;
   font-size: ${(props) => (props.broken ? `${props.brokenTicket}px` : "3rem")};
   bottom: 5vh;

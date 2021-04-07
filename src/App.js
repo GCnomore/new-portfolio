@@ -13,9 +13,9 @@ function App() {
   const [page, setPage] = useState("");
   const [darkMode, setDarkMode] = useState(false);
   const [broken, setBroken] = useState(false);
-  const easterEggCode = useRef([]);
   const [light, setLight] = useState(0);
   const [screenWidth, setScreenWidth] = useState("normal");
+  const easterEggCode = useRef([]);
 
   window.addEventListener("resize", () => {
     if (window.innerWidth <= 1118 && window.innerWidth > 840) {
@@ -130,7 +130,7 @@ const AppContainer = styled.div`
       : "row"};
 `;
 
-const SideBar = styled.div`
+const SideBar = styled.aside`
   width: ${(props) => {
     if (props.screenWidth === "small" || props.screenWidth === "mobile") {
       if (props.broken) {
@@ -155,7 +155,7 @@ const SideBar = styled.div`
     ${(props) => (props.broken ? "rotateX(20deg) rotateZ(10deg)" : "")};
 `;
 
-const ContentsContainer = styled.div`
+const ContentsContainer = styled.main`
   width: 100vw;
   height: 100vh;
   overflow-x: hidden;

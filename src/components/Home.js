@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useSpring, animated } from "react-spring";
 import GetTime from "./GetTime";
 import Typography from "./Typography";
@@ -197,7 +197,7 @@ export default function Home({ theme, broken, screenWidth }) {
   );
 }
 
-const HomeContainer = styled.div`
+const HomeContainer = styled.main`
   width: 100%;
   height: 100%;
   padding: ${(props) =>
@@ -272,6 +272,7 @@ const WindowTab = styled.section`
 
   > div:nth-child(1) > img {
     width: 1.5vw;
+    height: 1.5vw;
   }
   > div:nth-child(2) {
     font-size: 0.9vw;
