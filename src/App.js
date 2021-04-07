@@ -14,7 +14,7 @@ function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [broken, setBroken] = useState(false);
   const [light, setLight] = useState(0);
-  const [screenWidth, setScreenWidth] = useState("normal");
+  const [screenwidth, setScreenWidth] = useState("normal");
   const easterEggCode = useRef([]);
 
   window.addEventListener("resize", () => {
@@ -58,16 +58,16 @@ function App() {
   return (
     <AppContainer
       className={darkMode ? "lightsOnOff" : ""}
-      screenWidth={screenWidth}
+      screenwidth={screenwidth}
     >
-      <SideBar broken={broken} screenWidth={screenWidth}>
+      <SideBar broken={broken} screenwidth={screenwidth}>
         <SideBarMenu
           setPage={setPage}
           setDarkMode={setDarkMode}
           broken={broken}
           setLight={setLight}
           light={light}
-          screenWidth={screenWidth}
+          screenwidth={screenwidth}
         />
       </SideBar>
       {page === "theater" ? (
@@ -75,20 +75,20 @@ function App() {
           <ProjectTheater
             broken={broken}
             theme={darkMode ? theme.dark : theme.normal}
-            screenWidth={screenWidth}
+            screenwidth={screenwidth}
           />
         </>
       ) : (
         <ContentsContainer
           theme={darkMode ? theme.dark : theme.normal}
-          screenWidth={screenWidth}
+          screenwidth={screenwidth}
         >
           {page === "" && (
             <>
               <Home
                 broken={broken}
                 theme={darkMode ? theme.dark : theme.normal}
-                screenWidth={screenWidth}
+                screenwidth={screenwidth}
               />
             </>
           )}
@@ -97,7 +97,7 @@ function App() {
               <About
                 broken={broken}
                 theme={darkMode ? theme.dark : theme.normal}
-                screenWidth={screenWidth}
+                screenwidth={screenwidth}
               />
             </>
           )}
@@ -108,7 +108,7 @@ function App() {
                 broken={broken}
                 setBroken={setBroken}
                 theme={darkMode ? theme.dark : theme.normal}
-                screenWidth={screenWidth}
+                screenwidth={screenwidth}
               />
             </>
           )}
@@ -125,14 +125,14 @@ const AppContainer = styled.div`
   height: 100vh;
   width: 100%;
   flex-direction: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "column"
       : "row"};
 `;
 
 const SideBar = styled.aside`
   width: ${(props) => {
-    if (props.screenWidth === "small" || props.screenWidth === "mobile") {
+    if (props.screenwidth === "small" || props.screenwidth === "mobile") {
       if (props.broken) {
         return "80%";
       }
@@ -144,7 +144,7 @@ const SideBar = styled.aside`
     }
   }};
   height: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "4rem"
       : "100%"};
   position: fixed;

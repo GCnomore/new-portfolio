@@ -5,6 +5,7 @@ import { projects, TAG } from "../proejcts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../animation.css";
 import { useSpring, animated } from "react-spring";
+import PropTypes from "prop-types";
 
 import jquery from "../assets/icons/Jquery.webp";
 import react from "../assets/icons/react.webp";
@@ -17,12 +18,12 @@ import {
   faTicketAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function About({
+export default function ProjectSlide({
   setPage,
   broken,
   theme,
   setBroken,
-  screenWidth,
+  screenwidth,
 }) {
   const [slide, setSlide] = useState({
     gcBoard: {
@@ -98,10 +99,10 @@ export default function About({
     if (project.tag.includes(sortBy) || sortBy === "none") {
       return (
         <Project
-          kokoatalk={project.name === "kokoatalk"}
+          kokoatalk={project.name === "kokoatalk" ? "true" : "false"}
           theme={theme}
           style={fadeIn_projectContainer}
-          screenWidth={screenWidth}
+          screenwidth={screenwidth}
         >
           <button
             onClick={() => {
@@ -136,7 +137,7 @@ export default function About({
                   show={project.name === showDetail}
                 />
                 <ProjectDescription
-                  screenWidth={screenWidth}
+                  screenwidth={screenwidth}
                   show={
                     showDetail === project.name
                       ? false
@@ -149,9 +150,9 @@ export default function About({
                 </ProjectDescription>
                 <ProjectDetails
                   show={project.name === showDetail}
-                  kokoatalk={project.name === "kokoatalk"}
+                  kokoatalk={project.name === "kokoatalk" ? "true" : "false"}
                   onMouseLeave={() => setShowDetail("")}
-                  screenWidth={screenWidth}
+                  screenwidth={screenwidth}
                 >
                   <div>
                     <h2>{project.name.toUpperCase()}</h2>
@@ -223,7 +224,7 @@ export default function About({
       <SortContainer
         theme={theme}
         style={fadeIn_sortContainer}
-        screenWidth={screenWidth}
+        screenwidth={screenwidth}
       >
         <h2>Sort by</h2>
         <div>
@@ -235,7 +236,7 @@ export default function About({
             selected={sortBy}
             className={broken ? "fly1" : ""}
             theme={theme}
-            screenWidth={screenWidth}
+            screenwidth={screenwidth}
           />
           <SortIcon
             src={reactNative}
@@ -245,7 +246,7 @@ export default function About({
             selected={sortBy}
             className={broken ? "fly2" : ""}
             theme={theme}
-            screenWidth={screenWidth}
+            screenwidth={screenwidth}
           />
           <SortIcon
             src={nodeJS}
@@ -255,7 +256,7 @@ export default function About({
             selected={sortBy}
             className={broken ? "fly3" : ""}
             theme={theme}
-            screenWidth={screenWidth}
+            screenwidth={screenwidth}
           />
           <SortIcon
             src={vue}
@@ -265,7 +266,7 @@ export default function About({
             selected={sortBy}
             className={broken ? "fly4" : ""}
             theme={theme}
-            screenWidth={screenWidth}
+            screenwidth={screenwidth}
           />
           <SortIcon
             src={jquery}
@@ -275,7 +276,7 @@ export default function About({
             selected={sortBy}
             className={broken ? "fly5" : ""}
             theme={theme}
-            screenWidth={screenWidth}
+            screenwidth={screenwidth}
           />
         </div>
         <h2
@@ -286,7 +287,7 @@ export default function About({
           Clear
         </h2>
       </SortContainer>
-      <ProjectSlider screenWidth={screenWidth}>
+      <ProjectSlider screenwidth={screenwidth}>
         {renderProjectSlide(projects.gcBoard, "gcBoard")}
         {renderProjectSlide(projects.movieHunt, "movieHunt")}
         {renderProjectSlide(projects.pokedex, "pokedex")}
@@ -295,11 +296,11 @@ export default function About({
         {renderProjectSlide(projects.todo, "todo")}
       </ProjectSlider>
       <ToTheater
-        broken={broken}
+        broken={broken ? "true" : "false"}
         theme={theme}
         style={fadeIn_ticket}
-        brokenTicket={brokenTicket}
-        screenWidth={screenWidth}
+        brokenticket={brokenTicket}
+        screenwidth={screenwidth}
       >
         <FontAwesomeIcon
           icon={faTicketAlt}
@@ -309,7 +310,7 @@ export default function About({
               if (brokenTicket <= 25) {
                 setBrokenTicket(brokenTicket - 1);
                 if (brokenTicket <= 3.5) {
-                  if (screenWidth !== "true") {
+                  if (screenwidth !== "true") {
                     setBroken(false);
                     setPage("theater");
                   } else {
@@ -342,7 +343,7 @@ const ProjectContainer = styled.main`
 
 const SortContainer = styled(animated.section)`
   position: ${(props) =>
-    props.screenWidth === "mobile" ? "relative" : "fixed"};
+    props.screenwidth === "mobile" ? "relative" : "fixed"};
   display: flex;
   width: 100%;
   justify-content: center;
@@ -351,16 +352,16 @@ const SortContainer = styled(animated.section)`
   font-family: "Luckiest Guy", cursive;
   font-size: 1.6rem;
   margin-top: ${(props) => {
-    if (props.screenWidth === "small") {
+    if (props.screenwidth === "small") {
       return "5rem";
-    } else if (props.screenWidth === "mobile") {
+    } else if (props.screenwidth === "mobile") {
       return "5rem";
     } else {
       return "";
     }
   }};
   margin-left: ${(props) =>
-    props.screenWidth === "mobile" || props.screenWidth === "small"
+    props.screenwidth === "mobile" || props.screenwidth === "small"
       ? "0"
       : "3vw"};
   color: ${(props) => (props.theme ? props.theme.normalFontColor : "black")};
@@ -393,18 +394,18 @@ const SortContainer = styled(animated.section)`
 
 const SortIcon = styled.img`
   width: ${(props) => {
-    if (props.screenWidth === "mobile") {
+    if (props.screenwidth === "mobile") {
       return "9vw";
-    } else if (props.screenWidth === "small") {
+    } else if (props.screenwidth === "small") {
       return "7vw";
     } else {
       return "4.5rem";
     }
   }};
   height: ${(props) => {
-    if (props.screenWidth === "mobile") {
+    if (props.screenwidth === "mobile") {
       return "9vw";
-    } else if (props.screenWidth === "small") {
+    } else if (props.screenwidth === "small") {
       return "7vw";
     } else {
       return "4.5rem";
@@ -412,7 +413,7 @@ const SortIcon = styled.img`
   }};
   min-width: 3.5rem;
   min-height: 3.5rem;
-  margin: ${(props) => (props.screenWidth === "mobile" ? "0 1.5vw" : "0 1rem")};
+  margin: ${(props) => (props.screenwidth === "mobile" ? "0 1.5vw" : "0 1rem")};
   filter: ${(props) => props.theme && `drop-shadow(${props.theme.dropShadow})`};
   cursor: pointer;
   transition: 0.5s ease-in-out;
@@ -428,23 +429,23 @@ const SortIcon = styled.img`
 `;
 
 const ProjectSlider = styled.section`
-  margin-top: ${(props) => (props.screenWidth === "mobile" ? "0" : "8rem")};
+  margin-top: ${(props) => (props.screenwidth === "mobile" ? "0" : "8rem")};
   width: fit-content;
   height: 100vh;
   display: flex;
   flex-direction: ${(props) =>
-    props.screenWidth === "mobile" ? "column" : "row"};
+    props.screenwidth === "mobile" ? "column" : "row"};
   padding: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "5rem 0"
       : "5rem 1rem"};
   align-items: center;
 
   > div:nth-child(1) {
     margin: ${(props) => {
-      if (props.screenWidth === "small") {
+      if (props.screenwidth === "small") {
         return "5rem 8rem 0 2rem";
-      } else if (props.screenWidth === "mobile") {
+      } else if (props.screenwidth === "mobile") {
         return "0 0 4rem 0";
       } else {
         return "0 8rem";
@@ -456,19 +457,19 @@ const ProjectSlider = styled.section`
 const Project = styled(animated.div)`
   display: flex;
   width: ${(props) => {
-    if (props.kokoatalk) {
+    if (props.kokoatalk === "true") {
       return "fit-content";
-    } else if (props.screenWidth === "small") {
+    } else if (props.screenwidth === "small") {
       return "95vw";
-    } else if (props.screenWidth === "mobile") {
+    } else if (props.screenwidth === "mobile") {
       return "100%";
     } else {
       return "70rem";
     }
   }};
   height: fit-content;
-  margin: ${(props) => (props.screenWidth === "mobile" ? "4rem 0" : "0 8rem")};
-  padding: ${(props) => (props.screenWidth === "mobile" ? "0" : "1rem 1rem")};
+  margin: ${(props) => (props.screenwidth === "mobile" ? "4rem 0" : "0 8rem")};
+  padding: ${(props) => (props.screenwidth === "mobile" ? "0" : "1rem 1rem")};
   transition: 0.5s ease-in-out;
 
   > button {
@@ -477,8 +478,8 @@ const Project = styled(animated.div)`
     height: fit-content;
     align-self: center;
     padding: ${(props) =>
-      props.screenWidth === "mobile" ? "2vw" : "2rem 1rem"};
-    font-size: ${(props) => (props.screenWidth === "mobile" ? "1rem" : "3rem")};
+      props.screenwidth === "mobile" ? "2vw" : "2rem 1rem"};
+    font-size: ${(props) => (props.screenwidth === "mobile" ? "1rem" : "3rem")};
     transition: 0.4s;
     cursor: pointer;
     background-color: transparent;
@@ -527,45 +528,45 @@ const ProjectDetails = styled.div`
     > h2 {
       text-align: center;
       font-size: ${(props) => {
-        if (props.kokoatalk) {
+        if (props.kokoatalk === "true") {
           return "2rem";
-        } else if (props.screenWidth === "small") {
+        } else if (props.screenwidth === "small") {
           return "2.5vw";
-        } else if (props.screenWidth === "mobile") {
+        } else if (props.screenwidth === "mobile") {
           return "4vw";
         } else {
           return "3rem";
         }
       }};
       margin: ${(props) =>
-        props.screenWidth === "mobile" ? "0.5rem 0 0.5rem 0" : "1rem 0 1rem 0"};
+        props.screenwidth === "mobile" ? "0.5rem 0 0.5rem 0" : "1rem 0 1rem 0"};
       text-decoration: underline;
     }
   }
   > div:nth-child(2) {
     overflow: hidden;
-    display: ${(props) => (props.kokoatalk ? "block" : "flex")};
+    display: ${(props) => (props.kokoatalk === "true" ? "block" : "flex")};
     justify-content: space-between;
     ${(props) =>
-      props.kokoatalk &&
+      props.kokoatalk === "true" &&
       "> section{ font-size: 0.9rem; padding: 0 !important;  >h2 {font-size: 1.3rem;}}"}
 
     > section {
       padding: ${(props) =>
-        props.screenWidth === "small" || props.screenWidth === "mobile"
+        props.screenwidth === "small" || props.screenwidth === "mobile"
           ? "0 1.5vw"
           : "0 3rem"};
       width: 100%;
       text-align: center;
       height: fit-content;
       > div {
-        padding: ${(props) => (props.kokoatalk ? "0 0.2rem" : "")};
+        padding: ${(props) => (props.kokoatalk === "true" ? "0 0.2rem" : "")};
         font-size: ${(props) => {
-          if (props.kokoatalk) {
+          if (props.kokoatalk === "true") {
             return "0.9rem";
-          } else if (props.screenWidth === "mobile") {
+          } else if (props.screenwidth === "mobile") {
             return "2vw";
-          } else if (props.screenWidth === "small") {
+          } else if (props.screenwidth === "small") {
             return "1.5vw";
           } else {
             return "1rem";
@@ -576,21 +577,21 @@ const ProjectDetails = styled.div`
       > h2 {
         text-decoration: underline;
         margin: ${(props) => {
-          if (props.kokoatalk) {
+          if (props.kokoatalk === "true") {
             return "2rem 0 1rem 0";
-          } else if (props.screenWidth === "mobile") {
+          } else if (props.screenwidth === "mobile") {
             return "0 0 1rem 0";
-          } else if (props.screenWidth === "small") {
+          } else if (props.screenwidth === "small") {
           } else {
             return "0 0 2rem 0";
           }
         }};
         font-size: ${(props) => {
-          if (props.kokoatalk) {
+          if (props.kokoatalk === "true") {
             return "1.3rem";
-          } else if (props.screenWidth === "mobile") {
+          } else if (props.screenwidth === "mobile") {
             return "3.2vw";
-          } else if (props.screenWidth === "small") {
+          } else if (props.screenwidth === "small") {
             return "2vw";
           } else {
             return "1.8rem";
@@ -600,15 +601,15 @@ const ProjectDetails = styled.div`
       > a {
         color: white;
         margin: ${(props) =>
-          props.screenWidth === "small" || props.screenWidth === "mobile"
+          props.screenwidth === "small" || props.screenwidth === "mobile"
             ? "1vw"
             : "2rem"};
         font-size: ${(props) => {
-          if (props.kokoatalk) {
+          if (props.kokoatalk === "true") {
             return "0.9rem";
-          } else if (props.screenWidth === "mobile") {
+          } else if (props.screenwidth === "mobile") {
             return "2vw";
-          } else if (props.screenWidth === "small") {
+          } else if (props.screenwidth === "small") {
             return "1.5vw";
           } else {
             return "1rem";
@@ -620,12 +621,13 @@ const ProjectDetails = styled.div`
     section:nth-child(3) > div {
       display: grid;
       grid-template-columns: ${(props) =>
-        props.kokoatalk ? "1fr 1fr" : "1fr 1fr 1fr"};
-      ${(props) => props.kokoatalk && "grid-gap: 0; padding: 0 1rem;"}
+        props.kokoatalk === "true" ? "1fr 1fr" : "1fr 1fr 1fr"};
+      ${(props) =>
+        props.kokoatalk === "true" && "grid-gap: 0; padding: 0 1rem;"}
 
       > p {
         margin: ${(props) =>
-          props.screenWidth === "mobile" || props.screenWidth === "small"
+          props.screenwidth === "mobile" || props.screenwidth === "small"
             ? "0.2rem 0"
             : "0.5rem 0"};
       }
@@ -649,13 +651,13 @@ const ProjectDescription = styled.div`
     color: white;
     margin: 0;
     padding: 0.3rem 0;
-    top: ${(props) => (props.screenWidth === "mobile" ? "-7vw" : "-5rem")};
+    top: ${(props) => (props.screenwidth === "mobile" ? "-7vw" : "-5rem")};
     width: 100%;
     height: -webkit-fit-content;
     height: -moz-fit-content;
     height: fit-content;
     font-size: ${(props) =>
-      props.screenWidth === "mobile" ? "2vw" : "1.2rem"};
+      props.screenwidth === "mobile" ? "2vw" : "1.2rem"};
   }
 `;
 
@@ -670,11 +672,12 @@ const Divider = styled.div`
 const ToTheater = styled(animated.div)`
   align-self: center;
   position: absolute;
-  font-size: ${(props) => (props.broken ? `${props.brokenTicket}px` : "3rem")};
+  font-size: ${(props) =>
+    props.broken === "true" ? `${props.brokenticket}px` : "3rem"};
   bottom: 5vh;
   text-align: center;
   color: ${(props) => (props.theme ? props.theme.normalFontColor : "black")};
-  display: ${(props) => (props.screenWidth === "mobile" ? "none" : "")};
+  display: ${(props) => (props.screenwidth === "mobile" ? "none" : "")};
 
   > svg {
     cursor: pointer;
@@ -702,3 +705,19 @@ const Modal = styled.div`
   font-size: 3rem;
   padding: 2rem;
 `;
+
+ProjectSlide.propTypes = {
+  setPage: PropTypes.func.isRequired,
+  broken: PropTypes.bool.isRequired,
+  setBroken: PropTypes.func.isRequired,
+  screenwidth: PropTypes.string.isRequired,
+  theme: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    normalFontColor: PropTypes.string,
+    dropShadow: PropTypes.string.isRequired,
+    dropShadowActive: PropTypes.string.isRequired,
+    aboutCardShadow: PropTypes.string,
+    textShadow: PropTypes.string,
+  }),
+};

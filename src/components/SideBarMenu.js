@@ -5,6 +5,7 @@ import gmail from "../assets/icons/gmail.webp";
 import twitter from "../assets/icons/twitter_icon.svg";
 import linkedin from "../assets/icons/linkedin_icon.svg";
 import github from "../assets/icons/github1.webp";
+import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBoxOpen,
@@ -26,7 +27,7 @@ import logo9 from "../assets/easterEggs/logo9.webp";
 import logo10 from "../assets/easterEggs/logo10.webp";
 import { animated, useSpring } from "react-spring";
 
-export default function SideBarMenu({ setPage, light, setLight, screenWidth }) {
+export default function SideBarMenu({ setPage, light, setLight, screenwidth }) {
   const [easter, setEaster] = useState(false);
   const [showContactIcons, setShowContactIcons] = useState(false);
 
@@ -59,9 +60,9 @@ export default function SideBarMenu({ setPage, light, setLight, screenWidth }) {
   });
 
   return (
-    <SideBarContainer style={stretch} screenWidth={screenWidth}>
+    <SideBarContainer style={stretch} screenwidth={screenwidth}>
       <MenuHeader
-        screenWidth={screenWidth}
+        screenwidth={screenwidth}
         style={fadeIn}
         onClick={() => {
           light >= 11 ? setLight(0) : setLight(light + 1);
@@ -69,7 +70,7 @@ export default function SideBarMenu({ setPage, light, setLight, screenWidth }) {
       >
         <img alt="site logo" src={light === 0 ? logo : logos[light]} />
       </MenuHeader>
-      <SideMenuList style={fadeIn} screenWidth={screenWidth}>
+      <SideMenuList style={fadeIn} screenwidth={screenwidth}>
         <li onClick={() => setPage("")}>
           <FontAwesomeIcon icon={faHome} />
           <p>Home</p>
@@ -85,7 +86,7 @@ export default function SideBarMenu({ setPage, light, setLight, screenWidth }) {
         <li onClick={() => setEaster(!easter)}>
           <FontAwesomeIcon icon={faEgg} />
         </li>
-        <EasterEggList show={easter} screenWidth={screenWidth}>
+        <EasterEggList show={easter} screenwidth={screenwidth}>
           <h2>Easter Egg List</h2>
           <ul>
             <li>
@@ -103,8 +104,8 @@ export default function SideBarMenu({ setPage, light, setLight, screenWidth }) {
           </ul>
         </EasterEggList>
       </SideMenuList>
-      <ContactIcons style={fadeIn} screenWidth={screenWidth}>
-        {screenWidth === "mobile" ? (
+      <ContactIcons style={fadeIn} screenwidth={screenwidth}>
+        {screenwidth === "mobile" ? (
           <>
             <FontAwesomeIcon
               icon={faEllipsisH}
@@ -183,7 +184,7 @@ export default function SideBarMenu({ setPage, light, setLight, screenWidth }) {
 const SideBarContainer = styled(animated.section)`
   width: 100%;
   height: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "8vh"
       : "100vh"};
   background-color: rgb(0, 0, 0, 0.7);
@@ -191,7 +192,7 @@ const SideBarContainer = styled(animated.section)`
   color: white;
   display: flex;
   flex-direction: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "row"
       : "column"};
   justify-content: space-between;
@@ -202,36 +203,36 @@ const MenuHeader = styled(animated.header)`
   height: 100%;
   display: flex;
   justify-content: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "flex-start"
       : "center"};
   align-items: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "center"
       : ""};
 
   > img {
     width: ${(props) => {
-      if (props.screenWidth === "small") {
+      if (props.screenwidth === "small") {
         return "3.5rem";
-      } else if (props.screenWidth === "mobile") {
+      } else if (props.screenwidth === "mobile") {
         return "2.5rem";
       } else {
         return "4rem";
       }
     }};
     margin-left: ${(props) =>
-      props.screenWidth === "small" || props.screenWidth === "mobile"
+      props.screenwidth === "small" || props.screenwidth === "mobile"
         ? "0.5rem"
         : "0"};
     margin-top: ${(props) =>
-      props.screenWidth === "small" || props.screenWidth === "mobile"
+      props.screenwidth === "small" || props.screenwidth === "mobile"
         ? "0"
         : "0.5rem"};
     height: ${(props) => {
-      if (props.screenWidth === "small") {
+      if (props.screenwidth === "small") {
         return "3.5rem";
-      } else if (props.screenWidth === "mobile") {
+      } else if (props.screenwidth === "mobile") {
         return "2.5rem";
       } else {
         return "4rem";
@@ -246,11 +247,11 @@ const SideMenuList = styled(animated.ul)`
   list-style: none;
   padding: 0;
   margin: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "0"
       : "-15vh 0 0 0"};
   display: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "flex"
       : ""};
   align-items: center;
@@ -258,11 +259,11 @@ const SideMenuList = styled(animated.ul)`
 
   > li {
     font-size: ${(props) =>
-      props.screenWidth === "small" || props.screenWidth === "mobile"
+      props.screenwidth === "small" || props.screenwidth === "mobile"
         ? "1.5rem"
         : "2rem"};
     margin: ${(props) =>
-      props.screenWidth === "small" || props.screenWidth === "mobile"
+      props.screenwidth === "small" || props.screenwidth === "mobile"
         ? "0 0.8rem"
         : " 3rem 0"};
     text-align: center;
@@ -289,7 +290,7 @@ const SideMenuList = styled(animated.ul)`
 
     > p {
       font-size: ${(props) =>
-        props.screenWidth === "mobile" ? "2.5vw" : "1rem"};
+        props.screenwidth === "mobile" ? "2.5vw" : "1rem"};
       margin: 0;
     }
   }
@@ -300,29 +301,29 @@ const ContactIcons = styled(animated.footer)`
   height: 100%;
   display: flex;
   flex-direction: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "row"
       : "column"};
   justify-content: flex-end;
   align-items: center;
   margin-top: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "0"
       : "5vh"};
 
   > a > img {
     width: ${(props) =>
-      props.screenWidth === "small" || props.screenWidth === "mobile"
+      props.screenwidth === "small" || props.screenwidth === "mobile"
         ? "2.5vw"
         : "2rem"};
     min-width: 1.5rem;
     height: ${(props) =>
-      props.screenWidth === "small" || props.screenWidth === "mobile"
+      props.screenwidth === "small" || props.screenwidth === "mobile"
         ? "2.5vw"
         : "2rem"};
     min-height: 1.5rem;
     margin: ${(props) =>
-      props.screenWidth === "small" || props.screenWidth === "mobile"
+      props.screenwidth === "small" || props.screenwidth === "mobile"
         ? "0 0.5rem"
         : "0.5rem 0"};
   }
@@ -333,11 +334,11 @@ const ContactIcons = styled(animated.footer)`
 
   > a:nth-child(3) > img {
     width: ${(props) =>
-      props.screenWidth === "small" || props.screenWidth === "mobile"
+      props.screenwidth === "small" || props.screenwidth === "mobile"
         ? "3vw"
         : "2rem"};
     height: ${(props) =>
-      props.screenWidth === "small" || props.screenWidth === "mobile"
+      props.screenwidth === "small" || props.screenwidth === "mobile"
         ? "2.24vw"
         : "1.49rem"};
   }
@@ -347,29 +348,29 @@ const EasterEggList = styled.div`
   color: white;
   position: fixed;
   left: ${(props) => {
-    if (props.screenWidth === "small") {
+    if (props.screenwidth === "small") {
       return "55vw";
-    } else if (props.screenWidth === "mobile") {
+    } else if (props.screenwidth === "mobile") {
       return "";
     } else {
       return "100%";
     }
   }};
   top: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "100%"
       : "40vh"};
   background-color: rgba(0, 0, 0, 0.6);
-  width: ${(props) => (props.screenWidth === "mobile" ? "" : "18rem")};
+  width: ${(props) => (props.screenwidth === "mobile" ? "" : "18rem")};
   padding: 2rem;
   display: ${(props) => (props.show ? "block" : "none")};
 
   > h2 {
     margin: 0;
     font-size: ${(props) => {
-      if (props.screenWidth === "small") {
+      if (props.screenwidth === "small") {
         return "";
-      } else if (props.screenWidth === "mobile") {
+      } else if (props.screenwidth === "mobile") {
         return "3.5vw";
       } else {
         return "";
@@ -385,9 +386,9 @@ const EasterEggList = styled.div`
     > li {
       margin: 1rem 0;
       font-size: ${(props) => {
-        if (props.screenWidth === "small") {
+        if (props.screenwidth === "small") {
           return "";
-        } else if (props.screenWidth === "mobile") {
+        } else if (props.screenwidth === "mobile") {
           return "2.5vw";
         } else {
           return "";
@@ -412,17 +413,17 @@ const MobileContactIcons = styled.div`
 
   > div > a > img {
     width: ${(props) =>
-      props.screenWidth === "small" || props.screenWidth === "mobile"
+      props.screenwidth === "small" || props.screenwidth === "mobile"
         ? "2.5vw"
         : "2rem"};
     min-width: 1.5rem;
     height: ${(props) =>
-      props.screenWidth === "small" || props.screenWidth === "mobile"
+      props.screenwidth === "small" || props.screenwidth === "mobile"
         ? "2.5vw"
         : "2rem"};
     min-height: 1.5rem;
     margin: ${(props) =>
-      props.screenWidth === "small" || props.screenWidth === "mobile"
+      props.screenwidth === "small" || props.screenwidth === "mobile"
         ? "0.5rem"
         : "0.5rem 0"};
   }
@@ -433,12 +434,19 @@ const MobileContactIcons = styled.div`
 
   > div > a:nth-child(3) > img {
     width: ${(props) =>
-      props.screenWidth === "small" || props.screenWidth === "mobile"
+      props.screenwidth === "small" || props.screenwidth === "mobile"
         ? "3vw"
         : "2rem"};
     height: ${(props) =>
-      props.screenWidth === "small" || props.screenWidth === "mobile"
+      props.screenwidth === "small" || props.screenwidth === "mobile"
         ? "2.24vw"
         : "1.49rem"};
   }
 `;
+
+SideBarMenu.propTypes = {
+  setPage: PropTypes.func.isRequired,
+  light: PropTypes.number.isRequired,
+  setLight: PropTypes.func.isRequired,
+  screenwidth: PropTypes.string.isRequired,
+};

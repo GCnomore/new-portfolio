@@ -5,7 +5,7 @@ import "../animation.css";
 import styled, { keyframes } from "styled-components/macro";
 import projector from "../assets/projector.webp";
 
-export default function ProjectTheater({ broken, darkMode }) {
+export default function ProjectTheater() {
   const [selected, setSelected] = useState("");
   const [screenReady, setScreenReady] = useState(false);
   const [showing, setShowing] = useState("");

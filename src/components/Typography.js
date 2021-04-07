@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import "../animation.css";
+import PropTypes from "prop-types";
 
 export default function Typography({ theme, broken }) {
   return (
@@ -248,3 +249,16 @@ const TypographyContainer = styled.div`
     left: 42vw;
   }
 `;
+
+Typography.propTypes = {
+  theme: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    normalFontColor: PropTypes.string,
+    dropShadow: PropTypes.string.isRequired,
+    dropShadowActive: PropTypes.string.isRequired,
+    aboutCardShadow: PropTypes.string,
+    textShadow: PropTypes.string,
+  }),
+  broken: PropTypes.bool.isRequired,
+};

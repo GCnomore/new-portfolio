@@ -5,6 +5,7 @@ import Typography from "./Typography";
 import styled from "styled-components/macro";
 import javascript from "../assets/icons/javascript.webp";
 import phoneImg from "../assets/undraw_my_app_re_gxtj.svg";
+import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBatteryFull,
@@ -13,7 +14,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "../animation.css";
 
-export default function Home({ theme, broken, screenWidth }) {
+export default function Home({ theme, broken, screenwidth }) {
   const typing = useRef(false);
   const txt = useRef("");
   const deleteWord = useRef(false);
@@ -108,34 +109,34 @@ export default function Home({ theme, broken, screenWidth }) {
   });
 
   return (
-    <HomeContainer screenWidth={screenWidth}>
-      <TypographyContainer style={fadeIn_rest} screenWidth={screenWidth}>
+    <HomeContainer screenwidth={screenwidth}>
+      <TypographyContainer style={fadeIn_rest} screenwidth={screenwidth}>
         <Typography theme={theme} broken={broken} />
       </TypographyContainer>
-      <NameContainer theme={theme} screenWidth={screenWidth}>
+      <NameContainer theme={theme} screenwidth={screenwidth}>
         <div>
           <FirstName style={fadeIn_firstName}>Isaac</FirstName>
           <LastName style={fadeIn_lastName}>Choi</LastName>
         </div>
-        <MyTitle theme={theme} style={fadeIn_title} screenWidth={screenWidth}>
+        <MyTitle theme={theme} style={fadeIn_title} screenwidth={screenwidth}>
           <h1>Front End Developer</h1>
         </MyTitle>
       </NameContainer>
-      <PhoneContainer screenWidth={screenWidth}>
+      <PhoneContainer screenwidth={screenwidth}>
         <div>
           <Phone
             src={phoneImg}
             alt="phone illustration"
             style={fadeIn_rest}
             className={broken ? "shake" : ""}
-            screenWidth={screenWidth}
+            screenwidth={screenwidth}
           />
           <PhoneScreen
             style={fadeIn_rest}
             className={broken ? "shakeScreen" : ""}
-            screenWidth={screenWidth}
+            screenwidth={screenwidth}
           >
-            <AppBar screenWidth={screenWidth}>
+            <AppBar screenwidth={screenwidth}>
               <section>{<GetTime />}</section>
               <section>
                 <FontAwesomeIcon icon={faSignal} />
@@ -143,7 +144,7 @@ export default function Home({ theme, broken, screenWidth }) {
                 <FontAwesomeIcon icon={faBatteryFull} />
               </section>
             </AppBar>
-            <PhoneContent screenWidth={screenWidth}>
+            <PhoneContent screenwidth={screenwidth}>
               <h1>Isaac Choi Portfolio</h1>
               <span>Welcome to my website!</span>
               <span>I am a front end developer based in LA</span>
@@ -155,7 +156,7 @@ export default function Home({ theme, broken, screenWidth }) {
       <TypingContainer
         style={fadeIn_rest}
         theme={theme}
-        screenWidth={screenWidth}
+        screenwidth={screenwidth}
       >
         <header>
           <WindowMenu>
@@ -201,12 +202,12 @@ const HomeContainer = styled.main`
   width: 100%;
   height: 100%;
   padding: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "0"
       : "0 0 0 10rem"};
   display: flex;
   flex-direction: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "column"
       : "row"};
   user-select: none;
@@ -220,7 +221,7 @@ const TypingContainer = styled(animated.div)`
   width: 40vw;
   height: fit-content;
   display: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "none"
       : "block"};
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -312,11 +313,11 @@ const NameContainer = styled.div`
   z-index: 10;
   display: flex;
   justify-content: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "center"
       : ""};
   align-items: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "center"
       : ""};
   flex-direction: column;
@@ -324,7 +325,7 @@ const NameContainer = styled.div`
     props.theme.name === "dark" ? props.theme.normalFontColor : "black"};
   font-family: "Chango", cursive;
   margin-top: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "4rem"
       : ""};
   > div {
@@ -343,24 +344,24 @@ const MyTitle = styled(animated.div)`
   height: 100%;
   margin: 0 0 1rem 0;
   align-items: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? ""
       : "center"};
   color: ${(props) =>
     props.theme.name === "dark" ? props.theme.normalFontColor : "black"};
   display: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "flex"
       : "block"};
 
   > h1 {
     text-align: ${(props) =>
-      props.screenWidth === "small" || props.screenWidth === "mobile"
+      props.screenwidth === "small" || props.screenwidth === "mobile"
         ? "center"
         : "right"};
     font-size: 7.5vw;
     margin: ${(props) =>
-      props.screenWidth === "small" || props.screenWidth === "mobile"
+      props.screenwidth === "small" || props.screenwidth === "mobile"
         ? "0"
         : "20vh 14vw 0 0"};
   }
@@ -370,17 +371,17 @@ const PhoneContainer = styled(animated.div)`
   width: 100%;
   display: flex;
   justify-content: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "center"
       : ""};
   position: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? ""
       : "absolute"};
   left: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile" ? "" : "0"};
+    props.screenwidth === "small" || props.screenwidth === "mobile" ? "" : "0"};
   top: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? ""
       : "35vh"};
 
@@ -394,11 +395,11 @@ const PhoneContainer = styled(animated.div)`
 
 const Phone = styled(animated.img)`
   width: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "70vw"
       : "40vw"};
   height: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "57.5vw"
       : "32.5vw"};
 `;
@@ -408,18 +409,18 @@ const PhoneScreen = styled(animated.div)`
   flex-direction: column;
   position: absolute;
   top: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "1vw"
       : "0"};
   left: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "42vw"
       : "23.2vw"};
   bottom: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   width: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "25vw"
       : "14.5vw"};
 `;
@@ -429,7 +430,7 @@ const AppBar = styled(animated.header)`
   justify-content: space-between;
   width: 100%;
   margin: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "1vh 0 3vh 2.4vw"
       : "2vh 0 0 2.4vw"};
   color: black;
@@ -437,17 +438,17 @@ const AppBar = styled(animated.header)`
 
   > section:nth-child(1) {
     font-size: ${(props) =>
-      props.screenWidth === "small" || props.screenWidth === "mobile"
+      props.screenwidth === "small" || props.screenwidth === "mobile"
         ? "1.5vw"
         : "0.9vw"};
   }
   > section:nth-child(2) {
     margin-right: ${(props) =>
-      props.screenWidth === "small" || props.screenWidth === "mobile"
+      props.screenwidth === "small" || props.screenwidth === "mobile"
         ? "2vw"
         : "1.5vw"};
     font-size: ${(props) =>
-      props.screenWidth === "small" || props.screenWidth === "mobile"
+      props.screenwidth === "small" || props.screenwidth === "mobile"
         ? "1.2vw"
         : "0.7vw"};
     > * {
@@ -457,7 +458,7 @@ const AppBar = styled(animated.header)`
 `;
 const PhoneContent = styled(animated.div)`
   transform: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "rotateX(30deg) rotateY(-20deg) rotateZ(12.5deg)"
       : "rotateX(30deg) rotateY(-20deg) rotateZ(13.5deg)"};
   width: 90%;
@@ -465,9 +466,9 @@ const PhoneContent = styled(animated.div)`
   flex-direction: column;
   color: black;
   margin: ${(props) => {
-    if (props.screenWidth === "small") {
+    if (props.screenwidth === "small") {
       return "0.5vh 0 0 0.6vw";
-    } else if (props.screenWidth === "mobile") {
+    } else if (props.screenwidth === "mobile") {
       return "-2.5vh 0 0 0";
     } else {
       return "2vh 0 0 0.6vw";
@@ -475,9 +476,9 @@ const PhoneContent = styled(animated.div)`
   }};
   > h1 {
     font-size: ${(props) => {
-      if (props.screenWidth === "small") {
+      if (props.screenwidth === "small") {
         return "2vw";
-      } else if (props.screenWidth === "mobile") {
+      } else if (props.screenwidth === "mobile") {
         return "2.5vw";
       } else {
         return "1.4vw";
@@ -487,9 +488,9 @@ const PhoneContent = styled(animated.div)`
 
   > span {
     font-size: ${(props) => {
-      if (props.screenWidth === "small") {
+      if (props.screenwidth === "small") {
         return "1.5vw";
-      } else if (props.screenWidth === "mobile") {
+      } else if (props.screenwidth === "mobile") {
         return "2vw";
       } else {
         return "1vw";
@@ -501,7 +502,21 @@ const PhoneContent = styled(animated.div)`
 
 const TypographyContainer = styled(animated.div)`
   display: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "none"
       : "block"};
 `;
+
+Home.propTypes = {
+  broken: PropTypes.bool.isRequired,
+  screenwidth: PropTypes.string.isRequired,
+  theme: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    normalFontColor: PropTypes.string,
+    dropShadow: PropTypes.string.isRequired,
+    dropShadowActive: PropTypes.string.isRequired,
+    aboutCardShadow: PropTypes.string,
+    textShadow: PropTypes.string,
+  }),
+};

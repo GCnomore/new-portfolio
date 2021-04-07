@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useSpring, animated } from "react-spring";
+import PropTypes from "prop-types";
 import styled from "styled-components/macro";
 import "../animation.css";
 import portrait from "../assets/profile_cut.webp";
@@ -42,7 +43,7 @@ import semanticui from "../assets/icons/semanticui.webp";
 import jest from "../assets/icons/jest.webp";
 import express from "../assets/icons/express.webp";
 
-export default function About({ broken, theme, screenWidth }) {
+export default function About({ broken, theme, screenwidth }) {
   const [flipCard, setFlipCard] = useState("");
   const [levelUp, setLevelUp] = useState(0);
   const [showModal, setShowModal] = useState(false);
@@ -68,7 +69,7 @@ export default function About({ broken, theme, screenWidth }) {
         return (
           <>
             <Level2Crown
-              screenWidth={screenWidth}
+              screenwidth={screenwidth}
               src={lvl_2_crown}
               alt="gold crown"
             />
@@ -79,7 +80,7 @@ export default function About({ broken, theme, screenWidth }) {
         return (
           <>
             <Level3Crown
-              screenWidth={screenWidth}
+              screenwidth={screenwidth}
               src={lvl_3_crown}
               alt="gold crown"
             />
@@ -89,12 +90,12 @@ export default function About({ broken, theme, screenWidth }) {
         return (
           <>
             <Level3Crown
-              screenWidth={screenWidth}
+              screenwidth={screenwidth}
               src={lvl_3_crown}
               alt="gold crown"
             />
             <GoldBrooch
-              screenWidth={screenWidth}
+              screenwidth={screenwidth}
               src={lvl_3_brooch}
               alt="gold brooch"
             />
@@ -104,17 +105,17 @@ export default function About({ broken, theme, screenWidth }) {
         return (
           <>
             <Level3Crown
-              screenWidth={screenWidth}
+              screenwidth={screenwidth}
               src={lvl_3_crown}
               alt="gold crown"
             />
             <GoldBrooch
-              screenWidth={screenWidth}
+              screenwidth={screenwidth}
               src={lvl_3_brooch}
               alt="gold brooch"
             />
             <GoldFrame
-              screenWidth={screenWidth}
+              screenwidth={screenwidth}
               src={goldFrame}
               alt="gold frame"
             />
@@ -124,67 +125,67 @@ export default function About({ broken, theme, screenWidth }) {
         return (
           <>
             <Level3Crown
-              screenWidth={screenWidth}
+              screenwidth={screenwidth}
               src={lvl_3_crown}
               alt="gold crown"
             />
             <GoldBrooch
-              screenWidth={screenWidth}
+              screenwidth={screenwidth}
               src={lvl_3_brooch}
               alt="gold brooch"
             />
             <GoldFrame
-              screenWidth={screenWidth}
+              screenwidth={screenwidth}
               src={goldFrame}
               alt="gold frame"
             />
-            <GoldRod screenWidth={screenWidth} src={goldRod} alt="gold rod" />
+            <GoldRod screenwidth={screenwidth} src={goldRod} alt="gold rod" />
           </>
         );
       if (levelUp === 6)
         return (
           <>
             <Level3Crown
-              screenWidth={screenWidth}
+              screenwidth={screenwidth}
               src={lvl_3_crown}
               alt="gold crown"
             />
             <GoldBrooch
-              screenWidth={screenWidth}
+              screenwidth={screenwidth}
               src={lvl_3_brooch}
               alt="gold brooch"
             />
             <GoldFrame
-              screenWidth={screenWidth}
+              screenwidth={screenwidth}
               src={goldFrame}
               alt="gold frame"
             />
-            <GoldRod screenWidth={screenWidth} src={goldRod} alt="gold rod" />
-            <GoldBar screenWidth={screenWidth} src={goldBar} alt="gold bar" />
+            <GoldRod screenwidth={screenwidth} src={goldRod} alt="gold rod" />
+            <GoldBar screenwidth={screenwidth} src={goldBar} alt="gold bar" />
           </>
         );
       if (levelUp === 7)
         return (
           <>
             <Level3Crown
-              screenWidth={screenWidth}
+              screenwidth={screenwidth}
               src={lvl_3_crown}
               alt="gold crown"
             />
             <GoldBrooch
-              screenWidth={screenWidth}
+              screenwidth={screenwidth}
               src={lvl_3_brooch}
               alt="gold brooch"
             />
             <GoldFrame
-              screenWidth={screenWidth}
+              screenwidth={screenwidth}
               src={goldFrame}
               alt="gold frame"
             />
-            <GoldRod screenWidth={screenWidth} src={goldRod} alt="gold rod" />
-            <GoldBar screenWidth={screenWidth} src={goldBar} alt="gold bar" />
+            <GoldRod screenwidth={screenwidth} src={goldRod} alt="gold rod" />
+            <GoldBar screenwidth={screenwidth} src={goldBar} alt="gold bar" />
             <GoldChest
-              screenWidth={screenWidth}
+              screenwidth={screenwidth}
               src={goldChest}
               alt="gold chest"
             />
@@ -194,29 +195,29 @@ export default function About({ broken, theme, screenWidth }) {
         return (
           <>
             <Level3Crown
-              screenWidth={screenWidth}
+              screenwidth={screenwidth}
               src={lvl_3_crown}
               alt="gold crown"
             />
             <GoldBrooch
-              screenWidth={screenWidth}
+              screenwidth={screenwidth}
               src={lvl_3_brooch}
               alt="gold brooch"
             />
             <GoldFrame
-              screenWidth={screenWidth}
+              screenwidth={screenwidth}
               src={goldFrame}
               alt="gold frame"
             />
-            <GoldRod screenWidth={screenWidth} src={goldRod} alt="gold rod" />
-            <GoldBar screenWidth={screenWidth} src={goldBar} alt="gold bar" />
+            <GoldRod screenwidth={screenwidth} src={goldRod} alt="gold rod" />
+            <GoldBar screenwidth={screenwidth} src={goldBar} alt="gold bar" />
             <GoldChest
-              screenWidth={screenWidth}
+              screenwidth={screenwidth}
               src={goldChest}
               alt="gold chest"
             />
             <GoldCastle
-              screenWidth={screenWidth}
+              screenwidth={screenwidth}
               src={goldCastle}
               alt="gold castle"
             />
@@ -229,12 +230,12 @@ export default function About({ broken, theme, screenWidth }) {
         return (
           <>
             <Level3Crown
-              screenWidth={screenWidth}
+              screenwidth={screenwidth}
               src={lvl_3_crown}
               alt="gold crown"
             />
             <GoldBrooch
-              screenWidth={screenWidth}
+              screenwidth={screenwidth}
               src={lvl_3_brooch}
               alt="gold brooch"
             />
@@ -244,7 +245,7 @@ export default function About({ broken, theme, screenWidth }) {
         return (
           <>
             <Level2Crown
-              screenWidth={screenWidth}
+              screenwidth={screenwidth}
               src={lvl_2_crown}
               alt="gold crown"
             />
@@ -304,8 +305,8 @@ export default function About({ broken, theme, screenWidth }) {
   }, [broken]);
 
   return (
-    <AboutContainer theme={theme} style={fadeIn} screenWidth={screenWidth}>
-      <ProfileContainer theme={theme} screenWidth={screenWidth}>
+    <AboutContainer theme={theme} style={fadeIn} screenwidth={screenwidth}>
+      <ProfileContainer theme={theme} screenwidth={screenwidth}>
         <Crown
           className={flipCard === "" ? "bounce" : flipCard}
           lvl={broken ? null : levelUp}
@@ -320,7 +321,7 @@ export default function About({ broken, theme, screenWidth }) {
           <div>{renderCrown()}</div>
         </Crown>
         <ProfileCard
-          screenWidth={screenWidth}
+          screenwidth={screenwidth}
           theme={theme}
           onClick={() => {
             broken ? setFlipCard("lvlUp") : setFlipCard("flip");
@@ -355,7 +356,7 @@ export default function About({ broken, theme, screenWidth }) {
         <SummaryContainer
           broken={broken}
           theme={theme}
-          screenWidth={screenWidth}
+          screenwidth={screenwidth}
         >
           <h2>A BIT ABOUT ME</h2>
           <p>
@@ -374,9 +375,9 @@ export default function About({ broken, theme, screenWidth }) {
         broken={broken}
         className={broken && "rotate"}
         theme={theme}
-        screenWidth={screenWidth}
+        screenwidth={screenwidth}
       />
-      <SkillContainer theme={theme} screenWidth={screenWidth}>
+      <SkillContainer theme={theme} screenwidth={screenwidth}>
         <section>
           <div>
             <h2 className={broken ? "shake" : ""}>Confident Skills</h2>
@@ -553,11 +554,11 @@ const AboutContainer = styled(animated.main)`
   height: 100%;
   display: flex;
   flex-direction: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "column"
       : "row"};
   margin-left: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? ""
       : "2vw"};
   background-color: ${(props) => props.theme.backgroundColor};
@@ -573,11 +574,11 @@ const ProfileContainer = styled.section`
   flex-direction: column;
   align-items: center;
   width: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "100%"
       : "65%"};
   padding: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "5rem 0"
       : "3rem 5rem"};
 `;
@@ -586,11 +587,11 @@ const ProfileCard = styled(animated.div)`
   font-family: "Exo", sans-serif;
   width: fit-content;
   padding: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "0.5rem 0"
       : "1rem 0"};
   margin: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "0 7vw"
       : ""};
   display: flex;
@@ -618,7 +619,7 @@ const ProfileCard = styled(animated.div)`
     display: flex;
     justify-content: space-between;
     padding: ${(props) =>
-      props.screenWidth === "small" || props.screenWidth === "mobile"
+      props.screenwidth === "small" || props.screenwidth === "mobile"
         ? "0.1rem 0.5rem"
         : "0.5rem 1rem"};
     align-items: center;
@@ -627,9 +628,9 @@ const ProfileCard = styled(animated.div)`
     > p:nth-child(1) {
       margin: 0;
       font-size: ${(props) => {
-        if (props.screenWidth === "small") {
+        if (props.screenwidth === "small") {
           return "2vw";
-        } else if (props.screenWidth === "mobile") {
+        } else if (props.screenwidth === "mobile") {
           return "1.3rem";
         } else {
           return "1.2rem";
@@ -641,9 +642,9 @@ const ProfileCard = styled(animated.div)`
     > p:nth-child(2) {
       margin: 0;
       font-size: ${(props) => {
-        if (props.screenWidth === "small") {
+        if (props.screenwidth === "small") {
           return "1.5vw";
-        } else if (props.screenWidth === "mobile") {
+        } else if (props.screenwidth === "mobile") {
           return "1rem";
         } else {
           return "1.1rem";
@@ -655,9 +656,9 @@ const ProfileCard = styled(animated.div)`
 
   > h1 {
     font-size: ${(props) => {
-      if (props.screenWidth === "small") {
+      if (props.screenwidth === "small") {
         return "2.5vw";
-      } else if (props.screenWidth === "mobile") {
+      } else if (props.screenwidth === "mobile") {
         return "1.3rem";
       } else {
         return "1.2rem";
@@ -670,7 +671,7 @@ const ProfileCard = styled(animated.div)`
 
   > img {
     width: ${(props) =>
-      props.screenWidth === "small" || props.screenWidth === "mobile"
+      props.screenwidth === "small" || props.screenwidth === "mobile"
         ? "25vw"
         : "13vw"};
     min-width: 8rem;
@@ -679,16 +680,16 @@ const ProfileCard = styled(animated.div)`
     opacity: 0.9;
     z-index: 200;
     padding: ${(props) =>
-      props.screenWidth === "small" || props.screenWidth === "mobile"
+      props.screenwidth === "small" || props.screenwidth === "mobile"
         ? "0 2rem"
         : "0 4rem"};
   }
 
   > p {
     font-size: ${(props) => {
-      if (props.screenWidth === "small") {
+      if (props.screenwidth === "small") {
         return "2vw";
-      } else if (props.screenWidth === "mobile") {
+      } else if (props.screenwidth === "mobile") {
         return "1rem";
       } else {
         return "1.1rem";
@@ -703,9 +704,9 @@ const ProfileCard = styled(animated.div)`
     z-index: 400;
     > h2 {
       font-size: ${(props) => {
-        if (props.screenWidth === "small") {
+        if (props.screenwidth === "small") {
           return "1.8vw";
-        } else if (props.screenWidth === "mobile") {
+        } else if (props.screenwidth === "mobile") {
           return "1.2rem";
         } else {
           return "1.1rem";
@@ -722,9 +723,9 @@ const ProfileCard = styled(animated.div)`
       margin-bottom: 1rem;
       z-index: 200;
       font-size: ${(props) => {
-        if (props.screenWidth === "small") {
+        if (props.screenwidth === "small") {
           return "1.5vw";
-        } else if (props.screenWidth === "mobile") {
+        } else if (props.screenwidth === "mobile") {
           return "1rem";
         } else {
           return "1rem";
@@ -781,11 +782,11 @@ const SummaryContainer = styled.section`
     text-shadow: ${(props) =>
       props.theme.name === "dark" && `${props.theme.textShadow}`};
     font-size: ${(props) =>
-      props.screenWidth === "small" || props.screenWidth === "mobile"
+      props.screenwidth === "small" || props.screenwidth === "mobile"
         ? "0.9rem"
         : "1rem"};
     width: ${(props) =>
-      props.screenWidth === "small" || props.screenWidth === "mobile"
+      props.screenwidth === "small" || props.screenwidth === "mobile"
         ? "70vw"
         : "35vw"};
   }
@@ -797,7 +798,7 @@ const SkillContainer = styled.section`
   flex-direction: column;
   color: ${(props) => props.theme.normalFontColor};
   padding: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "3rem 0"
       : "1rem"};
 
@@ -812,7 +813,7 @@ const SkillContainer = styled.section`
 
       > h2 {
         font-size: ${(props) =>
-          props.screenWidth === "mobile" ? "4vw" : "2vw"};
+          props.screenwidth === "mobile" ? "4vw" : "2vw"};
         font-family: "Luckiest Guy", cursive;
         letter-spacing: 2px;
         word-spacing: 0.5rem;
@@ -821,13 +822,13 @@ const SkillContainer = styled.section`
       > div {
         display: grid;
         grid-template-columns: ${(props) =>
-          props.screenWidth === "small" || props.screenWidth === "mobile"
+          props.screenwidth === "small" || props.screenwidth === "mobile"
             ? "1fr 1fr 1fr 1fr 1fr 1fr 1fr"
             : "1fr 1fr 1fr 1fr 1fr"};
         justify-content: center;
         align-items: center;
         grid-gap: ${(props) =>
-          props.screenWidth === "small" || props.screenWidth === "mobile"
+          props.screenwidth === "small" || props.screenwidth === "mobile"
             ? "0"
             : "1rem 0.25rem"};
         margin-bottom: 3rem;
@@ -835,7 +836,7 @@ const SkillContainer = styled.section`
         > div {
           > img {
             width: ${(props) =>
-              props.screenWidth === "small" || props.screenWidth === "mobile"
+              props.screenwidth === "small" || props.screenwidth === "mobile"
                 ? "7vw"
                 : "3.5vw"};
             padding: 0.5rem;
@@ -849,7 +850,7 @@ const SkillContainer = styled.section`
             text-shadow: ${(props) =>
               props.theme.name === "dark" && `${props.theme.textShadow}`};
             font-size: ${(props) =>
-              props.screenWidth === "mobile" ? "2.5vw" : "1rem"};
+              props.screenwidth === "mobile" ? "2.5vw" : "1rem"};
           }
         }
       }
@@ -867,7 +868,7 @@ const SkillContainer = styled.section`
 
       > h2 {
         font-size: ${(props) =>
-          props.screenWidth === "mobile" ? "3vw" : "1.45vw"};
+          props.screenwidth === "mobile" ? "3vw" : "1.45vw"};
         font-family: "Luckiest Guy", cursive;
         letter-spacing: 2px;
         word-spacing: 0.5rem;
@@ -876,16 +877,16 @@ const SkillContainer = styled.section`
       > div {
         display: grid;
         grid-template-columns: ${(props) => {
-          if (props.screenWidth === "mobile") {
+          if (props.screenwidth === "mobile") {
             return "1fr 1fr 1fr";
-          } else if (props.screenWidth === "small") {
+          } else if (props.screenwidth === "small") {
             return "1fr 1fr 1fr 1fr 1fr";
           } else {
             return "1fr 1fr 1fr 1fr";
           }
         }};
         grid-gap: ${(props) =>
-          props.screenWidth === "small" || props.screenWidth === "mobile"
+          props.screenwidth === "small" || props.screenwidth === "mobile"
             ? "0.8vw 1vw"
             : "0.8vw 0.5vw"};
         font-size: 1rem;
@@ -893,9 +894,9 @@ const SkillContainer = styled.section`
         > div {
           > img {
             width: ${(props) => {
-              if (props.screenWidth === "mobile") {
+              if (props.screenwidth === "mobile") {
                 return "6vw";
-              } else if (props.screenWidth === "small") {
+              } else if (props.screenwidth === "small") {
                 return "4vw";
               } else {
                 return "2.5vw";
@@ -912,7 +913,7 @@ const SkillContainer = styled.section`
             text-shadow: ${(props) =>
               props.theme.name === "dark" && `${props.theme.textShadow}`};
             font-size: ${(props) =>
-              props.screenWidth === "mobile" ? "2.25vw" : "0.9rem"};
+              props.screenwidth === "mobile" ? "2.25vw" : "0.9rem"};
           }
         }
       }
@@ -922,13 +923,13 @@ const SkillContainer = styled.section`
 
 const Divider = styled.div`
   width: ${(props) =>
-    ((props.broken ? "30px" : "2px") && props.screenWidth === "small") ||
-    props.screenWidth === "mobile"
+    ((props.broken ? "30px" : "2px") && props.screenwidth === "small") ||
+    props.screenwidth === "mobile"
       ? "60%"
       : "2px"};
   height: ${(props) =>
-    ((props.broken ? "50vh" : "85vh") && props.screenWidth === "small") ||
-    props.screenWidth === "mobile"
+    ((props.broken ? "50vh" : "85vh") && props.screenwidth === "small") ||
+    props.screenwidth === "mobile"
       ? "2px"
       : "85vh"};
   background-color: ${(props) =>
@@ -962,11 +963,11 @@ const Crown = styled.div`
 const Level2Crown = styled.img`
   z-index: 100;
   margin-top: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "1vw"
       : "2vw"};
   width: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "20vw"
       : "12vw"};
   min-width: 8rem;
@@ -974,7 +975,7 @@ const Level2Crown = styled.img`
 const Level3Crown = styled.img`
   position: absolute;
   width: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "18vw"
       : "10.5vw"};
   margin-top: 6vw;
@@ -983,9 +984,9 @@ const Level3Crown = styled.img`
 
 const GoldBrooch = styled.img`
   position: absolute;
-  margin-top: ${(props) => (props.screenWidth === "mobile" ? "4rem" : "7.5vw")};
+  margin-top: ${(props) => (props.screenwidth === "mobile" ? "4rem" : "7.5vw")};
   width: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "32vw"
       : "18vw"};
   min-width: 11rem;
@@ -995,11 +996,11 @@ const GoldFrame = styled.img`
   z-index: 100;
   margin-left: 1.5rem;
   margin-top: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "-5vw"
       : "-1vw"};
   width: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "55.5vw"
       : "31vw"};
   align-self: right;
@@ -1010,7 +1011,7 @@ const GoldBar = styled.img`
   top: 20vw;
   left: -5vw;
   width: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "25vw"
       : "14.5vw"};
 `;
@@ -1019,11 +1020,11 @@ const GoldRod = styled.img`
   z-index: 101;
   top: 2vw;
   left: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "38vw"
       : "20vw"};
   width: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "20vw"
       : "15vw"};
 `;
@@ -1032,11 +1033,11 @@ const GoldChest = styled.img`
   z-index: 101;
   top: 20vw;
   left: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "45vw"
       : "20vw"};
   width: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "30vw"
       : "23vw"};
 `;
@@ -1046,7 +1047,7 @@ const GoldCastle = styled.img`
   top: -4vw;
   left: 10vw;
   width: ${(props) =>
-    props.screenWidth === "small" || props.screenWidth === "mobile"
+    props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "100vw"
       : "80vw"};
 `;
@@ -1076,3 +1077,17 @@ const Modal = styled.div`
 const GithubIcon = styled.img`
   border-radius: ${(props) => props.name === "github" && "5rem"};
 `;
+
+About.propTypes = {
+  broken: PropTypes.bool.isRequired,
+  screenwidth: PropTypes.string.isRequired,
+  theme: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    normalFontColor: PropTypes.string,
+    dropShadow: PropTypes.string.isRequired,
+    dropShadowActive: PropTypes.string.isRequired,
+    aboutCardShadow: PropTypes.string,
+    textShadow: PropTypes.string,
+  }),
+};
