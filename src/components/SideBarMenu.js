@@ -25,7 +25,8 @@ import logo7 from "../assets/easterEggs/logo7.webp";
 import logo8 from "../assets/easterEggs/logo8.webp";
 import logo9 from "../assets/easterEggs/logo9.webp";
 import logo10 from "../assets/easterEggs/logo10.webp";
-import { animated, useSpring } from "react-spring";
+import { animated, useSpring, Spring } from "react-spring";
+import "../animation.css";
 
 export default function SideBarMenu({ setPage, light, setLight, screenwidth }) {
   const [easter, setEaster] = useState(false);
@@ -117,6 +118,7 @@ export default function SideBarMenu({ setPage, light, setLight, screenwidth }) {
                   rel="noreferrer"
                   target="_blank"
                   href="https://github.com/GCnomore"
+                  className="rotateIcon"
                 >
                   <img alt="github icon" src={github} />
                 </a>
@@ -124,6 +126,7 @@ export default function SideBarMenu({ setPage, light, setLight, screenwidth }) {
                   rel="noreferrer"
                   target="_blank"
                   href="https://www.linkedin.com/in/isaac-choi-6a68bb1b4/"
+                  className="rotateIcon"
                 >
                   <img alt="linkedin icon" src={linkedin} />
                 </a>
@@ -131,6 +134,7 @@ export default function SideBarMenu({ setPage, light, setLight, screenwidth }) {
                   rel="noreferrer"
                   target="_blank"
                   href="mailto:isaacgc08@gmail.com"
+                  className="rotateIcon"
                 >
                   <img alt="gmail icon" src={gmail} />
                 </a>
@@ -138,6 +142,7 @@ export default function SideBarMenu({ setPage, light, setLight, screenwidth }) {
                   rel="noreferrer"
                   target="_blank"
                   href="https://twitter.com/IsaacCh99785355"
+                  className="rotateIcon"
                 >
                   <img alt="twitter icon" src={twitter} />
                 </a>
@@ -150,6 +155,7 @@ export default function SideBarMenu({ setPage, light, setLight, screenwidth }) {
               rel="noreferrer"
               target="_blank"
               href="https://github.com/GCnomore"
+              className="rotateIcon"
             >
               <img alt="github icon" src={github} />
             </a>
@@ -157,6 +163,7 @@ export default function SideBarMenu({ setPage, light, setLight, screenwidth }) {
               rel="noreferrer"
               target="_blank"
               href="https://www.linkedin.com/in/isaac-choi-6a68bb1b4/"
+              className="rotateIcon"
             >
               <img alt="linkedin icon" src={linkedin} />
             </a>
@@ -164,6 +171,7 @@ export default function SideBarMenu({ setPage, light, setLight, screenwidth }) {
               rel="noreferrer"
               target="_blank"
               href="mailto:isaacgc08@gmail.com"
+              className="rotateIcon"
             >
               <img alt="gmail icon" src={gmail} />
             </a>
@@ -171,6 +179,7 @@ export default function SideBarMenu({ setPage, light, setLight, screenwidth }) {
               rel="noreferrer"
               target="_blank"
               href="https://twitter.com/IsaacCh99785355"
+              className="rotateIcon"
             >
               <img alt="twitter icon" src={twitter} />
             </a>
@@ -310,6 +319,10 @@ const ContactIcons = styled(animated.footer)`
     props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "0"
       : "5vh"};
+
+  > svg {
+    cursor: pointer;
+  }
 
   > a > img {
     width: ${(props) =>

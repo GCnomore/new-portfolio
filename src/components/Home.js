@@ -80,37 +80,51 @@ export default function Home({ theme, broken, screenwidth }) {
     };
   }, []);
 
-  const fadeIn_rest = useSpring({
-    config: { duration: 2000 },
-    opacity: 1,
-    delay: 4500,
-    from: { opacity: 0 },
-  });
-
   const fadeIn_firstName = useSpring({
-    config: { duration: 1500 },
+    config: { duration: 700 },
     opacity: 1,
     delay: 500,
     from: { opacity: 0 },
   });
 
   const fadeIn_lastName = useSpring({
-    config: { duration: 1500 },
+    config: { duration: 700 },
+    opacity: 1,
+    delay: 1000,
+    from: { opacity: 0 },
+  });
+
+  const fadeIn_title = useSpring({
+    config: { duration: 700 },
     opacity: 1,
     delay: 1500,
     from: { opacity: 0 },
   });
 
-  const fadeIn_title = useSpring({
-    config: { duration: 1500 },
+  const fadeIn_phone = useSpring({
+    config: { duration: 700 },
+    opacity: 1,
+    delay: 2000,
+    from: { opacity: 0 },
+  });
+
+  const fadeIn_IDE = useSpring({
+    config: { duration: 700 },
     opacity: 1,
     delay: 2500,
     from: { opacity: 0 },
   });
 
+  const fadeIn_typography = useSpring({
+    config: { duration: 700 },
+    opacity: 1,
+    delay: 3000,
+    from: { opacity: 0 },
+  });
+
   return (
     <HomeContainer screenwidth={screenwidth}>
-      <TypographyContainer style={fadeIn_rest} screenwidth={screenwidth}>
+      <TypographyContainer style={fadeIn_typography} screenwidth={screenwidth}>
         <Typography theme={theme} broken={broken} />
       </TypographyContainer>
       <NameContainer theme={theme} screenwidth={screenwidth}>
@@ -127,12 +141,12 @@ export default function Home({ theme, broken, screenwidth }) {
           <Phone
             src={phoneImg}
             alt="phone illustration"
-            style={fadeIn_rest}
+            style={fadeIn_phone}
             className={broken ? "shake" : ""}
             screenwidth={screenwidth}
           />
           <PhoneScreen
-            style={fadeIn_rest}
+            style={fadeIn_phone}
             className={broken ? "shakeScreen" : ""}
             screenwidth={screenwidth}
           >
@@ -154,7 +168,7 @@ export default function Home({ theme, broken, screenwidth }) {
         </div>
       </PhoneContainer>
       <TypingContainer
-        style={fadeIn_rest}
+        style={fadeIn_IDE}
         theme={theme}
         screenwidth={screenwidth}
       >

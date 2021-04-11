@@ -58,7 +58,7 @@ export default function ProjectSlide({
   });
 
   const fadeIn_projectContainer = useSpring({
-    config: { duration: 700 },
+    config: { duration: 200 },
     opacity: 1,
     from: { opacity: 0 },
     delay: 800,
@@ -132,11 +132,11 @@ export default function ProjectSlide({
                   src={item.default}
                   alt={project.name}
                   width={item.default.includes("kokoa") ? "20rem" : null}
-                  data-name={project.name}
-                  onMouseEnter={(e) => setShowDetail(e.target.dataset.name)}
                   show={project.name === showDetail}
                 />
                 <ProjectDescription
+                  data-name={project.name}
+                  onMouseEnter={(e) => setShowDetail(e.target.dataset.name)}
                   screenwidth={screenwidth}
                   show={
                     showDetail === project.name
@@ -146,13 +146,18 @@ export default function ProjectSlide({
                       : false
                   }
                 >
-                  <p>{project.description[index]}</p>
+                  <p
+                    data-name={project.name}
+                    onMouseEnter={(e) => setShowDetail(e.target.dataset.name)}
+                  >
+                    {project.description[index]}
+                  </p>
                 </ProjectDescription>
                 <ProjectDetails
                   show={project.name === showDetail}
                   kokoatalk={project.name === "kokoatalk" ? "true" : "false"}
-                  onMouseLeave={() => setShowDetail("")}
                   screenwidth={screenwidth}
+                  onMouseLeave={() => setShowDetail("")}
                 >
                   <div>
                     <h2>{project.name.toUpperCase()}</h2>
@@ -411,8 +416,8 @@ const SortIcon = styled.img`
       return "4.5rem";
     }
   }};
-  min-width: 3.5rem;
-  min-height: 3.5rem;
+  min-width: 3rem;
+  min-height: 3rem;
   margin: ${(props) => (props.screenwidth === "mobile" ? "0 1.5vw" : "0 1rem")};
   filter: ${(props) => props.theme && `drop-shadow(${props.theme.dropShadow})`};
   cursor: pointer;
@@ -444,7 +449,7 @@ const ProjectSlider = styled.section`
   > div:nth-child(1) {
     margin: ${(props) => {
       if (props.screenwidth === "small") {
-        return "5rem 8rem 0 2rem";
+        return "0 8rem 0 2rem";
       } else if (props.screenwidth === "mobile") {
         return "0 0 4rem 0";
       } else {
@@ -636,7 +641,6 @@ const ProjectDetails = styled.div`
 `;
 
 const ProjectDescription = styled.div`
-  backdrop-filter: blur(1.2px);
   text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -644,14 +648,14 @@ const ProjectDescription = styled.div`
   transition: 0.5s;
   height: 100%;
   width: 100%;
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: flex-end;
   > p {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(1.2px);
-    position: fixed;
     color: white;
-    margin: 0;
-    padding: 0.3rem 0;
-    top: ${(props) => (props.screenwidth === "mobile" ? "-7vw" : "-5rem")};
     width: 100%;
     height: -webkit-fit-content;
     height: -moz-fit-content;

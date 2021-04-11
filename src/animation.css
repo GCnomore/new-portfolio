@@ -313,3 +313,7 @@
 .shakeScreen {
   animation: _shakeScreen infinite 0.1s;
 }
+
+.rotateIcon:hover {
+  animation: _rotate 0.4s ease-in-out;
+}
