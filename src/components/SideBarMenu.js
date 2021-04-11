@@ -362,16 +362,16 @@ const EasterEggList = styled.div`
   position: fixed;
   left: ${(props) => {
     if (props.screenwidth === "small") {
-      return "55vw";
+      return "5rem";
     } else if (props.screenwidth === "mobile") {
       return "";
     } else {
-      return "100%";
+      return "5rem";
     }
   }};
   top: ${(props) =>
     props.screenwidth === "small" || props.screenwidth === "mobile"
-      ? "100%"
+      ? "5rem"
       : "40vh"};
   background-color: rgba(0, 0, 0, 0.6);
   width: ${(props) => (props.screenwidth === "mobile" ? "" : "18rem")};
