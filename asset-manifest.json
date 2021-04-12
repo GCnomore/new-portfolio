@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.0a4b94bd.chunk.css",
-    "main.js": "/static/js/main.31ec2392.chunk.js",
-    "main.js.map": "/static/js/main.31ec2392.chunk.js.map",
+    "main.css": "/static/css/main.b3448f3b.chunk.css",
+    "main.js": "/static/js/main.00921e19.chunk.js",
+    "main.js.map": "/static/js/main.00921e19.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.c537701b.js",
     "runtime-main.js.map": "/static/js/runtime-main.c537701b.js.map",
     "static/js/2.e3fba92b.chunk.js": "/static/js/2.e3fba92b.chunk.js",
     "static/js/2.e3fba92b.chunk.js.map": "/static/js/2.e3fba92b.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.0a4b94bd.chunk.css.map": "/static/css/main.0a4b94bd.chunk.css.map",
+    "static/css/main.b3448f3b.chunk.css.map": "/static/css/main.b3448f3b.chunk.css.map",
     "static/js/2.e3fba92b.chunk.js.LICENSE.txt": "/static/js/2.e3fba92b.chunk.js.LICENSE.txt",
     "static/media/Angular.be814d14.webp": "/static/media/Angular.be814d14.webp",
     "static/media/Bootstrap.3445c8fc.webp": "/static/media/Bootstrap.3445c8fc.webp",
@@ -88,7 +88,7 @@
   "entrypoints": [
     "static/js/runtime-main.c537701b.js",
     "static/js/2.e3fba92b.chunk.js",
-    "static/css/main.0a4b94bd.chunk.css",
-    "static/js/main.31ec2392.chunk.js"
+    "static/css/main.b3448f3b.chunk.css",
+    "static/js/main.00921e19.chunk.js"
   ]
 }
