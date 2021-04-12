@@ -87,7 +87,11 @@ export default function SideBarMenu({ setPage, light, setLight, screenwidth }) {
         <li onClick={() => setEaster(!easter)}>
           <FontAwesomeIcon icon={faEgg} />
         </li>
-        <EasterEggList show={easter} screenwidth={screenwidth}>
+        <EasterEggList
+          show={easter}
+          screenwidth={screenwidth}
+          className={easter ? "easterEggSlide" : ""}
+        >
           <h2>Easter Egg List</h2>
           <ul>
             <li>

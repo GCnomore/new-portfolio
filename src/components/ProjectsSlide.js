@@ -350,10 +350,11 @@ const SortContainer = styled(animated.section)`
   position: ${(props) =>
     props.screenwidth === "mobile" ? "relative" : "fixed"};
   display: flex;
-  width: 100%;
+  /* width: 100%; */
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  align-self: center;
   font-family: "Luckiest Guy", cursive;
   font-size: 1.6rem;
   margin-top: ${(props) => {

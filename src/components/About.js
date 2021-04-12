@@ -366,8 +366,8 @@ export default function About({ broken, theme, screenwidth }) {
             technologies which eventually caught my interest in programming.
             Doing something productive rather than just playing games with a
             computer was enough reason for me to dive in. I am a very curious
-            person and eager to know how things around me work fundamentally.
-            Being a developer is a fun adventure for me!
+            person and eager to learn new knowledge. Being a developer is a fun
+            adventure for me!
           </p>
         </SummaryContainer>
       </ProfileContainer>
@@ -566,6 +566,7 @@ const AboutContainer = styled(animated.main)`
   > section:nth-child(3) {
     width: 100%;
   }
+  overflow-y: hidden;
 `;
 
 const ProfileContainer = styled.section`
@@ -805,6 +806,7 @@ const SkillContainer = styled.section`
   > section:nth-child(1) {
     width: 100%;
     text-align: center;
+    padding-top: 5rem;
 
     > div {
       display: flex;
@@ -838,7 +840,8 @@ const SkillContainer = styled.section`
             width: ${(props) =>
               props.screenwidth === "small" || props.screenwidth === "mobile"
                 ? "7vw"
-                : "3.5vw"};
+                : "3vw"};
+            min-width: 3rem;
             padding: 0.5rem;
             filter: ${(props) => `drop-shadow(${props.theme.dropShadow})`};
           }
@@ -860,6 +863,7 @@ const SkillContainer = styled.section`
   > section:nth-child(2) {
     display: flex;
     justify-content: space-evenly;
+    padding-bottom: 5rem;
 
     > div {
       display: flex;
@@ -899,9 +903,10 @@ const SkillContainer = styled.section`
               } else if (props.screenwidth === "small") {
                 return "4vw";
               } else {
-                return "2.5vw";
+                return "2vw";
               }
             }};
+            min-width: 1rem;
             filter: ${(props) => `drop-shadow(${props.theme.dropShadow})`};
             margin-bottom: 0.5rem;
           }

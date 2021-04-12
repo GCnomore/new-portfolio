@@ -81,44 +81,44 @@ export default function Home({ theme, broken, screenwidth }) {
   }, []);
 
   const fadeIn_firstName = useSpring({
-    config: { duration: 700 },
+    config: { duration: 1200 },
     opacity: 1,
     delay: 500,
     from: { opacity: 0 },
   });
 
   const fadeIn_lastName = useSpring({
-    config: { duration: 700 },
+    config: { duration: 1200 },
     opacity: 1,
-    delay: 1000,
+    delay: 1200,
     from: { opacity: 0 },
   });
 
   const fadeIn_title = useSpring({
-    config: { duration: 700 },
+    config: { duration: 1200 },
     opacity: 1,
-    delay: 1500,
+    delay: 1900,
     from: { opacity: 0 },
   });
 
   const fadeIn_phone = useSpring({
-    config: { duration: 700 },
+    config: { duration: 1200 },
     opacity: 1,
-    delay: 2000,
+    delay: 2600,
     from: { opacity: 0 },
   });
 
   const fadeIn_IDE = useSpring({
-    config: { duration: 700 },
+    config: { duration: 1200 },
     opacity: 1,
-    delay: 2500,
+    delay: 3300,
     from: { opacity: 0 },
   });
 
   const fadeIn_typography = useSpring({
-    config: { duration: 700 },
+    config: { duration: 1200 },
     opacity: 1,
-    delay: 3000,
+    delay: 4000,
     from: { opacity: 0 },
   });
 
