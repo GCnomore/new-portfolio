@@ -566,7 +566,6 @@ const AboutContainer = styled(animated.main)`
   > section:nth-child(3) {
     width: 100%;
   }
-  overflow-y: hidden;
 `;
 
 const ProfileContainer = styled.section`
