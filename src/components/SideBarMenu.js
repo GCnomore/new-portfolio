@@ -13,6 +13,7 @@ import {
   faEllipsisH,
   faHome,
   faIdBadge,
+  faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 
 import logo1 from "../assets/easterEggs/logo1.webp";
@@ -87,6 +88,7 @@ export default function SideBarMenu({ setPage, light, setLight, screenwidth }) {
         <li onClick={() => setEaster(!easter)}>
           <FontAwesomeIcon icon={faEgg} />
         </li>
+
         <EasterEggList
           show={easter}
           screenwidth={screenwidth}

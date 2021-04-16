@@ -45,14 +45,7 @@ export const projects = {
           provide various templates of work flow management.
         </p>
       ),
-      tech: [
-        "Javascript",
-        "React",
-        "Styled-Component",
-        "Prop-types",
-        "UUID",
-        "Babel",
-      ],
+      tech: ["Javascript", "React", "Styled-Component", "Prop-types", "UUID"],
     },
     project_src: "https://gcnomore.github.io/gcboard/",
     project_code: "https://github.com/GCnomore/gcboard",

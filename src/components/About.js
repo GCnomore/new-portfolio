@@ -840,7 +840,7 @@ const SkillContainer = styled.section`
               props.screenwidth === "small" || props.screenwidth === "mobile"
                 ? "7vw"
                 : "3vw"};
-            min-width: 3rem;
+            min-width: 2rem;
             padding: 0.5rem;
             filter: ${(props) => `drop-shadow(${props.theme.dropShadow})`};
           }
