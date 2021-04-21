@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/static/css/main.b3448f3b.chunk.css",
-    "main.js": "/static/js/main.99df886f.chunk.js",
-    "main.js.map": "/static/js/main.99df886f.chunk.js.map",
+    "main.js": "/static/js/main.05a511ee.chunk.js",
+    "main.js.map": "/static/js/main.05a511ee.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.c537701b.js",
     "runtime-main.js.map": "/static/js/runtime-main.c537701b.js.map",
     "static/js/2.e3fba92b.chunk.js": "/static/js/2.e3fba92b.chunk.js",
@@ -22,7 +22,7 @@
     "static/media/express.cfb6dcc0.webp": "/static/media/express.cfb6dcc0.webp",
     "static/media/firebase.2b6253c0.webp": "/static/media/firebase.2b6253c0.webp",
     "static/media/flutter.683623c0.webp": "/static/media/flutter.683623c0.webp",
-    "static/media/gcboard1.webp": "/static/media/gcboard1.403ac016.webp",
+    "static/media/gcboard1.webp": "/static/media/gcboard1.a88e2325.webp",
     "static/media/gcboard2.webp": "/static/media/gcboard2.5d1dd138.webp",
     "static/media/github1.7c8c0415.webp": "/static/media/github1.7c8c0415.webp",
     "static/media/gmail.d30eb9c1.webp": "/static/media/gmail.d30eb9c1.webp",
@@ -89,6 +89,6 @@
     "static/js/runtime-main.c537701b.js",
     "static/js/2.e3fba92b.chunk.js",
     "static/css/main.b3448f3b.chunk.css",
-    "static/js/main.99df886f.chunk.js"
+    "static/js/main.05a511ee.chunk.js"
   ]
 }
