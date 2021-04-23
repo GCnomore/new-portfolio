@@ -68,7 +68,7 @@ export const projects = {
       summary: (
         <p>
           Full stack project made with <strong>MERN stack</strong> This project
-          uses database I reated with some of my favorite movies. It can
+          uses database I created with some of my favorite movies. It can
           register a user and save their account info to the database. Used
           Heroku to host this app.
           <br />
