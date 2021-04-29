@@ -72,7 +72,7 @@ export default function ProjectSlide({
   });
 
   useEffect(() => {
-    grabAndSlide("app", 1.2);
+    grabAndSlide("project", 1.2);
   }, []);
 
   const renderModal = () => {
@@ -224,7 +224,7 @@ export default function ProjectSlide({
   };
 
   return (
-    <ProjectContainer className="app">
+    <ProjectContainer className="project" screenwidth={screenwidth}>
       {showModal && renderModal()}
       <SortContainer
         theme={theme}
@@ -339,7 +339,7 @@ export default function ProjectSlide({
 
 const ProjectContainer = styled.main`
   width: auto;
-  height: 100vh;
+  height: ${(props) => (props.screenwidth === "mobile" ? "100%" : "100vh")};
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
@@ -350,11 +350,19 @@ const SortContainer = styled(animated.section)`
   position: ${(props) =>
     props.screenwidth === "mobile" ? "relative" : "fixed"};
   display: flex;
-  /* width: 100%; */
-  justify-content: center;
+  width: 100%;
+  height: ${(props) => (props.screenwidth === "mobile" ? "100%" : "")};
+  justify-content: ${(props) => {
+    if (props.screenwidth === "small") {
+      return "flex-start";
+    } else if (props.screenwidth === "mobile") {
+      return "flex-start";
+    } else {
+      return "center";
+    }
+  }};
   flex-direction: column;
   align-items: center;
-  align-self: center;
   font-family: "Luckiest Guy", cursive;
   font-size: 1.6rem;
   margin-top: ${(props) => {
@@ -377,7 +385,9 @@ const SortContainer = styled(animated.section)`
     border-radius: 0.3rem;
     padding: 0.25rem 1rem;
     border: ${(props) =>
-      props.theme ? "3px solid white" : "3px solid rgba(0, 0, 0, 0.6)"};
+      props.theme.name === "dark"
+        ? "3px solid white"
+        : "3px solid rgba(0, 0, 0, 0.6)"};
     box-shadow: ${(props) =>
       props.theme
         ? "5px 6px 5px rgba(255, 255, 255, 0.3)"
@@ -401,18 +411,18 @@ const SortContainer = styled(animated.section)`
 const SortIcon = styled.img`
   width: ${(props) => {
     if (props.screenwidth === "mobile") {
-      return "9vw";
+      return "auto";
     } else if (props.screenwidth === "small") {
-      return "7vw";
+      return "auto";
     } else {
       return "4.5rem";
     }
   }};
   height: ${(props) => {
     if (props.screenwidth === "mobile") {
-      return "9vw";
+      return "7vh";
     } else if (props.screenwidth === "small") {
-      return "7vw";
+      return "7vh";
     } else {
       return "4.5rem";
     }
@@ -437,7 +447,7 @@ const SortIcon = styled.img`
 const ProjectSlider = styled.section`
   margin-top: ${(props) => (props.screenwidth === "mobile" ? "0" : "8rem")};
   width: fit-content;
-  height: 100vh;
+  height: ${(props) => (props.screenwidth === "mobile" ? "100%" : "100vh")};
   display: flex;
   flex-direction: ${(props) =>
     props.screenwidth === "mobile" ? "column" : "row"};
@@ -473,8 +483,8 @@ const Project = styled(animated.div)`
       return "70rem";
     }
   }};
-  height: fit-content;
-  margin: ${(props) => (props.screenwidth === "mobile" ? "4rem 0" : "0 8rem")};
+  height: auto;
+  margin: ${(props) => (props.screenwidth === "mobile" ? "10rem 0" : "0 8rem")};
   padding: ${(props) => (props.screenwidth === "mobile" ? "0" : "1rem 1rem")};
   transition: 0.5s ease-in-out;
 
@@ -506,7 +516,7 @@ const ProjectContent = styled.div`
 
 const ProjectImg = styled.img`
   width: ${(props) => (props.width ? props.width : "100%")};
-  height: 100%;
+  height: auto;
   z-index: ${(props) => (props.show ? -1000 : 1)};
   box-shadow: ${(props) =>
     props.theme ? "0px 0px 50px rgba(255, 255, 255, 0.6)" : ""};

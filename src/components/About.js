@@ -573,6 +573,7 @@ const ProfileContainer = styled.section`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  height: 100%;
   width: ${(props) =>
     props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "100%"
@@ -586,6 +587,7 @@ const ProfileContainer = styled.section`
 const ProfileCard = styled(animated.div)`
   font-family: "Exo", sans-serif;
   width: fit-content;
+  height: auto;
   padding: ${(props) =>
     props.screenwidth === "small" || props.screenwidth === "mobile"
       ? "0.5rem 0"

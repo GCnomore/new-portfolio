@@ -122,7 +122,7 @@ export default App;
 
 const AppContainer = styled.div`
   display: flex;
-  height: 100vh;
+  height: ${(props) => (props.screenwidth !== "nomal" ? "" : "100vh")};
   width: 100%;
   flex-direction: ${(props) =>
     props.screenwidth === "small" || props.screenwidth === "mobile"
@@ -157,7 +157,7 @@ const SideBar = styled.aside`
 
 const ContentsContainer = styled.main`
   width: 100vw;
-  height: 100vh;
+  height: ${(props) => (props.screenwidth !== "normal" ? "" : "100vh")};
   overflow-x: hidden;
   background-color: ${(props) => props.theme.backgroundColor};
 `;

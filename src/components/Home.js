@@ -310,7 +310,7 @@ const LineNumber = styled.section`
 
 const TextContent = styled.div`
   display: flex;
-  height: 100%;
+  height: 17vw;
   background-color: #2d2d2d;
 
   color: rgba(255, 255, 255, 0.8);
