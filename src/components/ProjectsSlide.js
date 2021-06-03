@@ -342,8 +342,18 @@ const ProjectContainer = styled.main`
   height: ${(props) => (props.screenwidth === "mobile" ? "100%" : "100vh")};
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
+  overflow-x: scroll;
   user-select: none;
+  ::-webkit-scrollbar {
+    width: 15px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.8);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(147, 146, 146, 0.5);
+    border-radius: 10px;
+  }
 `;
 
 const SortContainer = styled(animated.section)`

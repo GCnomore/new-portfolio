@@ -160,4 +160,14 @@ const ContentsContainer = styled.main`
   height: ${(props) => (props.screenwidth !== "normal" ? "" : "100vh")};
   overflow-x: hidden;
   background-color: ${(props) => props.theme.backgroundColor};
+  ::-webkit-scrollbar {
+    width: 15px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.8);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(147, 146, 146, 0.5);
+    border-radius: 10px;
+  }
 `;

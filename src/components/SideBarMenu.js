@@ -13,7 +13,6 @@ import {
   faEllipsisH,
   faHome,
   faIdBadge,
-  faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 
 import logo1 from "../assets/easterEggs/logo1.webp";
@@ -26,7 +25,7 @@ import logo7 from "../assets/easterEggs/logo7.webp";
 import logo8 from "../assets/easterEggs/logo8.webp";
 import logo9 from "../assets/easterEggs/logo9.webp";
 import logo10 from "../assets/easterEggs/logo10.webp";
-import { animated, useSpring, Spring } from "react-spring";
+import { animated, useSpring } from "react-spring";
 import "../animation.css";
 
 export default function SideBarMenu({ setPage, light, setLight, screenwidth }) {
